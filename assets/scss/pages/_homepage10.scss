@@ -1,0 +1,181 @@
+.cardIconTitleDescLeftStyle2 {
+    .cardIconTitleDesc {
+        text-align: left;
+    }
+}
+.banner-home10 {
+    .box-cover-image {
+        &::before {
+            opacity: 0.5;
+        }
+    }
+    .box-banner-info {
+        transform: translateY(-50%);
+        top: 50%;
+    }
+}
+.btn-play-big {
+    display: inline-block;
+    height: 90px;
+    width: 90px;
+    background: url(../imgs/page/homepage10/play.png) no-repeat center;
+    background-size: contain;
+}
+.box-search-ride-style-6 {
+    background-color: transparent;
+    border-radius: 0px;
+    bottom: -70px;
+    max-width: 1150px;
+    .tab-content {
+        background-color: $background-white;
+        border-radius: 0px 6px 6px 6px;
+        box-shadow: $box-shadow-3;
+        padding: 20px 30px;
+        .box-form-search {
+            display: flex;
+            margin-bottom: 0px;
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+    }
+    .search-item {
+        margin-right: 15px;
+        border: 1px solid $color-border;
+        padding-left: 0px;
+        border-radius: 6px;
+        &:last-child {
+            margin-right: 0px;
+        }
+        .search-icon {
+            margin-right: 5px;
+            .item-icon {
+                background-color: transparent;
+            }
+        }
+        &.search-button {
+            padding: 0px;
+            min-width: 150px;
+            max-width: 150px;
+            border: 0px;
+        }
+    }
+    .box-search-tabs {
+        width: 100%;
+    }
+    .btn-search {
+        border-radius: 6px;
+        width: 100%;
+        background-color: $color-secondary;
+    }
+    .nav-tabs-search {
+        border-bottom: 0px;
+        li {
+            padding: 0px;
+            float: left;
+            a {
+                padding: 16px 30px;
+                background-color: $background-bg-2;
+                &:hover, &.active {
+                    background-color: $background-white;
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+            &:first-child {
+                a {
+                    border-radius: 6px 0px 0px 0px;
+                }
+            }
+            &:last-child {
+                a {
+                    border-radius: 0px 6px 0px 0px;
+                }
+            }
+        }
+    }
+}
+.fleet-style-2 {
+    .cardFleet {
+        &:hover {
+            background-color: $background-bg-2;
+        }
+    }
+    .swiper-button-next-fleet, .swiper-button-prev-fleet {
+        &:hover {
+            background-color: $background-bg-2;
+        }
+    }
+}
+.bg-how-it-works-home10 {
+    position: relative;
+    background: url(../imgs/page/homepage10/map.png) no-repeat right bottom;
+    &::before {
+        display: none;
+    }
+    .list-how, .list-how.slider-nav-thumbnails .slick-list .slick-track {
+        li {
+            &::before {
+                border-color: $color-text;
+            }
+            &:after {
+                background-color: $color-text;
+            }
+            a {
+                color: $color-text;
+            }
+            .line-white {
+                background-color: $color-text;
+            }
+        }
+    }
+    .list-how li h4, .list-how.slider-nav-thumbnails .slick-list .slick-track li h4, .list-how li p, .list-how.slider-nav-thumbnails .slick-list .slick-track li p {
+        color: $color-text;
+    }
+}
+.box-showcase-home10 .bg-showcase {
+    background-color: $color-primary;
+    background-image: url(../imgs/page/homepage10/line.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+    border-radius: 0px;
+    background-size: cover;
+}
+.box-reliability-home10 {
+    background: url(../imgs/page/homepage10/img-reliability.png) no-repeat top center;
+    background-size: cover;
+    padding: 160px 0px;
+    text-align: right;
+}
+.box-info-reliability {
+    background-color: $background-white;
+    padding: 50px;
+    max-width: 370px;
+    text-align: left;
+    display: inline-block;
+    border-radius: 6px;
+}
+.bg-our-service-home-10 {
+    margin: 90px 0px 120px 0px;
+    .box-pagination-fleet {
+        margin-top: 30px;
+    }
+}
+.swiper-services-auto {
+    .swiper-slide {
+        max-width: 1170px;
+    }
+}
+.footer.footer-10 {
+    background-image: none;
+    .footer-2 {
+        background-color: #ffffff15;
+        .footer-bottom {
+            border-top: 0px;
+        }
+    }
+}
+.bg-region-home10 {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}

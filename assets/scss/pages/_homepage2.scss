@@ -1,0 +1,249 @@
+.box-list-how {
+    position: relative;
+    ul {
+        display: flex;
+        width: 100%;
+        li {
+            width: 100%;
+            padding-right: 180px;
+            display: inline-block;
+            &:last-child {
+                padding-right: 0px;
+                min-width: 270px;
+                max-width: 270px;
+            }
+            &.has-arrow {
+                background-image: url(../imgs/page/homepage2/arrow-button.png);
+                background-repeat: no-repeat;
+                background-position: right 60px top 80px;
+            }
+        }
+    }
+}
+.box-fleet-cover {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.box-fleet-padding {
+    background-color: $background-bg-4;
+    border-radius: 12px;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    background-image: url(../imgs/page/homepage2/bg-line.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.box-image-showcase {
+    position: relative;
+    > img {
+        border-radius: 6px;
+        display: block;
+    }
+}
+.box-btn-play-video {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    .btn-white {
+        border-radius: 6px;
+        font-size: 16px;
+        line-height: 28px;
+        font-weight: 500;
+        &:hover {
+            background-color: $color-secondary;
+        }
+    }
+}
+.box-number-info {
+    border: 1px solid $color-border;
+    padding: 10px 26px;
+    border-radius: 6px;
+    background-color: $background-white;
+    display: flex;
+    align-items: center;
+    min-height: 83px;
+    .text-number {
+        display: inline-block;
+        padding-right: 15px;
+    }
+    .text-number-info {
+        width: 100%;
+        display: inline-block;
+    }
+}
+.block-padding-100 {
+    padding-left: 100px;
+    padding-right: 100px;
+    .block-padding-inner {
+        border-radius: 12px;
+        padding: 120px 0px;
+    }
+}
+.bg-testimonial {
+    background-image: url(../imgs/page/homepage2/quote.png);
+    background-repeat: no-repeat;
+    background-position: right 175px top 49px;
+    background-size: auto;
+}
+.swiper-group-testimonials-2 .swiper-slide {
+    padding: 40px;
+    width: 100% !important;
+}
+.bg-testimonial {
+    .box-region-right {
+        padding-left: 30px;
+    }
+}
+.box-pagination-button-testimonials-2 {
+    position: relative;
+    padding-left: 40px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding-top: 20px;
+    .swiper-button-prev-testimonials-2, .swiper-button-next-testimonials-2 {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        display: inline-block;
+        left: auto;
+        height: 40px;
+        width: 40px;
+    }
+    .swiper-pagination-testimonials-2 {
+        display: inline-block;
+        padding-left: 20px;
+        width: auto;
+        position: relative;
+        top: auto;
+        margin: 0px;
+    }
+    .swiper-button-prev-testimonials-2 {
+        background-image: url(../imgs/page/homepage2/prev-white.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-right: 10px;
+    }
+    .swiper-button-next-testimonials-2 {
+        background-image: url(../imgs/page/homepage2/next-white.png);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+.latest-new-white {
+    .tags a, .color-white {
+        color: $color-text !important;
+    }
+    .btn.btn-arrow-up {
+        border-color: $color-text;
+    }
+    .btn.btn-arrow-up svg {
+        color: $color-text;
+    }
+    .datePost {
+        .color-white {
+            color: $color-white !important;
+        }
+    }
+}
+.box-banner-homepage-2 {
+    position: relative;
+}
+.box-search-ride-style-2 {
+    display: inline-block;
+    background-color: transparent;
+    bottom: 0px;
+    width: 100%;
+    .box-search-tabs {
+        max-width: 470px;
+        width: 100%;
+        border-radius: 6px;
+        bottom: -60px;
+        right: 0px;
+        background-color: $background-white;
+        position: absolute;
+        box-shadow: $box-shadow-3;
+        
+    }
+    .box-form-search {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 30px;
+        .btn-search {
+            background-color: $color-secondary;
+            border-radius: 6px;
+            width: 100%;
+            &:hover {
+                background-color: $color-primary;
+            }
+        }
+    }
+    .search-item {
+        background: $background-bg-4;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        width: 100%;
+        &.search-date, &.search-time, &.search-button {
+            min-width: 100%;
+            max-width: 100%;
+        }
+        &.search-button {
+            padding: 0px;
+        }
+        .search-icon .item-icon {
+            background-color: $background-white;
+            border-radius: 6px;
+            width: 44px;
+            height: 44px;
+        }
+        .search-inputs {
+            .search-input {
+                line-height: 18px;
+            }
+            .text-14 {
+                line-height: 16px;
+            }
+        }
+    }
+}
+.nav-tabs-search {
+    border-bottom: 1px solid $color-border;
+    li {
+        padding: 0px 30px;
+        position: relative;
+        a {
+            position: relative;
+            display: block;
+            padding: 26px 0px;
+            font-size: 16px;
+            line-height: 28px;
+            font-weight: 500;
+            color: $color-grey;
+            &.active, &:hover {
+                color: $color-text;
+                &::before {
+                    content: "";
+                    height: 2px;
+                    width: 100%;
+                    background-color: $color-text;
+                    bottom: 0px;
+                    left: 0px;
+                    position: absolute;
+                }
+            }
+        }
+    }
+}
+.box-fleet-padding.bg-testimonial {
+    padding-bottom: 40px;
+}
+.box-fleet-padding.bg-download-2
+{
+    background-image: url(../imgs/page/homepage2/bg-line.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

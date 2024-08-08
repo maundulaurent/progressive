@@ -1,0 +1,142 @@
+.dropdown-menu-box {
+    display: inline-block;
+    .dropdown-toggle::after {
+        display: none;
+    }
+    .dropdown-toggle {
+        padding: 10px 25px 10px 20px;
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 500;
+        background: url(../imgs/template/icons/angle-down-black.svg) no-repeat right center;
+    }
+    .dropdown-menu {
+        border: $color-border 1px solid;
+        .dropdown-item {
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: 500;
+            color: $color-text;
+            &:hover {
+                background-color: $background-bg-3;
+            }
+        }
+    }
+}
+.our-fleet-2 {
+    .cardFleet {
+        .cardInfoBottom {
+            .passenger {
+                position: relative;
+                min-width: 170px;
+                max-width: 170px;
+            }
+            .luggage {
+                justify-content: flex-start;
+            }
+        }
+    }
+    .cardFleetStyle3 {
+        .cardInfoBottom .passenger {
+            min-width: 70px;
+            max-width: 70px;
+        }
+    }
+}
+.fleet-style-5 {
+    .cardFleet {
+        &:hover {
+            border-color: $color-primary;
+            background-color: $background-white;
+            box-shadow: $box-shadow-3;
+        }
+    }
+}
+.fleet-style-3 {
+    .cardFleet {
+        border: 0px;
+        &:hover {
+            background-color: $background-white;
+            box-shadow: $box-shadow-3;
+        }
+    }
+}
+.passengers-info {
+    display: inline-block;
+    padding: 0px 0px 0px 22px;
+    background-image: url(../imgs/template/icons/friend.svg);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+.luggages-info {
+    display: inline-block;
+    padding: 0px 0px 0px 22px;
+    background-image: url(../imgs/template/icons/luggage.svg);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+.box-vehicle-price {
+    background-color: $background-bg-3;
+    border-radius: 6px;
+    padding: 15px 30px;
+}
+.list-prices {
+    padding: 0px;
+    margin: 0px;
+    display: block;
+    list-style: none;
+    li {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        border-bottom: 1px solid $color-border;
+        padding: 15px 0px;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
+        color: $color-text;
+        span.text {
+            width: 100%;
+        }
+        span.price {
+            min-width: 42px;
+            max-width: 42px;
+            width: 100%;
+        }
+        &:last-child {
+            border-bottom: 0px;
+            padding-bottom: 0px;
+        }
+    }
+}
+.mw-100 {
+    max-width: 100% !important;
+}
+.text-conditions {
+    font-size: 14px;
+    line-height: 18px;
+    color: $color-text;
+    font-weight: 400;
+    padding: 0px 0px 0px 20px;
+    display: inline-block;
+    &.icon-meet {
+        background-image: url(../imgs/page/fleet/meet.png);
+        background-position: left center;
+        background-repeat: no-repeat;
+    }
+    &.icon-free-cancel {
+        background-image: url(../imgs/page/fleet/free-cancel.png);
+        background-position: left center;
+        background-repeat: no-repeat;
+    }
+    &.icon-free-wait {
+        background-image: url(../imgs/page/fleet/free-wait.png);
+        background-position: left center;
+        background-repeat: no-repeat;
+    }
+    &.icon-safe {
+        background-image: url(../imgs/page/fleet/safe.png);
+        background-position: left center;
+        background-repeat: no-repeat;
+    }
+}

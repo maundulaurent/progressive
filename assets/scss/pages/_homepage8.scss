@@ -1,0 +1,195 @@
+.box-testimonials-home8 {
+    padding: 120px 0px 90px 0px;
+    .box-customers-images {
+        max-width: 370px;
+        img {
+            border-radius: 6px;
+            display: block;
+        }
+    }
+}
+.box-showcase-home8 {
+    position: relative;
+}
+.box-slider-customers {
+    padding: 50px 0px 50px 0px;
+    position: relative;
+    max-height: 945px;
+    overflow: hidden;
+    .box-swiper {
+        max-width: 100%;
+    }
+}
+.swiper-pagination.swiper-pagination-number .swiper-pagination-bullet {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    margin: 5px 0px 5px 0px;
+    border: 1px solid $color-text;
+    border-radius: 50%;
+    background-color: $background-white;
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.swiper-pagination.swiper-pagination-number .swiper-pagination-bullet-active {
+    background-color: $background-bg-4;
+}
+.swiper-pagination-number {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 60px;
+    width: 40px;
+    bottom: auto !important;
+}
+.box-our-fleet-home8 {
+    padding: 120px 0px 120px 0px;
+    .fleet-style-3 {
+        .cardFleet {
+            border: 1px solid $color-white;
+            &:hover {
+                border-color: $color-border;
+            }
+        }
+        .box-pagination-fleet {
+            margin-top: 0px;
+            position: unset;
+            .swiper-button-prev-fleet {
+                position: absolute;
+                top: 50%;
+                left: -102px;
+                transform: translateY(-50%);
+            }
+            .swiper-button-next-fleet {
+                position: absolute;
+                top: 50%;
+                right: -102px;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}
+.box-makeyourtrip-home8 {
+    background-color: $background-bg-2;
+    padding: 120px 0px;
+    .cardIconTitleDescLeft .cardIconTitleDesc {
+        background-color: $background-white;
+        border-radius: 6px;
+        box-shadow: $box-shadow-3;
+    }
+}
+.box-how-it-works-home8 {
+    background-image: url(../imgs/page/homepage8/map.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    padding: 120px 0px;
+    .list-how li {
+        &:last-child {
+            padding-bottom: 0px;
+        }
+    }
+}
+.banner-home8 {
+    position: relative;
+}
+.box-search-ride-style-4 {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+    .box-search-tabs {
+        position: relative;
+        top: auto;
+        left: auto;
+        bottom: auto;
+        right: auto;
+    }
+}
+.box-banner-homepage-8 {
+    .box-cover-image {
+        padding: 109px 0px;
+        .container-sub {
+            position: relative;
+            z-index: 2;
+        }
+    }
+    .box-search-ride-style-4 .box-form-search .btn-search {
+        background-color: $color-primary;
+        color: $color-white;
+        &:hover {
+            background-color: $color-secondary;
+            color: $color-white;
+        }
+    }
+}
+.footer-8 {
+    background-color: $background-white;
+    padding-top: 0px;
+    .footer-box-inner {
+        background-color: $background-white;
+        padding-top: 0px;
+        .address-footer {
+            background-image: url(../imgs/page/homepage8/address.png);
+        }
+        .time-footer {
+            background-image: url(../imgs/page/homepage8/time.png);
+        }
+        .call-footer {
+            background-image: url(../imgs/page/homepage8/call.png);
+        }
+    }
+    .footer-bottom {
+        border-top: 1px solid $color-border;
+    }
+    .menu-footer li a {
+        color: $color-text;
+        &:hover {
+            color: $color-success;
+        }
+    }
+    .menu-bottom li a {
+        color: $color-text;
+        &:hover {
+            color: $color-success;
+        }
+    }
+    .btn.btn-link-location
+    {
+        background-image: url(../imgs/page/homepage8/address.png);
+    }
+    .btn.btn-link-globe {
+        background-image: url(../imgs/page/homepage8/globe.png);
+    }
+    .btn.btn-link-location, .btn.btn-link-globe {
+        color: $color-text;
+        &:hover {
+            background-color: $background-bg-2;
+        }
+    }
+}
+.color-text-2 {
+    color: #181a1f83;
+}
+.box-info-slide-custmer {
+    padding-left: 120px;
+    max-width: 590px;
+}
+.box-swiper .swiper-group-1-number {
+    .swiper-slide {
+        max-height: 945px;
+    }
+    .swiper-container {
+        height: auto;
+    }
+}
+.box-intercity-home8 {
+    padding: 120px 0px 0px 0px;
+}
+.box-testimonials-home8 {
+    .box-pagination-fleet {
+        margin-top: 30px;
+    }
+}

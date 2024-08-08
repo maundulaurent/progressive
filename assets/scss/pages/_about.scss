@@ -1,0 +1,71 @@
+.icon-quote {
+    &.bg-secondary {
+        background-image: url(../imgs/page/about/quote.png);
+    }
+}
+.box-pagination-testimonials {
+    &.swiper-pagination-grey {
+        .swiper-pagination { 
+            .swiper-pagination-bullet {
+                background-color: $color-text;
+            }
+            .swiper-pagination-bullet-active {
+                background-color: $color-primary;
+            }
+        }
+        .firstNumber, .lastNumber {
+            color: $color-text;
+        }
+    }
+}
+.list-the-trip {
+    li {
+        display: flex;
+        width: 100%;
+        margin-bottom: 30px;
+        .cardImage {
+            min-width: 80px;
+            max-width: 80px;
+            width: 100%;
+            margin-right: 20px;
+        }
+        .cardInfo {
+            width: 100%;
+        }
+    }
+}
+.box-the-trip {
+    padding: 120px 0px 90px 0px;
+    max-width: 540px;
+}
+.bg-your-trip {
+    position: relative;
+}
+.box-the-trip-right {
+    max-width: 45%;
+    width: 100%;
+    background: url(../imgs/page/about/bg-trip.png) no-repeat top right;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+}
+.banner-about {
+    position: relative;
+}
+.padding-box {
+    padding: 60px 0px;
+}
+.box-banner-right {
+    position: absolute;
+    bottom: -50px;
+    right: 0px;
+    overflow: hidden;
+    max-width: 55%;
+    top: 0px;
+    width: 100%;
+    height: calc(100% + 50px);
+    background: url(../imgs/page/about/banner2.png) no-repeat top center;
+    background-size: cover;
+}

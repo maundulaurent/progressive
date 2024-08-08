@@ -1,0 +1,36 @@
+.box-login {
+    max-width: 369px;
+    margin: auto;
+}
+.cb-rememberme {
+    float: left;
+    margin: 5px 9px 0px 0px;
+}
+.text-or-box {
+    position: relative;
+    text-align: center;
+    margin: 35px 0px;
+    &::before {
+        content: "";
+        height: 1px;
+        width: 100%;
+        background-color: $color-border;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        bottom: 0px;
+        margin: auto;
+    }
+    .text-or {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: $background-white;
+        color: $color-text;
+        font-size: 16px;
+        line-height: 28px;
+        font-weight: 500;
+        position: relative;
+        z-index: 2;
+    }
+}

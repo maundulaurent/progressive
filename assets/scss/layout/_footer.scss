@@ -1,0 +1,303 @@
+.footer {
+    background-color: $color-primary;
+    background-image: url(../imgs/template/bg-footer.png);
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
+    .btn-download {
+        border: 1px solid $color-white;
+        margin-bottom: 20px;
+    }
+    .menu-footer {
+        display: inline-block;
+        li {
+            list-style: none;
+            margin-bottom: 8px;
+            a {
+                color: $color-white;
+                font-size: $font-sm;
+                font-weight: 400;
+                line-height: 35px;
+                text-decoration: none;
+                display: block;
+                padding: 0px 0px 0px 0px;
+                transition-duration: 0.2s;
+                letter-spacing: 0.3px;
+                &:hover {
+                    transition-duration: 0.2s;
+                    padding-left: 2px;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    &.footer-white {
+        background-color: $background-white;
+        background-image: none;
+        .footer-bottom, .box-footer-top {
+            border-color: $color-border;
+        }
+        .color-white, .menu-footer li a, .menu-bottom li a {
+            color: $color-text !important;
+        }
+        .menu-bottom li a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        .btn.btn-link-location {
+            background-image: url(../imgs/page/homepage2/marker.png);
+            color: $color-text !important;
+            border-radius: 40px;
+            &:hover, .active {
+                background-color: $background-bg-2;
+            }
+        }
+        .btn.btn-link-globe {
+            background-image: url(../imgs/template/icons/globe-black.svg);
+            color: $color-text !important;
+            border-radius: 40px;
+            &:hover, &.active {
+                background-color: $background-bg-2;
+            }
+        }
+        .icon-socials.icon-facebook {
+            background: url(../imgs/template/icons/fb-black.svg) no-repeat center;
+        }
+        .icon-socials.icon-twitter {
+            background: url(../imgs/template/icons/tw-black.svg) no-repeat center;
+        }
+        .icon-socials.icon-instagram {
+            background: url(../imgs/template/icons/instagram-black.svg) no-repeat center;
+        }
+        .icon-socials.icon-linkedin {
+            background: url(../imgs/template/icons/linkedin-black.svg) no-repeat center;
+        }
+    }
+    &.footer-bg-4 {
+        background-color: $background-bg-4;
+        .btn.btn-link-globe:hover, .btn.btn-link-globe.active, .btn.btn-link-location:hover, .btn.btn-link-location.active {
+            background-color: $background-white;
+        }
+    }
+    &.footer-3 {
+        background-image: none;
+    }
+    &.footer-4 {
+        .btn.btn-link-location {
+            &:hover, .active {
+                background-color: $background-white;
+            }
+        }
+        .btn.btn-link-globe {
+            &:hover, &.active {
+                background-color: $background-white;
+            }
+        }
+    }
+    &.footer-5 {
+        .box-footer-top {
+            border-bottom: 0px;
+        }
+    }
+    &.footer-6 {
+        padding-top: 60px;
+        background-image: none;
+    }
+}
+.width-20 {
+    width: 20%;
+}
+.width-25 {
+    width: 25%;
+}
+.footer-bottom {
+    padding: 28px 0px;
+    border-top: 1px solid rgb(255 255 255 / 20%);
+}
+.menu-bottom {
+    display: inline-block;
+    li {
+        display: inline-block;
+        color: $color-white;
+        padding: 0px 15px;
+        a {
+            color: $color-white;
+            &:hover {
+                color: $color-green;
+            }
+        }
+    }
+}
+.bg-download {
+    background-color: $background-bg-2;
+    background-image: url(../imgs/page/homepage1/bg-download.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    padding: 123px 0px;
+    position: relative;
+    .container-sub {
+        position: relative;
+        z-index: 2;
+    }
+    &::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-image: url(../imgs/page/homepage1/phone.png);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: auto 100%;
+        z-index: 1;
+    }
+}
+.bg-download-2 {
+    background-image: url(../imgs/page/homepage2/bg-download.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    padding: 123px 0px;
+    position: relative;
+    .container-sub {
+        position: relative;
+        z-index: 2;
+    }
+    &::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-image: url(../imgs/page/homepage1/phone.png);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: auto 100%;
+        z-index: 1;
+    }
+}
+.bg-download-3 {
+    background-image: url(../imgs/page/homepage3/bg-download-3.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    padding: 123px 0px;
+    position: relative;
+    .container-sub {
+        position: relative;
+        z-index: 2;
+    }
+    &::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-image: url(../imgs/page/homepage1/phone.png);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: auto 100%;
+        z-index: 1;
+    }
+}
+#scrollUp {
+	width: 56px;
+    height: 56px;
+    color: $color-white;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    z-index: 999 !important;
+    border: 0;
+    background-color: #fff;
+    transition-duration: 0.2s;
+    background-color: $color-brand-1;
+    i {
+        display: block;
+        line-height: 56px !important;
+        font-size: 20px;
+        color: #fff;
+    }
+    &:hover {
+        transform: translateY(-3px);
+        transition-duration: 0.2s;
+        background-color: $color-brand-1-hover;
+    }
+}
+
+footer a {
+    text-decoration: none;
+}
+.icon-socials {
+    display: inline-block;
+    margin-right: 8px;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    transition-duration: 0.2s;
+    vertical-align: middle;
+    &:last-child {
+        margin-right: 0px;
+    }
+    &.icon-facebook {
+        background: url(../imgs/template/icons/fb.svg) no-repeat center;
+        transition-duration: 0.2s;
+        &:hover {
+            background: url(../imgs/template/icons/fb.svg) no-repeat center;
+            transition-duration: 0.2s;
+            background-color: rgb(255 255 255 / 20%);
+        }
+    }
+    &.icon-twitter {
+        background: url(../imgs/template/icons/tw.svg) no-repeat center;
+        transition-duration: 0.2s;
+        &:hover {
+            background: url(../imgs/template/icons/tw.svg) no-repeat center;
+            transition-duration: 0.2s;
+            background-color: rgb(255 255 255 / 20%);
+        }
+    }
+    &.icon-instagram {
+        background: url(../imgs/template/icons/instagram.svg) no-repeat center;
+        transition-duration: 0.2s;
+        &:hover {
+            background: url(../imgs/template/icons/instagram.svg) no-repeat center;
+            transition-duration: 0.2s;
+            background-color: rgb(255 255 255 / 20%);
+        }
+    }
+    &.icon-linkedin {
+        background: url(../imgs/template/icons/linkedin.svg) no-repeat center;
+        transition-duration: 0.2s;
+        &:hover {
+            background: url(../imgs/template/icons/linkedin.svg) no-repeat center;
+            transition-duration: 0.2s;
+            background-color: rgb(255 255 255 / 20%);
+        }
+    }
+    &:hover {
+        transform: translateY(-3px);
+        transition-duration: 0.2s;
+        border-radius: 50%;
+    }
+}
+.footer-white {
+    .icon-socials {
+        &:hover {
+            background-color: $background-bg-2 !important;
+        }
+    }
+}
+.box-footer-top {
+    padding: 30px 0px 10px 0px;
+    border-bottom: 1px solid rgb(255 255 255 / 20%);
+    margin-bottom: 60px;
+}

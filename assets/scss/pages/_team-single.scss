@@ -1,0 +1,119 @@
+.content-team-single {
+    max-width: 670px;
+    .tab-content {
+        padding: 30px 0px;
+        p {
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 28px;
+            color: $color-text;
+        }
+    }
+}
+.list-tabs-team {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-border;
+    li {
+        a {
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 500;
+            color: $color-grey;
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 2px solid $color-white;
+            &.active, &:hover {
+                color: $color-text;
+                border-bottom: 2px solid $color-text;
+            }
+        }
+    }
+}
+.list-experiences {
+    li {
+        position: relative;
+        .card-experiences {
+            .card-experience-circle {
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 40px;
+                    left: 0px;
+                    right: 0px;
+                    width: 1px;
+                    bottom: 10px;
+                    margin: auto;
+                    background: url(../imgs/page/team-single/dashed.png);
+                }
+            }
+        }  
+        &:last-child {
+            .card-experiences {
+                .card-experience-circle {
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+.box-user-info {
+    padding: 20px;
+    background: $background-white;
+    box-shadow: $box-shadow-3;
+    position: absolute;
+    max-width: 370px;
+    top: -240px;
+    border-radius: 6px;
+    .image-user {
+        margin-bottom: 20px;
+        img {
+            border-radius: 6px;
+            display: block;
+        }
+    }
+    .list-info-user {
+        li {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0px 0px 10px 0px;
+            border-bottom: 1px solid $color-border;
+            margin-bottom: 10px;
+            .label-left {
+                min-width: 65px;
+            }
+            .text-info-right {
+                width: auto;
+            }
+            &:last-child {
+                border-bottom: 0px;
+            }
+        }
+    }
+    .icon-socials {
+        height: 20px;
+        width: 20px;
+    }
+    .icon-socials.icon-facebook {
+        background: url(../imgs/template/icons/fb-black.png) no-repeat center;
+    }
+    .icon-socials.icon-twitter {
+        background: url(../imgs/template/icons/tw-black.png) no-repeat center;
+    }
+    .icon-socials.icon-instagram {
+        background: url(../imgs/template/icons/instagram-black.png) no-repeat center;
+    }
+    .icon-socials.icon-linkedin {
+        background: url(../imgs/template/icons/linkedin-black.png) no-repeat center;
+    }
+    .box-button-send {
+        margin-top: 10px;
+        .btn {
+            width: 100%;
+        }
+    }
+}

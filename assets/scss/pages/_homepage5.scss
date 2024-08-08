@@ -1,0 +1,207 @@
+.box-padding-fleet {
+    padding-top: 30px;
+}
+.link-grey {
+    margin-top: 30px;
+    li {
+        a {
+            color: $color-text;
+            opacity: .2;
+            font-weight: 500;
+            font-size: 32px;
+            line-height: 58px;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+.bg-our-fleet-2 {
+    background-image: url(../imgs/page/homepage5/map.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: contain;
+    .cardCities .cardInfo .cardTitle, .cardCities .cardInfo .cardDesc {
+        color: $color-white !important;
+    }
+    .cardCities .cardInfo .cardTitle {
+        &:hover {
+            color: $color-secondary !important;
+        }
+    }
+}
+.footer-5 {
+    background-image: none;
+    padding-top: 90px;
+    .box-footer-top {
+        margin-bottom: 36px;
+    }
+}
+.box-fleet-style-2 {
+    .box-swiper {
+        width: calc(100% + 60px);
+        margin-left: -30px;
+        .swiper-container {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+}
+.latest-new-background {
+    .cardNews {
+        overflow: hidden;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: $box-shadow-3;
+    }
+    .cardNews .cardImage {
+        img {
+            border-radius: 0px;
+        }
+    }
+    .cardInfo {
+        padding: 0px 30px;
+        .cardLink {
+            display: none;
+        }
+    }
+}
+.box-testimonials-home5 {
+    background-image: url(../imgs/page/homepage5/quote.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    .cardTestimonialsStyle2 {
+        .content-quote {
+            font-size: 32px;
+            line-height: 55px;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+        .box-quote {
+            .box-author {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+    }
+}
+.box-testimonials-770 {
+    max-width: 770px;
+    margin: auto;
+    text-align: center;
+}
+.box-services-banner {
+    position: absolute;
+    bottom: 30px;
+    z-index: 533;
+    left: 0px;
+    right: 0px;
+}
+.swiper-button-next-banner-2, .swiper-button-prev-banner-2 {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid $color-white;
+    line-height: 62px;
+    text-align: center;
+    display: inline-block;
+    background-image: none;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    right: auto;
+    margin-top: 20px;
+}
+.swiper-button-next-banner-2 svg, .swiper-button-prev-banner-2 svg {
+    height: 20px;
+    color: $color-white;
+}
+.swiper-button-next-banner-2:hover, .swiper-button-prev-banner-2:hover {
+    border-color: $color-white;
+    background-color: $background-white;
+    svg {
+        color: $color-text;
+    }
+}
+.box-pagination-button-2 {
+    position: absolute;
+    right: 0px;
+    top: 25px;
+    max-width: 85px;
+    margin: 0px;
+    left: auto;
+    display: inline-block;
+}
+
+.banner-home5 {
+    position: relative;
+    .swiper-banner-1 .swiper-slide {
+        padding-right: 100px;
+    }
+    .box-banner-info {
+        top: 30%;
+    }
+    .box-cover-image {
+        &::before {
+            content:"";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-image: url(../imgs/page/homepage5/bg-banner.png);
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 1;
+            background-color: transparent;
+            opacity: 1;
+        }
+    }
+    .btn-border {
+        border-radius: 16px;
+    }
+    .box-banner-homepage-2 {
+        z-index: 2;
+        .box-cover-image {
+            height: 1060px;
+        }
+    }
+}
+.header-homepage5.stick {
+    .header-top-main {
+        display: none;
+    }
+}
+.accordion-style-2 {
+    .accordion-button:not(.collapsed)::after {
+        background-image: none;
+    }
+    .accordion-collapse {
+        background: transparent;
+    }
+    .accordion-button::after {
+        background-image: none;
+    }
+    .accordion-button {
+        opacity: 1;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        background: transparent;
+        &.collapsed {
+            opacity: 0.2;
+        }
+    }
+    &.accordion {
+        .accordion-item {
+            border-bottom: 0px;
+        }
+        .accordion-body {
+            padding-bottom: 10px;
+        }
+    }
+}
+.latest-new-white {
+    padding-top: 120px;
+    padding-bottom: 90px;
+}

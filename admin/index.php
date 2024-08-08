@@ -1,3 +1,55 @@
+<?php
+session_start();
+// Ensure the user is logged in
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+    header("location: ../login.php");
+    exit;
+}
+
+
+require_once 'includes/db.php';
+
+
+// Pagination settings
+$itemsPerPage = 5; // Number of items to show per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $itemsPerPage;
+
+
+// Fetch data for the chart
+$sql = "SELECT recipes.name AS recipe_name, COUNT(recipe_ingredients.id) AS ingredient_count
+        FROM recipes
+        LEFT JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipe_id
+        GROUP BY recipes.name";
+
+$result = $conn->query($sql);
+
+$recipes = [];
+$ingredient_counts = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $recipes[] = $row['recipe_name'];
+        $ingredient_counts[] = $row['ingredient_count'];
+    }
+}
+
+
+// Fetch the paginated recipe list
+$sql_recipes = "SELECT id, name FROM recipes LIMIT $itemsPerPage OFFSET $offset";
+$result_recipes = $conn->query($sql_recipes);
+
+// Get the total number of recipes for pagination
+$sql_total = "SELECT COUNT(*) as total FROM recipes";
+$result_total = $conn->query($sql_total);
+$row_total = $result_total->fetch_assoc();
+$totalItems = $row_total['total'];
+$totalPages = ceil($totalItems / $itemsPerPage);
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

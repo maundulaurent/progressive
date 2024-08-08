@@ -1,0 +1,235 @@
+.banner-home1 {
+    position: relative;
+    display: block;
+}
+.banner-home2 {
+    position: relative;
+    display: block;
+    padding-left: 100px;
+    padding-right: 100px;
+    .box-banner-homepage-2 {
+        .box-cover-image {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+    }
+}
+.box-banner-info {
+    position: absolute;
+    top: 40%;
+    left: 0px;
+    width: 100%;
+    z-index: 3;
+    right: 0px;
+    max-width: 1170px;
+    margin: auto;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+}
+.box-cover-image {
+    position: relative;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 800px;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: $color-primary;
+        opacity: 0.3;
+        z-index: 2;
+    }
+    img {
+        position: relative;
+        z-index: 1;
+    }
+}
+.box-pagination-button {
+    position: absolute;
+    top: 30%;
+    max-width: 1170px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+}
+.swiper-button-next-banner, .swiper-button-prev-banner {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+}
+.swiper-button-prev-banner {
+    margin-right: 10px;
+}
+.swiper-pagination-banner {
+    position: relative;
+    display: inline-block;
+    bottom: auto !important;
+    text-align: left;
+    width: auto;
+    left: auto;
+    padding: 0px 0px 0px 12px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+}
+.ui-timepicker-standard {
+    width: 270px !important;
+    border: 2px solid $color-text !important;
+    padding: 15px 0px;
+    border-radius: 6px;
+    margin-top: 40px;
+    margin-left: -60px;
+    box-shadow: $box-shadow-3;
+    .ui-timepicker, .ui-timepicker-viewport {
+        height: 260px !important;
+    }
+    .ui-timepicker {
+        text-align: left;
+    }
+    li {
+        a {
+            padding: 0px 20px;
+            border-radius: 0px;
+            border: 1px solid $color-white;
+            font-size: 14px;
+            line-height: 35px;
+            color: $color-text;
+            font-family: $font-dm-sans;
+            transition: none;
+            font-weight: 500;
+            &.ui-state-hover {
+                border-color: $background-bg-3;
+                background-color: $background-bg-3;
+                font-weight: 500;
+                color: $color-text;
+            }
+            &:hover {
+                background-color: $background-bg-3;
+                border-color: $background-bg-3;
+            }
+        }
+    }
+}
+.box-dropdown-location {
+    position: absolute;
+    top: 100%;
+    left: 15px;
+    background: $background-white;
+    border: 2px solid $color-text;
+    border-radius: 6px;
+    padding: 0px 20px;
+    margin-top: 35px;
+    width: 430px;
+    z-index: 99;
+    display: none;
+}
+.list-locations {
+    .item-location {
+        display: flex;
+        align-items: flex-start;
+        padding: 20px 0px;
+        border-bottom: 1px solid $color-border;
+        cursor: pointer;
+        &:last-child {
+            border-bottom: 0px;
+        }
+        &:hover {
+            .location-info {
+                h6 {
+                    color: $color-green;
+                }
+                p {
+                    color: $color-text;
+                }
+            }
+        }
+        .location-icon {
+            max-width: 16px;
+            margin-right: 20px;
+            padding-top: 6px;
+        }
+        .location-info {
+            width: 100%;
+        }
+    }
+}
+@keyframes hero-thumb-animation {
+    0% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+@keyframes hero-thumb-animation-2 {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+@keyframes hero-thumb-sm-animation {
+    0% {
+        -webkit-transform: translateY(-20px) translateX(50px);
+        -moz-transform: translateY(-20px) translateX(50px);
+        -ms-transform: translateY(-20px) translateX(50px);
+        transform: translateY(-20px) translateX(50px);
+    }
+    100% {
+        -webkit-transform: translateY(-20px) translateX(0px);
+        -moz-transform: translateY(-20px) translateX(0px);
+        -ms-transform: translateY(-20px) translateX(0px);
+        transform: translateY(-20px) translateX(0px);
+    }
+}
+@keyframes hero-thumb-sm-2-animation {
+    0% {
+        -webkit-transform: translateY(-50px);
+        -moz-transform: translateY(-50px);
+        -ms-transform: translateY(-50px);
+        transform: translateY(-50px);
+    }
+    100% {
+        -webkit-transform: translateY(0px);
+        -moz-transform: translateY(0px);
+        -ms-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+}
+.shape-1 {
+    -webkit-animation: hero-thumb-animation 2s linear infinite alternate;
+    -moz-animation: hero-thumb-animation 2s linear infinite alternate;
+    -o-animation: hero-thumb-animation 2s linear infinite alternate;
+    animation: hero-thumb-animation 2s linear infinite alternate;
+}
+.shape-1-2 {
+    -webkit-animation: hero-thumb-animation-2 2s linear infinite alternate;
+    -moz-animation: hero-thumb-animation-2 2s linear infinite alternate;
+    -o-animation: hero-thumb-animation-2 2s linear infinite alternate;
+    animation: hero-thumb-animation-2 2s linear infinite alternate;
+}
+.shape-2 {
+    -webkit-animation: hero-thumb-sm-animation 4s linear infinite alternate;
+    -moz-animation: hero-thumb-sm-animation 4s linear infinite alternate;
+    -o-animation: hero-thumb-sm-animation 4s linear infinite alternate;
+    animation: hero-thumb-sm-animation 4s linear infinite alternate;
+}
+.shape-3 {
+    -webkit-animation: hero-thumb-sm-2-animation 4s linear infinite alternate;
+    -moz-animation: hero-thumb-sm-2-animation 4s linear infinite alternate;
+    -o-animation: hero-thumb-sm-2-animation 4s linear infinite alternate;
+    animation: hero-thumb-sm-2-animation 4s linear infinite alternate;
+}
+// End New Agon

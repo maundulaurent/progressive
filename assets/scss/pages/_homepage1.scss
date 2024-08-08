@@ -1,0 +1,563 @@
+.box-author {
+    display: flex;
+    align-items: center;
+    img {
+        max-width: 56px;
+        height: 56px;
+        width: 56px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    .author-info {
+        .author-name {
+            display: block;
+        }
+        img {
+            width: 12px;
+            height: auto;
+            border-radius: 0;
+            margin-right: 0px;
+            max-width: 100%;
+        }
+    }
+}
+.list-faqs {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    border: 0px;
+    li {
+        margin-bottom: 15px;
+        width: 100%;
+        a {
+            display: flex;
+            padding: 14px 26px 16px 26px;
+            border: 1px solid $color-gray-50;
+            color: $color-gray-400;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 700;
+            span {
+                width: 100%;
+                display: inline-block;
+            }
+            svg {
+                display: inline-block;
+                margin-top: 4px;
+                transition-duration: 0.2s;
+            }
+            &:hover, &.active {
+                background-color: $color-brand-1-hover;
+                color: $color-brand-2 !important;
+                svg, * {
+                    color: $color-brand-2 !important;
+                }
+            }
+            &:hover {
+                svg {
+                    transform: rotate(-45deg);
+                    transition-duration: 0.2s;
+                }
+            }
+        }
+    }
+}
+.accordion {
+    .accordion-item {
+        border-bottom: 1px solid $color-border;
+        transition: all .4s ease;
+    }
+    .accordion-button {
+        font-size: 20px;
+        line-height: 32px;
+        font-weight: 500;
+        color: $color-text;
+        border: 0px;
+        padding: 20px 0px 20px 0px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        background-color: $background-white;
+        transition: all .4s ease;
+    }
+    .accordion-collapse {
+        border-width: 0 0;
+        background-color: $background-white;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        transition: all .4s ease;
+    }
+    .accordion-body {
+        padding: 0px 0px 30px 0px;
+        font-size: 16px;
+        line-height: 28px;
+        transition: all .4s ease;
+    }
+}
+.accordion-button::after {
+    width: 30px;
+    height: 30px;
+    background-image: url(../imgs/template/icons/plus.png);
+    background-size: 30px;
+}
+.accordion-button:not(.collapsed) {
+    background-color: $background-white;
+    &::after {
+        background-image: url(../imgs/template/icons/minus.png);
+
+     }
+}
+.box-search-ride {
+    background-color: $background-white;
+    border-radius: 100px;
+    padding: 20px 5px;
+    position: absolute;
+    bottom: 50px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    z-index: 3;
+    max-width: 1170px;
+    display: flex;
+    align-items: center;
+    .search-item {
+        width: 100%;
+        display: flex;
+        padding: 0px 15px;
+        align-items: center;
+        position: relative;
+        .search-icon {
+            max-width: 52px;
+            width: 100%;
+            min-width: 52px;
+            margin-right: 15px;
+            .item-icon {
+                display: inline-block;
+                width: 52px;
+                height: 52px;
+                border-radius: 100%;
+                background-color: $background-bg-4;
+                background-position: center;
+                background-repeat: no-repeat;
+                vertical-align: middle;
+                &.icon-date {
+                    background-image: url(../imgs/template/icons/calendar.svg);
+                }
+                &.icon-time {
+                    background-image: url(../imgs/template/icons/time.svg);
+                }
+                &.icon-from {
+                    background-image: url(../imgs/template/icons/from.svg);
+                }
+                &.icon-to {
+                    background-image: url(../imgs/template/icons/to.svg);
+                }
+            }
+        }
+        .search-inputs {
+            width: 100%;
+            .search-input {
+                width: 100%;
+                display: inline-block;
+                padding:0px;
+                border: 0px;
+                font-size: 14px;
+                line-height: 24px;
+                font-weight: 500;
+                color: $color-text;
+                background-color: transparent;
+            }
+        }
+    }
+    .search-button {
+        max-width: 161px;
+        min-width: 161px;
+    }
+    .search-time {
+        max-width: 200px;
+        min-width: 200px;
+    }
+    .search-date {
+        max-width: 230px;
+        min-width: 230px;
+    }
+}
+.list-logos {
+    display: flex;
+    align-items: center;
+    li {
+        width: 100%;
+        text-align: right;
+    }
+}
+.icon-16 {
+    height: 16px;
+}
+.bg-our-fleet {
+    background-image: url(../imgs/page/homepage1/bg-our-fleet.png);
+    background-repeat: no-repeat;
+    background-position: left top 230px;
+}
+.box-pagination-fleet {
+    position: relative;
+    margin-top: 60px;
+}
+.swiper-button-prev-fleet {
+    margin-right: 15px;
+}
+.swiper-button-next-fleet, .swiper-button-prev-fleet {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+}
+.swiper-button-next-fleet, .swiper-button-prev-fleet {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid $color-border;
+    line-height: 67px;
+    text-align: center;
+    display: inline-block;
+    background-image: none;
+    svg {
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        color: $color-text;
+    }
+    &:hover {
+        border-color: $color-text;
+        background-color: $background-bg-4;
+    }
+}
+.bg-our-service-2 {
+    .swiper-button-next-fleet, .swiper-button-prev-fleet {
+        line-height: 67px;
+        svg {
+            color: $color-white;
+            height: 20px;
+        }
+        &:hover {
+            svg {
+                color: $color-text;
+            }
+        }
+    }
+}
+.slider-nav-thumbnails {
+    max-width: 439px;
+    margin: auto 0 auto auto;
+}
+.list-how.slider-nav-thumbnails {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    .slick-list {
+        .slick-track {
+            li {
+                padding-bottom: 60px;
+                position: relative;
+                padding-left: 50px;
+                cursor: pointer;
+                .line-white {
+                    display: none;
+                    height: 56px;
+                    width: 3px;
+                    position: absolute;
+                    top: 36px;
+                    border-radius: 60px;
+                    background-color: $background-white;
+                    left: 8px;
+                }
+                &::before {
+                    content: "";
+                    height: 20px;
+                    width: 20px;
+                    border: 1px solid $color-white;
+                    border-radius: 50%;
+                    opacity: 0.6;
+                    position: absolute;
+                    top: 6px;
+                    left: 0px;
+                }
+                &::after {
+                    content: "";
+                    bottom: 4px;
+                    width: 3px;
+                    opacity: 0.2;
+                    position: absolute;
+                    top: 36px;
+                    background-color: $background-white;
+                    left: 8px;
+                    border-radius: 60px;
+                }
+                h4, p {
+                    color: $color-white;
+                    opacity: 0.6;
+                }
+                &.slick-current  {
+                    &::before {
+                        opacity: 1;
+                    }
+                    h4, p {
+                        opacity: 1;
+                    }   
+                    .line-white {
+                        display: block;
+                    }
+                }
+                &.slick-active {
+                    &:last-child {
+                        &::after {
+                            display: none;
+                        }
+                        .line-white {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.box-main-slider {
+    width: 100%;
+    position: absolute;
+    top: 15%;
+    right: 0px;
+    max-width: 52%;
+}
+.detail-gallery {
+    display: inline-block;
+    vertical-align: middle;
+    min-height: 510px;
+    width: 100%;
+    position: relative;
+    z-index: 4;
+    .main-image-slider {
+        .slick-slide {
+            display: flex;
+            align-items: center;
+            max-height: 630px;
+            width: 100%;
+            text-align: right;
+            img {
+                max-height: 600px;
+                max-width: 100%;
+            }
+        }
+    }
+}
+.bg-how-it-works {
+    position: relative;
+    &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: url(../imgs/page/homepage1/line.png);
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-size: contain;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+    }
+    // &::after {
+    //     content: "";
+    //     width: 60%;
+    //     height: 100%;
+    //     background-image: url(../imgs/page/homepage1/laptop.png);
+    //     background-repeat: no-repeat;
+    //     background-position: left center;
+    //     background-size: contain;
+    //     position: absolute;
+    //     top: 0px;
+    //     right: 0px;
+    //     z-index: 2;
+    // }
+    // .container-sub, .container-fluid {
+    //     position: relative;
+    //     z-index: 3;
+    // }
+    .position-z3 {
+        position: relative;
+        z-index: 3;
+    }
+}
+.box-faqs {
+    max-width: 770px;
+    margin: auto;
+}
+.bg-showcase {
+    background-color: $color-secondary;
+    background-image: url(../imgs/page/homepage1/bg-showcase.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: contain;
+    border-radius: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.bg-our-service {
+    background-image: url(../imgs/page/homepage1/bg-our-service.png);
+    background-repeat: no-repeat;
+    background-position: right top -460px;
+}
+.bg-faqs {
+    background-image: url(../imgs/page/homepage1/bg-faqs.png);
+    background-repeat: no-repeat;
+    background-position: left -100px bottom 50px;
+}
+.box-showcase {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.box-quote {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    .icon-quote {
+        height: 70px;
+        width: 70px;
+        border-radius: 6px;
+        background-color: $background-white;
+        background-image: url(../imgs/page/homepage1/quote.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-right: 20px;
+    }
+}
+.content-quote {
+    font-size: 24px;
+    line-height: 40px;
+    color: $color-white;
+    font-weight: 500;
+}
+.box-video {
+    max-width: 370px;
+    width: 100%;
+    position: relative;
+    border-radius: 6px;
+    display: inline-block;
+    img {
+        border-radius: 6px;
+        width: 100%;
+    }
+    .btn-play {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        top: 50%;
+        left: -50px;
+        margin-top: -50px;
+        background-image: url(../imgs/page/homepage1/play.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 2;
+    }
+}
+.cardIconStyleCircle {
+    .cardIconTitleDesc .cardIcon {
+        position: relative;
+        &::before {
+            content: "";
+            height: 60px;
+            width: 60px;
+            background-color: $background-bg-2;
+            border-radius: 50%;
+            position: absolute;
+            top: -25px;
+            left: 0px;
+            right: 0px;
+            margin: auto;
+            z-index: 1;
+        }
+        img {
+            position: relative;
+            z-index: 2;
+        }
+    }
+}
+.box-gallery {
+    display: flex;
+    .gallery-1 {
+        width: 311px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        img {
+            border-radius: 6px;
+        }
+    }
+    .gallery-2 {
+        width: 249px;
+        img {
+            margin-bottom: 10px;
+            display: block;
+            border-radius: 6px;
+        }
+    }
+}
+.box-region-right {
+    padding-left: 110px;
+}
+.bg-region {
+    background-image: url(../imgs/page/homepage1/maps.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: contain;
+}
+.tags {
+    a {
+        color: $color-white;
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+.box-pagination-testimonials {
+    position: relative;
+    display: inline-block;
+    .firstNumber, .lastNumber {
+        position: absolute;
+        top:3px;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+        color: $color-white;
+    }
+    .firstNumber {
+        left: 0px;
+    }
+    .lastNumber {
+        right: 0px;
+    }
+    .swiper-pagination {
+        &.swiper-pagination-testimonials {
+            text-align: left;
+            position: relative;
+            padding: 0px 34px 0px 30px;
+            .swiper-pagination-bullet {
+                width: 50px;
+                height: 2px;
+                display: inline-block;
+                background: $background-white;
+                opacity: 0.2;
+                margin: 0px;
+                border-radius: 0px;
+            }
+            .swiper-pagination-bullet-active {
+                opacity: 1;
+                width: 50px;
+                height: 2px;
+            }
+        }
+    }
+}
+.box-testimonials {
+    background-image: url(../imgs/page/homepage1/bg-testimonials.png);
+    background-repeat: no-repeat;
+    background-position: top right 35%;
+}

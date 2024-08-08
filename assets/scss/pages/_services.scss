@@ -1,0 +1,25 @@
+
+.banner-image-service {
+    position: relative;
+    background-image: url(../imgs/page/services/banner.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 500px;
+    height: 500px;
+}
+.box-form-service-single {
+    position: relative;
+    .box-search-ride-style-2 .box-search-tabs {
+        bottom: 80px;
+        position: absolute;
+        max-width: 370px;
+        right: 10px;
+    }
+}
+.box-info-left {
+    padding-right: 50px;
+}
+.box-info-right {
+    padding-left: 50px;
+}

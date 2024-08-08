@@ -1,0 +1,1033 @@
+@include media-breakpoint-up(xxl) {}
+
+@media (max-width: 1550px) {
+    //max-width: 1500px
+    .cardFleet {
+        padding: 15px;
+    }
+    .cardFleet .cardInfoBottom .passenger .icon-circle, .cardFleet .cardInfoBottom .luggage .icon-circle {
+        margin-right: 7px;
+    }
+}
+
+@include media-breakpoint-down(xxl) {
+
+    //max-width: 1399.98px
+    .header .main-header .header-left .header-right {
+        width: 25%;
+    }
+    .header .main-header .header-left .header-nav {
+        width: 86%;
+    }
+    .banner-home2, .block-padding-100 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .bg-our-service-home-7 .box-pagination-fleet .swiper-button-next-fleet {
+        right: -80px;
+    }
+    .bg-our-service-home-7 .box-pagination-fleet .swiper-button-prev-fleet {
+        left: -80px;
+    }
+    .box-number-banner {
+        padding-left:5px;
+    }
+    .box-header-home4 {
+        padding: 0px 15px;
+    }
+    .header.header-homepage9 .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .header.header-homepage9 .main-header .header-left .header-nav {
+        width: 50%;
+    }
+    .header.header-homepage9 .main-header .header-left .header-logo {
+        width: 14%;
+    }
+    .header.header-homepage9 .main-header .header-left .header-right {
+        width: 36%;
+    }
+    .box-our-fleet-home8 .fleet-style-3 {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    .box-our-fleet-home8 .fleet-style-3 .box-pagination-fleet .swiper-button-next-fleet {
+        right: -80px;
+    }
+    .box-our-fleet-home8 .fleet-style-3 .box-pagination-fleet .swiper-button-prev-fleet {
+        left: -80px;
+    }
+}
+
+@include media-breakpoint-down(xl) {
+
+    //max-width: 1199.98px
+    .header{
+        padding: 10px 0;
+        .header-right {
+            .btn {
+                &.btn-brand-1 {
+                    padding: 8px 16px;
+                }
+            }
+        }
+    }
+    .header-top-sub {
+        display: none;
+    }
+    .burger-icon {
+        display: inline-block;
+    }
+    .header .burger-icon {
+        display: block;
+    }
+    .header .main-header .header-left .header-right {
+        width: 100%;
+        text-align: right;
+        padding-right: 40px;
+    }
+    .header .main-header .header-left .header-nav {
+        width: 0%;
+    }
+    .box-search-ride {
+        flex-wrap: wrap;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 20px;
+        padding: 0px 15px;
+    }
+    .header .container {
+        max-width: 100%;
+    }
+    .box-cover-image {
+        height: 700px;
+    }
+    .box-search-ride .search-item {
+        background: $background-bg-4;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        width: 100%;
+        min-width: auto;
+        max-width: 100%;
+    }
+    .box-search-ride .search-item .search-icon .item-icon {
+        background-color: $background-white;
+        border-radius: 6px;
+        width: 44px;
+        height: 44px;
+    }
+    .box-search-ride .search-item .search-icon {
+        max-width: 44px;
+        min-width: 44px;
+        margin-right: 10px;
+    }
+    .box-search-ride .search-item {
+        &.search-button {
+            width: 100%;
+            border-radius: 6px;
+            text-align: center;
+            padding: 0px;
+            .btn-search {
+                border-radius: 6px;
+                width: 100%;
+            }
+        }
+    }
+    .ui-timepicker-standard {
+        margin-top: 25px;
+        margin-left: 0px;
+    }
+    .box-dropdown-location {
+        top: 45px;
+        left: 65px;
+    }
+    .box-search-ride-style-2 .box-search-tabs {
+        right: auto;
+        bottom: auto;
+        position: relative;
+        max-width: 100%;
+    }
+    .box-banner-homepage-2 .box-banner-info {
+        top: 200px;
+    }
+    .banner-home5 .box-banner-info {
+        top: 30%;
+    }
+    .box-search-ride-style-2 {
+        padding: 0px;
+    }
+    .box-fleet-cover {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .box-search-ride-style-3 {
+        .box-dropdown-location {
+            left: 0px;
+            max-width: 430px;
+            width: 100%;
+        }
+        .search-item {
+            background-color: $background-white;
+        }
+    }
+    .box-search-ride-style-3 {
+        padding: 0px;
+    }
+    .header .header-top-sub .main-header .header-left .header-right {
+        width: 100%;
+    }
+    .header-top-sub {
+        padding: 15px 0px;
+    }
+    .header-homepage5 {
+        padding: 0px 0;
+    }
+    .box-socials-header {
+        padding-right: 35px;
+    }
+    .box-the-trip-right {
+        max-width: 40%;
+    }
+    .bg-our-service-home-7 {
+        .box-slide-fleet-2 {
+            padding: 0px 80px;
+        }
+        // .box-swiper {
+        //     .swiper-container {
+        //         margin: 0px 50px;
+        //     }
+        //     .box-pagination-fleet {
+        //         .swiper-button-prev-fleet {
+        //             left: -40px;
+        //         }
+        //         .swiper-button-next-fleet {
+        //             right: -40px;
+        //         }
+        //     }
+        // }
+    }
+    .bg-our-service-home-7::before {
+        height: 410px;
+    }
+    .header.header-7 .main-header .header-left .header-right {
+        min-width: 255px;
+    }
+    .box-banner-homepage6-left {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .box-search-ride-3 {
+        padding: 15px 15px;
+        border-radius: 8px;
+    }
+    .box-search-ride-style-6 .tab-content .box-form-search {
+        flex-wrap: wrap;
+    }
+    .box-search-ride-style-6 .search-item {
+        margin-right: 1%;
+        width: 48%;
+        margin-left: 1%;
+    }
+    .header.header-homepage9 .main-header .header-left .header-right {
+        width: 80%;
+    }
+    .header.header-homepage9 .main-header .header-left .header-logo {
+        width: 20%;
+        text-align: left;
+    }
+    .header.header-homepage9 .main-header .header-left .header-nav {
+        width: 0%;
+    }
+    .header.header-homepage9 .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .box-comfortable-home9 {
+        padding: 0px 20px;
+    }
+    .banner-home9 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .latest-new-home9 {
+        padding: 0px 20px;
+    }
+    .box-pdrl-60, .footer-7 {
+        padding: 0px 20px;
+    }
+    .box-search-ride-5 {
+        margin-top: 0px;
+        padding: 15px 15px 0px 15px;
+        .search-item {
+            background-color: $color-primary;
+        }
+    }
+    .box-search-ride-5 .search-item .search-icon .item-icon {
+        background-color: rgba(255, 255, 255, 0.2039215686);
+        border-radius: 50%;
+    }
+    .box-our-fleet-home8 .fleet-style-3 .box-pagination-fleet .swiper-button-next-fleet {
+        right: -70px;
+    }
+    .box-our-fleet-home8 .fleet-style-3 .box-pagination-fleet .swiper-button-prev-fleet {
+        left: -70px;
+    }
+    .box-main-slider {
+        top: 32%;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+
+    //max-width: 991.98px
+    .box-container-sw {
+        .box-swiper {
+            padding-left: 30px;
+        }
+        .box-button-slider {
+            left: 30px;
+        }
+    }
+    
+    .box-region-right {
+        padding-left: 0px;
+    }
+    .list-logos li {
+        text-align: left;
+    }
+    .box-video .btn-play {
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        top: 0px;
+        bottom: 0px;
+    }
+    // .cardService {
+    //     height: 340px;
+    // }
+    
+    .cardServiceStyle4, .cardService.cardServiceStyle5 {
+        height: auto;
+    }
+    .bg-how-it-works::after {
+    content: "";
+        width: 100%;
+        height: 430px;
+        background-position: center
+    }
+    .box-cover-image {
+        height: 600px;
+    }
+    .bg-how-it-works::before {
+        background-size: cover;
+    }
+    .box-list-how {
+        ul 
+        {
+            flex-wrap: wrap;
+            li {
+                width: 100%;
+            }
+
+        }
+    } 
+    .bg-testimonial .box-region-right {
+        padding-left: 0px;
+    }
+    .swiper-group-testimonials-2 .swiper-slide {
+        padding: 0px;
+    }
+    .box-pagination-button-testimonials-2 {
+        padding-left: 0px;
+        padding-top: 60px;
+    }
+    .bg-download-2::before {
+        display: none;
+    }
+    .box-list-how ul li.has-arrow {
+        padding-right: 0px;
+        padding-bottom: 100px;
+        background-position: center bottom 20px;
+    }
+    .box-list-how ul li:last-child {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    .box-fleet-padding {
+        padding-top: 90px;
+        padding-bottom: 50px;
+    }
+    .box-image-how {
+        padding-left: 0px;
+    }
+    .box-customers-say {
+        padding-right: 0px;
+    }
+    .bg-download-3::before {
+        background-image: none;
+    }
+    .box-btn-play {
+        left: 0px;
+    }
+    .cardServiceStyle3 {
+        height: 290px;
+    }
+    .box-form-service-single .box-search-ride-style-2 .box-search-tabs {
+        bottom: auto;
+        position: relative;
+        max-width: 100%;
+        right: auto;
+    }
+    .box-banner-right {
+        display: none;
+    }
+    .box-the-trip-right {
+        display: none;
+    }
+    .box-the-trip {
+        max-width: 100%;
+    }
+    .inner-invoice {
+        padding: 50px 30px 0px 30px;
+    }
+    .invoice-left, .invoice-right {
+        width: 50%;
+        max-width: 100%;
+    }
+    .box-booking-tabs .item-tab .box-tab-step .icon-tab .icon-book {
+        background-size: 25px;
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        margin-right: 10px;
+    }
+    .box-booking-tabs .item-tab .box-tab-step .number-tab span {
+        font-size: 20px;
+        line-height: 48px;
+    }
+    .box-row-tab .box-tab-left {
+        width: 61%;
+    }
+    .box-row-tab .box-tab-right {
+        width: 39%;
+    }
+    .box-content-detail {
+        padding-right: 0px;
+    }
+    .item-vehicle .vehicle-left {
+        padding: 0px 10px;
+        position: relative;
+        width: 100%;
+        border-right: 0px solid #E5E5E5;
+        margin-right: 0px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #e5e5e5;
+        padding-bottom: 30px;
+    }
+    .item-vehicle .vehicle-right {
+        width: 100%;
+    }
+    .item-vehicle {
+        flex-wrap: wrap;
+    }
+    .box-offices {
+        padding-left: 0px;
+    }
+    .box-banner-homepage7-left {
+        padding: 50px 10px 60px 10px;
+    }
+    .box-some-number {
+        text-align: center;
+    }
+    .box-number-banner {
+        .number-1 {
+            &:first-child {
+                padding-left: 0px;
+            }
+        }
+    }
+    .box-number-banner {
+        padding-right: 5px;
+    }
+    .bg-right-trip {
+        display: none;
+    }
+    .cardNumberTitleDesc::before {
+        display: none;
+    }
+    .block-padding-60::before, .block-news-padding-60::before {
+        left: 0px;
+    }
+    .box-reliability .container-sub::before {
+        width: auto;
+        right: 10px;
+    }
+    .box-number-servered {
+        right: 20px;
+    }
+    .banner-home9 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .box-comfortable-home9 {
+        padding: 0px 0px;
+    }
+    .latest-new-home9 {
+        padding: 0px 0px;
+    }
+    .box-pdrl-60, .footer-7 {
+        padding: 0px 0px;
+    }
+    .banner-home8 .box-cover-image {
+        height: auto !important;
+        padding-bottom: 5px;
+        padding-top: 50px;
+    }
+    .box-main-slider {
+        top: auto;
+        width: 100%;
+        position: relative;
+        right: auto;
+        max-width: 100%;
+        margin-bottom: 0px;
+    }
+    .slider-nav-thumbnails {
+        max-width: 100%;
+    }
+    .width-20 {
+        width: 33.33%;
+    }
+    .detail-gallery {
+        min-height: auto;
+    }
+}
+
+@include media-breakpoint-down(md) {
+
+    //max-width: 767.98px
+    .mobile-header-wrapper-style {
+        .mobile-header-wrapper-inner {
+            .mobile-header-top {
+
+                .mobile-header-logo a img {
+                    max-width: 140px;
+                }
+            }
+        }
+    }
+    .cardFleet {
+        padding: 15px;
+    }
+    .width-20 {
+        width: 33.33%;
+        margin-bottom: 30px;
+    }
+    .width-25 {
+        margin-bottom: 30px;
+        width: 50%;
+    }
+    .menu-bottom {
+        display: inline-block;
+        width: 100%;
+        padding: 15px 0px;
+    }
+    .bg-download::before {
+        display: none;
+    }
+    .box-cover-image {
+        height: 500px;
+    }
+    .box-banner-homepage-2 .box-banner-info {
+        top: 140px;
+    }
+    .banner-home5 .box-banner-info {
+        top: 30%;
+    }
+    .box-search-ride-style-2 .box-form-search {
+        padding: 15px;
+    }
+    .nav-tabs-search li {
+        padding: 0px 15px;
+    }
+    .nav-tabs-search li a {
+        padding: 20px 0px;
+    }
+    .banner-home-4.pt-150 {
+        padding-top: 70px !important;
+    }
+    .cardIconTitleDescLeft .cardIconTitleDesc {
+        padding: 20px 20px 10px 20px;
+    }
+    .heading-100-medium {
+        font-size: 50px;
+        line-height: 70px;
+    }
+    .table-invoice thead th {
+        padding: 11px 11px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .table-invoice tbody tr td {
+        padding: 13px 11px;
+    }
+    .box-invoice {
+        margin-top: 55px;
+        margin-bottom: 50px;
+    }
+    .box-booking-tabs {
+        flex-wrap: wrap;
+    }
+    .box-booking-tabs .item-tab {
+        width: 50%;
+    }
+    .box-row-tab .box-tab-left {
+        width: 100%;
+    }
+    .box-row-tab .box-tab-right {
+        width: 100%;
+    }
+    .box-booking-tabs .item-tab .box-tab-step {
+        padding: 15px 0px;
+    }
+    .box-info-book-border {
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+    }
+    .box-info-book-border .info-1 {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+    .cardImageLeftTextRight .cardImage {
+        padding: 10px;
+        margin-right: 15px;
+        line-height: 70px;
+    }
+    .cardImageLeftTextRight {
+        margin-bottom: 30px;
+    }
+    .cardServiceStyle5 {
+        flex-wrap: wrap;
+    }
+    .cardServiceStyle5 .cardImage {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .cardServiceStyle5 .cardInfo {
+        width: 100%;
+        padding-left: 0px;
+    }
+    .box-number-servered {
+        right: 10px;
+        left: 10px;
+    }
+    .width-20 {
+        width: 50%;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+
+    //max-width: 575.98px
+    .header {
+        padding: 10px 0;
+        min-height: 60px;
+    }
+    .header-homepage5 {
+        padding: 0px;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+    .box-container-sw .swiper-button-next,
+    .box-container-sw .swiper-button-prev {
+        display: block;
+    }    
+    .swiper-button-next-fleet, .swiper-button-prev-fleet, .swiper-button-prev-banner, .swiper-button-next-banner {
+        display: inline-block;
+    }
+    
+    .box-showcase {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .width-20 {
+        width: 50%;
+    }
+    .width-25 {
+        width: 100%;
+    }
+    .menu-bottom li {
+        margin-bottom: 10px;
+    }
+    .footer-bottom .mr-50 {
+        margin-right: 0px !important;
+    }
+    .list-logos {
+        overflow: hidden;
+        li {
+            min-width: 125px;
+            img {
+                max-width: 80%;
+            }
+        }
+    }
+    .bg-how-it-works::after {
+        height: 290px;
+    }
+    .box-cover-image {
+        height: 350px;
+    }
+    .box-pagination-button {
+        top: 20%;
+    }
+    .box-banner-info {
+        .heading-52-medium {
+            font-weight: 500;
+            font-size: 25px;
+            line-height: 35px;
+        }
+    }
+    .box-banner-homepage-2 .box-banner-info {
+        top: 110px;
+    }
+    .banner-home5 .box-banner-info {
+        top: 30%;
+    }
+    .box-fleet-cover {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .box-pagination-button-2 {
+        display: none;
+    }
+    .banner-home5 {
+        .swiper-slide {
+            padding-right: 0px;
+        }
+    }
+    .header-top-main .icon-socials, .box-socials-header {
+        display: none !important;
+    }
+    .header .header-top-sub .main-header .header-left .header-nav {
+        width: 0%;
+    }
+    .cardServiceStyle3 .cardImage img {
+        max-height: none;
+    }
+    .header-top-main .burger-icon {
+        top: 21px;
+        right: 15px;
+    }
+    .box-dropdown-cart {
+        padding-right: 25px;
+    }
+    .pagination li a {
+        max-width: 40px;
+        min-width: 40px;
+        padding: 9px 0px;
+    }
+    .pagination li .page-prev, .pagination li .page-next {
+        min-height: 44px;
+        padding: 8px 0px;
+    }
+    .cardNewsList {
+        .cardNews {
+            flex-wrap: wrap;
+            > a {
+                max-width: 100%;
+                margin-right: 0px;
+                width: 100%;
+            }
+        }
+    }
+    .invoice-top {
+        flex-wrap: wrap;
+    }
+    .invoice-left, .invoice-right {
+        width: 100%;
+    }
+    .link-grey li a {
+        font-weight: 500;
+        font-size: 22px;
+    }
+    .number-1 .heading-44-medium {
+        font-size: 25px;
+        line-height: 35px;
+    }
+    .number-1 .text-20 {
+        font-size: 16px;
+    }
+    .box-number-banner .number-1 {
+        padding-left: 15px;
+    }
+    .bg-our-service-home-7 .box-pagination-fleet .swiper-button-next-fleet, .bg-our-service-home-7 .box-pagination-fleet .swiper-button-prev-fleet {
+        display: none;
+    }
+    .bg-our-service-home-7 .box-slide-fleet-2 {
+        padding: 0px;
+    }
+    .box-banner-info {
+        flex-wrap: wrap;
+        top: 25%;
+    }
+    .banner-info-left {
+        margin-bottom: 15px;
+    }
+    .banner-home10 .box-cover-image {
+        height: 420px;
+    }
+    .box-search-ride-style-6 .search-item.search-button {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    .box-search-ride-style-6 .search-item {
+        margin-right: 0%;
+        width: 100%;
+        margin-left: 0%;
+    }
+    .box-our-fleet-home8 .fleet-style-3 .box-pagination-fleet .swiper-button-next-fleet {
+        display: none;
+    }
+    .box-our-fleet-home8 .fleet-style-3 .box-pagination-fleet .swiper-button-prev-fleet {
+        display: none;
+    }
+    .box-our-fleet-home8 .fleet-style-3 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .box-slider-customers {
+        padding: 50px 70px 50px 10px;
+    }
+    .swiper-pagination-number {
+        right: 10px;
+    }
+}
+
+@include media-breakpoint-down(xsm) {
+
+    //max-width: 500px
+    .width-20 {
+        width: 100%;
+    }
+    .heading-44-medium {
+        font-size: 36px;
+        line-height: 50px;
+    }
+    .ui-datepicker {
+        max-width: 360px;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+    .box-dropdown-location {
+        top: 45px;
+        left: 0px;
+        max-width: 430px;
+        width: 100%;
+    }
+    .heading-52-medium {
+        font-size: 35px;
+        line-height: 55px;
+    }
+    .cardServiceStyle3 {
+        height: 410px;
+    }
+    .content-single {
+        blockquote {
+            padding-left: 55px;
+            background-position: top 7px left 14px;
+        }
+    }
+    .box-count .deals-countdown .countdown-section .countdown-amount {
+        font-size: 35px;
+        line-height: 55px;
+    }
+    .box-count .deals-countdown .countdown-section .countdown-period {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .box-invoice-block {
+        padding: 0px 5px;
+    }
+    .inner-invoice {
+        padding: 30px 10px 0px 10px;
+    }
+    .box-search-ride-style-6 .nav-tabs-search li a {
+        padding: 10px 15px;
+        font-size: 14px;
+        line-height: 24px;
+    }
+    .box-info-reliability {
+        padding: 30px;
+    }
+}
+
+@include media-breakpoint-down(xssm) {
+    .box-footer-top .mr-30 {
+        margin-right: 10px !important;
+    }
+    // .cardService {
+    //     height: 335px;
+    // }
+    .cardServiceStyle4, .cardService.cardServiceStyle5 {
+        height: auto;
+    }
+    .box-cover-image {
+        height: 250px;
+    }
+    .box-button-login {
+        display: none !important;
+    }
+    .header-top-sub .box-button-login {
+        display: inline-block !important;
+    }
+    .box-banner-homepage-2 .box-banner-info {
+        top: 40px;
+    }
+    .banner-home5 .box-banner-info {
+        top: 30%;
+    }
+    .header-top-1 {
+        display: none;
+    }
+    .card-plan {
+        padding: 34px 20px 39px 20px;
+    }
+    .heading-100-medium {
+        font-size: 40px;
+        line-height: 60px;
+    }
+    .table-invoice thead th {
+        padding: 11px 5px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .table-invoice tbody tr td {
+        padding: 12px 5px;
+        font-size: 12px;
+        line-height: 16px;
+        .text-18-medium {
+            font-size: 16px;
+            line-height: 28px;
+        }
+    }
+    .box-booking-tabs .item-tab {
+        padding: 0px 10px;
+    }
+    .item-vehicle .vehicle-left .vehicle-facilities .text-fact {
+        width: 100%;
+    }
+    .box-info-book-border {
+        padding: 20px 5px 0px 5px;
+    }
+    .box-booking-border {
+        .list-prices {
+            li {
+                flex-wrap: wrap;
+                .text-top {
+                    width: 100%;
+                    color: $color-grey;
+                    display: block;
+                    padding-bottom: 10px;
+                }
+            }
+        }
+    }
+    .box-booking-border {
+        padding: 30px;
+    }
+    .sidebar {
+        padding: 20px 15px;
+    }
+    .heading-44-medium {
+        font-size: 30px;
+        line-height: 40px;
+    }
+    .list-extras .item-extra .extra-quantity {
+        max-width: 115px;
+        min-width: 115px;
+    }
+    .list-extras .item-extra {
+        flex-wrap: wrap;
+        .extra-info {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+    }
+    .number-1 .heading-44-medium {
+        font-size: 20px;
+        line-height: 25px;
+    }
+    .number-1 .text-20 {
+        font-size: 15px;
+    }
+    .box-number-banner .number-1 {
+        padding-left: 15px;
+    }
+    .ui-datepicker.ui-widget.ui-widget-content {
+        padding: 10px;
+    }
+    .ui-datepicker th {
+        padding: 14px 4px 4px 4px;
+        font-size: 14px;
+        line-height: 28px;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+    .ui-datepicker {
+        max-width: 260px;
+    }
+    .ui-timepicker-standard {
+        width: 190px !important;
+    }
+}
+
+@include media-breakpoint-down(xxsm) {
+    .mobile-header-wrapper-style {
+        width: 310px;
+    }
+    .perfect-scroll {
+        width: 100%;
+    }
+    .author-box .item-author .item-author-image {
+        margin-right: 10px;
+    }
+    .heading-100-medium {
+        font-size: 35px;
+        line-height: 55px;
+    }
+    .box-booking-tabs .item-tab {
+        width: 100%;
+    }
+    .box-booking-border {
+        padding: 20px 15px;
+    }
+    .box-booking-tabs .item-tab .box-tab-step .number-tab span {
+        font-size: 35px;
+        line-height: 58px;
+    }
+}
+
+@include media-breakpoint-up(xxl) {
+
+    //min-width: 1400px
+    .container.wide {
+        max-width: 1544px;
+    }
+}
+
+
+/*OTHER SCREEN*/
+
+@media screen and (min-width: 1200px) and (max-width: 1440px) {
+}

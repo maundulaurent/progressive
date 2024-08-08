@@ -1,0 +1,184 @@
+.banner-homepage6 {
+    position: relative;
+    .container-fluid {
+        padding: 0px;
+        .row {
+            margin: 0px;
+            [class*="col-lg-"] {
+                padding: 0px;
+            }
+        }
+    }
+    .list-logos {
+        li {
+            display: inline-block;
+            padding-right: 50px;
+            width: auto;
+            text-align: left;
+        }
+    }
+}
+.box-search-ride-3 {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    box-shadow: $box-shadow-3;
+    .search-item .search-icon .item-icon {
+        background-color: $background-bg-2;
+    }
+    .btn.btn-search {
+        background-color: $color-secondary;
+        &:hover {
+            background-color: $color-primary;
+        }
+    }
+}
+.box-banner-homepage6-left {
+    padding-left: 200px;
+    padding-top: 150px;
+    max-width: 955px;
+}
+.box-banner-homepage6-right {
+    height: 100%;
+    background-color: $background-bg-1;
+    text-align: center;
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    padding: 72px 105px 0px 105px;
+}
+.box-how-it-work {
+    .col-lg-4 {
+        &:last-child {
+            .cardNumberTitleDesc {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.block-padding-60 {
+  padding-left: 0px;
+  padding-right: 0px;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 60px;
+    height: 100%;
+    right: 0px;
+    background-color: $background-bg-2;
+    z-index: 1;
+  }
+  .container-sub {
+    position: relative;
+    z-index: 2;
+  }
+}
+.block-news-padding-60 {
+    padding-left: 0px;
+    padding-right: 0px;
+    position: relative;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 60px;
+        height: 100%;
+        right: 0px;
+        background-color: $background-bg-3;
+        z-index: 1;
+    }
+    .container-sub {
+        position: relative;
+        z-index: 2;
+    }
+}
+.box-our-services-full, .box-latest-news-full {
+    padding: 120px 0px;
+}
+.box-reliability {
+    position: relative;
+    margin-top: 50px;
+    .container-sub {
+        position: relative;
+        padding-top: 65px;
+        padding-bottom: 35px;
+        .row {
+            z-index: 2;
+            position: relative;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 80%;
+            z-index: 1;
+            height: 100%;
+            background-color: $background-bg-4;
+            top: 0px;
+            left: 10px;
+        }
+    }
+}
+.box-reliability-inner {
+    padding-left: 80px;
+}
+.box-customers-images {
+    .image-customer {
+        position: relative;
+        margin-right: 20px;
+        display: inline-block;
+        width: 90px;
+        opacity: 0.5;
+        &.active {
+            opacity: 1;
+        }
+        img {
+            height: 90px;
+            width: 90px;
+            border-radius: 50%;
+            display: block;
+        }
+        .customer-quote {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            height: 40px;
+            width: 40px;
+            img {
+                height: auto;
+                width: auto;
+            }
+        }
+    }
+}
+.swiper-button-prev-small, .swiper-button-next-small {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    position: relative;
+    margin-right: 10px;
+    svg {
+        position: absolute;
+        top: 13px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        height: 13px;
+    }
+}
+.swiper-pagination-testimonials-fraction
+{
+    position: absolute;
+    top: 0px;
+    left: 115px;
+    text-align: left;
+    padding-left: 0px;
+    line-height: 40px;
+}

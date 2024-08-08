@@ -1,0 +1,87 @@
+.box-search-ride-style-3 {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    max-width: 470px;
+    margin: 0px;
+    border-radius: 0px;
+    background: no-repeat;
+    .box-form-search {
+        display: inline-block;
+        width: 100%;
+    }
+    .search-item {
+        background-color: $background-white;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        padding: 10px;
+        .search-icon .item-icon {
+            background-color: $background-white;
+        }
+    }
+    .search-button {
+        padding: 0px;
+        min-width: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+        .btn-search {
+            width: 100%;
+            padding: 19px;
+            border-radius: 6px;
+            background-color: $color-primary;
+        }
+    }
+}
+.box-header-home4 {
+    padding: 0px 60px;
+}
+.banner-home-4 {
+    background-image: url(../imgs/page/homepage4/banner.png);
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+.gallery-home-4 {
+    .box-image-1 {
+        text-align: right;
+        padding-right: 20px;
+        max-width: 240px;
+    }
+    .box-image-bottom img {
+        margin-bottom: 20px;
+        margin-left: 0px;
+    }
+}
+.list-ticks-style-2 {
+    li {
+        &::before {
+            background-image: url(../imgs/page/homepage4/tick.png);
+        }
+    }
+}
+.box-list-how-2 {
+    ul li.has-arrow {
+        background-position: right 60px top 59%;
+    }
+}
+.bg-our-fleet-3 {
+    background-color: $color-primary;
+    background-image: url(../imgs/page/homepage4/pattern.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto;
+}
+.box-button-download-white {
+    .btn.btn-download {
+        background-color: $background-white;
+        .inner-download {
+            .icon-download {
+                &::before {
+                    background-color: $color-border;
+                }
+            }
+            .info-download span {
+                color: $color-text;
+            }
+        }
+    }
+}

@@ -1,0 +1,120 @@
+.box-comfortable-home9 {
+    padding: 0px 60px;
+    position: relative;
+}
+.box-comfortable-home9-inner {
+    border-radius: 6px;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    position: relative;
+}
+.bg-our-service-home-9 {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+.latest-new-home9 {
+    padding: 0px 60px;
+    .color-text {
+        color: $color-white !important;
+    }
+}
+.banner-home9 {
+    padding-left: 60px;
+    padding-right: 60px;
+    .box-pagination-button {
+        top: auto;
+        bottom: 30px;
+    }
+}
+.box-search-ride-5 {
+    max-width: 1366px;
+    background-color: $color-primary;
+    border-radius: 0 0 6px 6px;
+    top: 0px;
+    bottom: auto;
+    .search-item .search-inputs .search-input {
+        color: $color-white;
+    }
+    .color-grey {
+        color: $color-border;
+    }
+    .search-item .search-icon .item-icon {
+        background-color: #ffffff34;
+        &.icon-date {
+            background-image: url(../imgs/page/homepage9/planning.png);
+        }
+        &.icon-time {
+            background-image: url(../imgs/page/homepage9/clock.png);
+        }
+        &.icon-from {
+            background-image: url(../imgs/page/homepage9/from.png);
+        }
+        &.icon-to {
+            background-image: url(../imgs/page/homepage9/to.png);
+        }
+    }
+    .btn-search {
+        border-radius: 6px;
+        background-color: $color-secondary;
+        &:hover {
+            background-color: $color-text;
+        }
+    }
+}
+.swiper-pagination-banner-2 .swiper-pagination-bullet {
+    height: 4px;
+    width: 12px;
+    background-color: $background-white;
+    border-radius: 6px;
+    margin: 0px 5px;
+}
+.swiper-pagination-banner-2 .swiper-pagination-bullet-active {
+    width: 24px;
+}
+.box-pdrl-60, .footer-7 {
+    padding: 0px 60px;
+    position: relative;
+}
+.footer.footer-7 {
+    background-color: $background-white;
+    padding-top: 0px;
+    .menu-footer li {
+        margin-bottom: 5px;
+    }
+}
+.footer-box-inner {
+    background-color: $color-primary;
+    padding-top: 60px;
+}
+.bg-download-home9 {
+    background-image: none;
+}
+.color-white-2 {
+    color: rgba(255, 255, 255, 0.6);
+}
+.address-footer {
+    display: block;
+    padding: 0px 0px 5px 30px;
+    background: url(../imgs/page/homepage9/address.png) no-repeat left top 5px;
+}
+.time-footer {
+    display: block;
+    padding: 0px 0px 5px 30px;
+    background: url(../imgs/page/homepage9/time.png) no-repeat left top 5px;
+}
+.call-footer {
+    display: block;
+    padding: 0px 0px 5px 30px;
+    background: url(../imgs/page/homepage9/call.png) no-repeat left top 5px;
+}
+.box-number-servered {
+    position: absolute;
+    bottom: -70px;
+    right: -80px;
+}
+.box-number-servered {
+    .box-number-info {
+        border: 0px;
+        box-shadow: $box-shadow-3;
+    }
+}
