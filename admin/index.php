@@ -582,8 +582,150 @@ $totalPages = ceil($totalItems / $itemsPerPage);
       <!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+
+      <!-- to be main content wrapper -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Recipes Available Column -->
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <h3 class="card-title">Recipes Available</h3>
+              <div class="card-tools">
+                <a href="#" class="btn btn-tool btn-sm">
+                  <i class="fas fa-bars"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+              <table class="table table-striped table-valign-middle">
+                <thead>
+                  <tr>
+                    <th>Recipe</th>
+                    <th>Ingredients</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if ($result_recipes->num_rows > 0) {
+                    while ($row = $result_recipes->fetch_assoc()) {
+                      $recipe_id = $row['id'];
+                      echo "<tr>
+                              <td>{$row['name']}</td>
+                              <td><a href='recipes/manage.php?id={$recipe_id}'>Manage Recipe</a></td>
+                            </tr>";
+                    }
+                  } else {
+                    echo "<tr><td colspan='2'>No recipes found.</td></tr>";
+                  }
+                  ?>
+                </tbody>
+              </table>
+
+                <div class="text-center mt-3">
+                  <nav class="box-pagination">
+                    <ul class="pagination">
+                      <?php if ($page > 1): ?>
+                        <li class="page-item">
+                          <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                        </li>
+                      <?php endif; ?>
+
+                      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item<?= $i == $page ? ' active' : '' ?>">
+                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                      <?php endfor; ?>
+
+                      <?php if ($page < $totalPages): ?>
+                        <li class="page-item">
+                          <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                        </li>
+                      <?php endif; ?>
+                    </ul>
+                  </nav>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.col-lg-6 -->
+
+        <div class="col-lg-6">
+            <!-- Total Ingredients and Recipes Card -->
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="card-title">Statistics</h3>
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Total Ingredients</h4>
+                            <?php
+                            require_once 'includes/db.php';
+
+                            // Count total ingredients
+                            $sql_ingredients = "SELECT COUNT(*) as total_ingredients FROM recipe_ingredients";
+                            $result_ingredients = $conn->query($sql_ingredients);
+
+                            if ($result_ingredients) {
+                                $row_ingredients = $result_ingredients->fetch_assoc();
+                                $total_ingredients = $row_ingredients['total_ingredients'];
+                            } else {
+                                $total_ingredients = "Error";
+                            }
+                            ?>
+                            <h2><?= htmlspecialchars($total_ingredients) ?></h2>
+                        </div>
+                        <!-- Total Recipes -->
+                        <div class="col-md-6">
+                            <h4>Total Recipes</h4>
+                            <?php
+                            // Count total recipes
+                            $sql_recipes = "SELECT COUNT(*) as total_recipes FROM recipes";
+                            $result_recipes = $conn->query($sql_recipes);
+
+                            if ($result_recipes) {
+                                $row_recipes = $result_recipes->fetch_assoc();
+                                $total_recipes = $row_recipes['total_recipes'];
+                            } else {
+                                $total_recipes = "Error";
+                            }
+                            ?>
+                            <h2><?= htmlspecialchars($total_recipes) ?></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+
+        <!-- /.col-lg-6 -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+          <div class="col-md-3">
+              <a href="recipes/index.php" class="btn btn-primary btn-block mb-3">Manage Recipes</a>
+          </div>
+          <div class="col-md-3">
+              <a href="users/create-user.php" class="btn btn-primary btn-block mb-3">Users</a>
+          </div>
+      </div>
+
+    </div>
+  </div>
+    <!-- end to be main content -->
   </div>
   <!-- /.content-wrapper -->
+
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
