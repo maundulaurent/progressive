@@ -1,7 +1,39 @@
+
+
 <?php
+session_start();
 include 'admin/includes/db.php';
 
 session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the recipe data from the POST request
+    $recipe_name = $_POST['recipe_name'];
+    $pieces = $_POST['pieces'];
+    $ingredients = $_POST['ingredients'] ?? [];
+
+    // Store the recipe data in the session
+    $_SESSION['recipe'] = [
+        'name' => $recipe_name,
+        'pieces' => $pieces,
+        'ingredients' => array_map(function($ingredient) {
+            return [
+                'name' => $ingredient['name'],
+                'quantity' => $ingredient['quantity'],
+                'unit' => $ingredient['unit'],
+                'cost' => $ingredient['price']
+            ];
+        }, $ingredients),
+        'total_cost' => array_reduce($ingredients, function($carry, $ingredient) {
+            return $carry + ($ingredient['quantity'] * $ingredient['price']);
+        }, 0)
+    ];
+
+    // Redirect to the summary page
+    header('Location: customize-summary.php');
+    exit();
+}
+
 $recipe = $_SESSION['recipe'] ?? null;
 
 if (!$recipe) {
@@ -9,7 +41,7 @@ if (!$recipe) {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
     $num_pieces = $_POST['num_pieces'];
     $ratio = $num_pieces / $recipe['pieces'];
     $adjusted_ingredients = [];

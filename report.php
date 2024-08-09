@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'admin/includes/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

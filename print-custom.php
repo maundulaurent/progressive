@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'admin/includes/db.php';
 
 // Fetch data from the POST request

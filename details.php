@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'admin/includes/db.php';
 
 // Fetch recipe ID from the form submission
