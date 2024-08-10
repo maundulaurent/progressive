@@ -168,12 +168,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                             
                     <h3 class="heading-24-medium color-text mb-15 wow fadeInUp">Cost Calculator</h3>
                     
-                    <h5 class=" mb-30 wow fadeInUp">calculate the cost of producing several pieces using this recipe.</h5>
+                    <h5 class="mb-30 wow fadeInUp">This recipe produces : <?php echo htmlspecialchars($num_pieces); ?> pieces </h5>
+                    <h5 class=" mb-30 wow fadeInUp">find the ingredients ratios and costs of producing several pieces using this recipe.</h5>
                     <div class="mt-30 wow fadeInUp">
                         <form id="calculate-form">
                             <div class="form-group">
                                 <label for="num_pieces"></label>
-                                <input id="num_pieces" name="num_pieces" type="number" class="form-control" min="1" placeholder="Enter pieces" required>
+                                <input id="num_pieces" name="num_pieces" type="number" class="form-control" min="1" placeholder="Enter pieces to calculate" required>
                             </div>
                             <button type="button" class="btn btn-primary btn-primary-small mt-3" onclick="calculateCost()">Calculate</button>
                         </form>
