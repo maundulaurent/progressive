@@ -179,36 +179,13 @@ $conn->close();
     <section class="section">
       
     <div class="container mt-4">
-      <!-- <div class="box-booking-tabs"> 
-            <div class="item-tab wow fadeInUp"><a href="dashboard.php">
-                <div class="box-tab-step ">
-                    <div class="icon-tab"> <span class="icon-book icon-vehicle"> </span><span class="text-tab">Recipes </span></div>
-                    <div class="number-tab"> <span>01</span></div>
-                </div></a></div>
-            <div class="item-tab wow fadeInUp">
-                <div class="box-tab-step active">
-                    <div class="icon-tab"> <span class="icon-book icon-extra"> </span><span class="text-tab">Entry and Details</span></div>
-                    <div class="number-tab"> <span>02</span></div>
-                </div></div>
-            <div class="item-tab wow fadeInUp inactive-link">
-                <div class="box-tab-step "> 
-                    <div class="icon-tab"> <span class="icon-book icon-payment"> </span><span class="text-tab">Final Valuation  </span></div>
-                    <div class="number-tab"> <span>03</span></div>
-                </div></div>
-            
-
-            <div class="item-tab wow fadeInUp">
-                <div class="box-tab-step">
-                    <div class="icon-tab"> <span class="icon-book icon-pax"> </span><span class="text-tab">Print Report  </span></div>
-                    
-                </div></div>
-      </div> -->
         <h3 class="mb-4 mt-70">Recipe Evaluation for <?php echo htmlspecialchars($recipe['name']); ?></h3>
         <div class="box-row-tab mt-50">
         <div class="box-tab-left">
         <div class="box-frature-image mb-60 wow fadeInUp">
         <div class="cardImage"> 
             <div class="datePost"> 
+                <p class="text-14 color-white">created at</p>
                 <div class="heading-52-medium color-white"><?php echo date('d', strtotime($recipe['created_at'])); ?>.</div>
                 <p class="text-14 color-white"><?php echo date('M, Y', strtotime($recipe['created_at'])); ?></p>
               </div><img src="admin/uploads/<?php echo htmlspecialchars($recipe['image_path']); ?>" alt="<?php echo htmlspecialchars($recipe['name']); ?>" >

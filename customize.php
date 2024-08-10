@@ -55,19 +55,19 @@ session_start();
                                                 <div class="col-lg-6">
                                                     <div class="form-group"> 
                                                         <label class="form-label" for="ingredient_name">Ingredient Name:</label>
-                                                        <input class="form-control" id="ingredient_name" name="ingredient_name" type="text" placeholder="Ingredient Name">
+                                                        <input class="form-control" id="ingredient_name" name="ingredient_name" type="text" >
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group"> 
                                                         <label class="form-label" for="quantity">Quantity:</label>
-                                                        <input class="form-control" id="quantity" name="quantity" type="number" placeholder="Quantity">
+                                                        <input class="form-control" id="quantity" name="quantity" type="number" >
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group"> 
                                                         <label class="form-label" for="price_per_unit">Price per Unit:</label>
-                                                        <input class="form-control" id="price_per_unit" name="price_per_unit" type="number" step="0.01" placeholder="Price per unit">
+                                                        <input class="form-control" id="price_per_unit" name="price_per_unit" type="number" step="0.01" >
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
@@ -77,26 +77,24 @@ session_start();
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
-                                                <div class="box-info-route sidebar"> 
-                                                    <div class="info-route-left"> 
-                                                        <span class="text-14 color-grey">Ingredient</span>
-                                                        <div id="dynamic-ingredient"></div>
-                                                    </div>
-                                                    <div class="info-route-left"> 
-                                                        <span class="text-14 color-grey">Quantity</span>
-                                                        <div id="dynamic-quantity"></div>
-                                                    </div>
-                                                    <div class="info-route-left"> 
-                                                        <span class="text-14 color-grey">Price per Unit</span>
-                                                        <div id="dynamic-price"></div>
-                                                    </div>
-                                                    <div class="info-route-left"> 
-                                                        <span class="text-14 color-grey">Action</span>
-                                                        <div id="dynamic-action"></div>
-                                                    </div>
+                                                <div class="box-info-route sidebar">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-14 color-grey">Ingredient</th>
+                                                                <th class="text-14 color-grey">Quantity</th>
+                                                                <th class="text-14 color-grey">Price per Unit</th>
+                                                                <th class="text-14 color-grey">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="ingredients-table-body">
+                                                            <!-- Dynamic rows will be added here -->
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="mt-30 mb-120 wow fadeInUp">
                                         <button type="submit" class="btn btn-primary btn-primary-big w-100">Continue 
@@ -134,93 +132,55 @@ session_start();
     <?php include_once 'includes/scripts.php'; ?>
 
     <script>
-        let ingredientCount = 0;
+            let ingredientCount = 0;
 
-        function addIngredient() {
-            const ingredientName = document.getElementById('ingredient_name').value;
-            const quantity = document.getElementById('quantity').value;
-            const pricePerUnit = document.getElementById('price_per_unit').value;
+            function addIngredient() {
+        const ingredientName = document.getElementById('ingredient_name').value;
+        const quantity = document.getElementById('quantity').value;
+        const pricePerUnit = document.getElementById('price_per_unit').value;
 
-            if (ingredientName && quantity && pricePerUnit) {
-                const ingredientsDiv = document.getElementById('dynamic-ingredient');
-                const quantitiesDiv = document.getElementById('dynamic-quantity');
-                const pricesDiv = document.getElementById('dynamic-price');
-                const actionsDiv = document.getElementById('dynamic-action');
+        if (ingredientName && quantity && pricePerUnit) {
+            const tableBody = document.getElementById('ingredients-table-body');
 
-                ingredientsDiv.innerHTML += `
-                    <div id="ingredient-${ingredientCount}" class="ingredient-item">
-                        <input type="hidden" name="ingredients[${ingredientCount}][name]" value="${ingredientName}">
-                        <input type="hidden" name="ingredients[${ingredientCount}][quantity]" value="${quantity}">
-                        <input type="hidden" name="ingredients[${ingredientCount}][price]" value="${pricePerUnit}">
-                        ${ingredientName}
-                    </div>
-                `;
-                quantitiesDiv.innerHTML += `${quantity}<br>`;
-                pricesDiv.innerHTML += `${pricePerUnit}<br>`;
-                actionsDiv.innerHTML += `<button type="button" onclick="removeIngredient(${ingredientCount})" class="btn btn-danger btn-sm" style="float: right;">Remove</button><br>`;
+            // Create a new row
+            const row = document.createElement('tr');
+            row.id = `ingredient-${ingredientCount}`;
 
-                ingredientCount++;
+            // Add cells with ingredient details and delete button
+            row.innerHTML = `
+                <td><input type="hidden" name="ingredients[${ingredientCount}][name]" value="${ingredientName}">${ingredientName}</td>
+                <td><input type="hidden" name="ingredients[${ingredientCount}][quantity]" value="${quantity}">${quantity}</td>
+                <td><input type="hidden" name="ingredients[${ingredientCount}][price]" value="${pricePerUnit}">${pricePerUnit}</td>
+                <td><button type="button" onclick="removeIngredient(${ingredientCount})" style=" width: 100%; text-align: center;" class="btn btn-danger btn-sm">Remove</button></td>
+            `;
 
-                // Clear input fields
-                document.getElementById('ingredient_name').value = '';
-                document.getElementById('quantity').value = '';
-                document.getElementById('price_per_unit').value = '';
-            }
+            // Append the row to the table
+            tableBody.appendChild(row);
+
+            ingredientCount++;
+
+            // Clear input fields
+            document.getElementById('ingredient_name').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('price_per_unit').value = '';
         }
+    }
 
-        function removeIngredient(index) {
-            const ingredientDiv = document.getElementById(`ingredient-${index}`);
-            if (ingredientDiv) {
-                ingredientDiv.remove();
-
-                // Also remove the corresponding quantity, price, and action
-                const quantitiesDiv = document.getElementById('dynamic-quantity');
-                const pricesDiv = document.getElementById('dynamic-price');
-                const actionsDiv = document.getElementById('dynamic-action');
-
-                // Remove the item at the specified index
-                removeAtIndex(quantitiesDiv, index);
-                removeAtIndex(pricesDiv, index);
-                removeAtIndex(actionsDiv, index);
-
-                // Adjust the remaining items' indexes
-                adjustIngredientIndexes();
-            }
+    function removeIngredient(index) {
+        const row = document.getElementById(`ingredient-${index}`);
+        if (row) {
+            row.remove();
         }
+    }
 
-        function removeAtIndex(container, index) {
-            const items = container.children;
-            if (index >= 0 && index < items.length) {
-                items[index].remove();
-            }
+    function validateIngredients() {
+        const tableBody = document.getElementById('ingredients-table-body');
+        if (tableBody.children.length === 0) {
+            alert('Please add at least one ingredient.');
+            return false;
         }
-
-        function adjustIngredientIndexes() {
-            const ingredientsDiv = document.getElementById('dynamic-ingredient');
-            const quantitiesDiv = document.getElementById('dynamic-quantity');
-            const pricesDiv = document.getElementById('dynamic-price');
-            const actionsDiv = document.getElementById('dynamic-action');
-
-            Array.from(ingredientsDiv.children).forEach((item, index) => {
-                item.id = `ingredient-${index}`;
-                item.querySelector('input[name^="ingredients"]').name = `ingredients[${index}][name]`;
-                item.querySelector('input[name^="ingredients"]').name = `ingredients[${index}][quantity]`;
-                item.querySelector('input[name^="ingredients"]').name = `ingredients[${index}][price]`;
-            });
-
-            Array.from(quantitiesDiv.children).forEach((child, index) => child.id = `quantity-${index}`);
-            Array.from(pricesDiv.children).forEach((child, index) => child.id = `price-${index}`);
-            Array.from(actionsDiv.children).forEach((child, index) => child.id = `action-${index}`);
-        }
-
-        function validateIngredients() {
-            const ingredientsDiv = document.getElementById('dynamic-ingredient');
-            if (ingredientsDiv.children.length === 0) {
-                alert('Please add at least one ingredient.');
-                return false;
-            }
-            return true;
-        }
+        return true;
+    }
     </script>
 
 </body>
