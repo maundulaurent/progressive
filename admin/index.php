@@ -191,19 +191,21 @@ $totalPages = ceil($totalItems / $itemsPerPage);
               </p>
             </a>
           </li>
+          <li class="nav-header">WIDGETS</li>
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Widgets
+                Admin dashboard
               </p>
             </a>
           </li>
+          <li class="nav-header">MANAGE RECIPES</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Layout Options
+                Add Recipe
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -212,7 +214,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Charts
+                Edit Recipe
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -221,16 +223,17 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
-                UI Elements
+                Delete Recipes
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
           </li>
+          <li class="nav-header">MANAGE USERS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Forms
+                Create another Admin
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -239,17 +242,26 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Delete Admin
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
           </li>
-          <li class="nav-header">EXAMPLES</li>
+          <li class="nav-header">STATISTICS</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                View all Recipes
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                Calendar
+                Approve Recipes
               </p>
             </a>
           </li>
@@ -257,7 +269,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             <a href="pages/gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Gallery
+                Check Approved Recipes
               </p>
             </a>
           </li>
@@ -265,7 +277,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             <a href="pages/kanban.html" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
-                Kanban Board
+                User Customized Recipes
               </p>
             </a>
           </li>
@@ -278,29 +290,12 @@ $totalPages = ceil($totalItems / $itemsPerPage);
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Pages
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-search"></i>
-              <p>
-                Search
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

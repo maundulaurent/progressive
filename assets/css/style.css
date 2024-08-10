@@ -4251,6 +4251,15 @@ footer a {
   transition-duration: 0.2s;
   background-color: rgba(255, 255, 255, 0.2);
 }
+.icon-socials.icon-whatsapp {
+  background: url(../imgs/template/icons/whatsapp.svg) no-repeat center;
+  transition-duration: 0.2s;
+}
+.icon-socials.icon-whatsapp:hover {
+  background: url(../imgs/template/icons/whatsapp.svg) no-repeat center;
+  transition-duration: 0.2s;
+  background-color: rgba(255, 255, 255, 0.2);
+}
 .icon-socials:hover {
   transform: translateY(-3px);
   transition-duration: 0.2s;
@@ -9352,16 +9361,16 @@ input:checked + .slider:before {
   align-items: center;
 }
 .item-reviews .item-author-info .item-avatar {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   background-color: #181A1F;
   border-radius: 50%;
-  margin-right: 20px;
+  margin-right: 10px;
   color: #fff;
-  font-size: 15px;
-  line-height: 15px;
-  font-weight: 500;
-  line-height: 70px;
+  font-size: 10px;
+  line-height: 10px;
+  font-weight: 400;
+  line-height: 50px;
   text-align: center;
 }
 .item-reviews .item-desc {

@@ -89,7 +89,7 @@ if ($maxCount < 10) {
     $counts = array_map(fn($count) => $count + 2, $counts);
 }
 
-include '../includes/header.php';
+include '../includes/head.php';
 include '../includes/sidebar.php';
 ?>
 
