@@ -113,14 +113,15 @@ if ($stmt = $conn->prepare($sql)) {
     exit;
 }
 
-include '../includes/header.php';
+include '../includes/head.php';
 include '../includes/sidebar.php';
 ?>
+
 
 <div class="content-wrapper">
     <div class="content">
         <div class="container-fluid">
-            <h1>Manage Ingredients for <?= htmlspecialchars($recipe['name'] ?? 'Recipe') ?></h1>
+            <h3 class="mt-20">Manage Ingredients for <?= htmlspecialchars($recipe['name'] ?? 'Recipe') ?></h3>
 
             <!-- Prepare Ingredients -->
             <h2>Prepare Ingredients</h2>

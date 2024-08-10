@@ -1,6 +1,11 @@
 
 
-  <?php include_once 'head.php'; ?>
+  <?php 
+  include_once 'head.php'; 
+
+  define('BASE_URL', 'localhost/projects/finrecipe/');
+  
+  ?>
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar  elevation-4">
@@ -16,11 +21,11 @@
       <hr class="mt-3" style="border: 0; border-top: 1px solid #333;">
       <div class="user-panel d-flex">
         
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" style="display: block; margin: 0 auto;">
+      <div class="image">
+        <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($user_name); ?>&background=random&rounded=true" class="img-circle elevation-2" alt="User Image" style="display: block; margin: 0 auto;">
         </div>
         <div class="info">
-          <a href="#" class="text-dark">Moana Diva</a>
+          <a href="#" class="text-dark"><?php echo htmlspecialchars($user_name); ?></a>
         </div>
       </div>
       <hr style="border: 0; border-top: 1px solid #333;">
@@ -55,7 +60,7 @@
           </li>
           <li class="nav-header">WIDGETS</li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="../index.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin dashboard
@@ -64,7 +69,7 @@
           </li>
           <li class="nav-header">MANAGE RECIPES</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/recipes/index.php" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Add Recipe
@@ -73,7 +78,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/recipes/index.php" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Edit Recipe
@@ -82,7 +87,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/recipes/index.php" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Delete Recipes
@@ -92,7 +97,7 @@
           </li>
           <li class="nav-header">MANAGE USERS</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/users/create-user.php" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Create another Admin
@@ -101,7 +106,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/users/create-user.php" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Delete Admin
@@ -111,7 +116,7 @@
           </li>
           <li class="nav-header">STATISTICS</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 View all Recipes
@@ -120,7 +125,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Approve Recipes
@@ -128,7 +133,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Check Approved Recipes
@@ -136,7 +141,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 User Customized Recipes
@@ -144,7 +149,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
                 Mailbox
@@ -154,7 +159,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
@@ -169,5 +174,4 @@
     <!-- /.sidebar -->
   </aside>
 
-  <?php include_once 'scipts.php'; ?>
-  <?php include_once 'footer.php'; ?>
+  <?php include_once 'scripts.php'; ?>

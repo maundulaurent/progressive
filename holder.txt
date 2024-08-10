@@ -1,3 +1,9 @@
+customize-summary
+
+
+
+
+
 
 
 <?php
@@ -59,6 +65,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
     $num_pieces = $recipe['pieces'];
     $adjusted_ingredients = $recipe['ingredients'];
     $adjusted_cost = $recipe['total_cost'];
+}
+
+if (isset($_POST['num_pieces'])) {
+    $num_pieces = (int)$_POST['num_pieces'];
+    $recipe = $_SESSION['recipe'] ?? null;
+
+    if (!$recipe) {
+        echo json_encode(['error' => 'No recipe found.']);
+        exit();
+    }
+
+    $ratio = $num_pieces / $recipe['pieces'];
+    $adjusted_ingredients = [];
+
+    foreach ($recipe['ingredients'] as $ingredient) {
+        $adjusted_ingredients[] = [
+            'name' => $ingredient['name'],
+            'quantity' => $ingredient['quantity'] * $ratio,
+            'unit' => $ingredient['unit'],
+            'cost' => $ingredient['cost'] * $ratio,
+        ];
+    }
+
+    $adjusted_cost = $recipe['total_cost'] * $ratio;
+
+    echo json_encode([
+        'ingredients' => $adjusted_ingredients,
+        'total_cost' => $adjusted_cost
+    ]);
+} else {
+    echo json_encode(['error' => 'num_pieces not provided.']);
 }
 
 ?>
@@ -167,19 +204,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                     <div class="border-bottom mt-30 mb-25"></div>
                             
                     <h3 class="heading-24-medium color-text mb-15 wow fadeInUp">Cost Calculator</h3>
-                    
                     <h5 class=" mb-30 wow fadeInUp">calculate the cost of producing several pieces using this recipe.</h5>
                     <div class="mt-30 wow fadeInUp">
                         <form id="calculate-form">
                             <div class="form-group">
-                                <label for="num_pieces"></label>
+                                <label for="num_pieces">Number of Pieces</label>
                                 <input id="num_pieces" name="num_pieces" type="number" class="form-control" min="1" placeholder="Enter pieces" required>
                             </div>
                             <button type="button" class="btn btn-primary btn-primary-small mt-3" onclick="calculateCost()">Calculate</button>
                         </form>
+                        <div id="calculated-report-section" class="mt-30 wow fadeInUp" style="display: none;">
+                            <h4 class="heading-20-medium color-text">Calculated Cost and Quantities</h4>
+                            <table id="calculated-report-table" style="width: 100%; border-collapse: collapse;" class="mt-15">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 8px; text-align: left;">Ingredient</th>
+                                        <th style="padding: 8px; text-align: right;">Quantity</th>
+                                        <th style="padding: 8px; text-align: right;">Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows for calculated report will be added here -->
+                                </tbody>
+                            </table>
+                        </div>
+
 
                     </div>
-                   
                     <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($num_pieces)): ?>
                         <div class="mt-30 wow fadeInUp">
                             <h4 class="heading-20-medium color-text">Calculated Cost and Quantities</h4>
@@ -308,46 +359,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
     }
 
     function calculateCost() {
-        const numPieces = document.getElementById('num_pieces').value;
+    const numPieces = document.getElementById('num_pieces').value;
 
-        if (numPieces) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'customize-summary.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    if (numPieces) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'customize-summary.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
 
-                    // Update the table with new values
-                    const tableBody = document.querySelector('.mt-30 .table tbody');
-                    tableBody.innerHTML = '';
+                // Check for errors
+                if (response.error) {
+                    alert(response.error);
+                    return;
+                }
 
-                    response.ingredients.forEach(function(ingredient) {
-                        const row = `
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">${ingredient.name}</td>
-                                <td style="padding: 8px; text-align: right;">${ingredient.quantity} ${ingredient.unit}</td>
-                                <td style="padding: 8px; text-align: right;">$${ingredient.cost.toFixed(2)}</td>
-                            </tr>
-                        `;
-                        tableBody.insertAdjacentHTML('beforeend', row);
-                    });
+                // Show the report section
+                const reportSection = document.getElementById('calculated-report-section');
+                reportSection.style.display = 'block';
 
-                    const totalCostRow = `
+                // Update the table with new values
+                const tableBody = document.getElementById('calculated-report-table').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+
+                response.ingredients.forEach(function(ingredient) {
+                    const row = `
                         <tr>
-                            <td colspan="2" style="padding: 8px; text-align: right;"><strong>Total Cost:</strong></td>
-                            <td style="padding: 8px; text-align: right;"><strong>$${response.total_cost.toFixed(2)}</strong></td>
+                            <td style="padding: 8px; text-align: left;">${ingredient.name}</td>
+                            <td style="padding: 8px; text-align: right;">${ingredient.quantity} ${ingredient.unit}</td>
+                            <td style="padding: 8px; text-align: right;">$${ingredient.cost.toFixed(2)}</td>
                         </tr>
                     `;
-                    tableBody.insertAdjacentHTML('beforeend', totalCostRow);
-                }
-            };
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                });
 
-            const data = `num_pieces=${encodeURIComponent(numPieces)}`;
-            xhr.send(data);
-        }
+                const totalCostRow = `
+                    <tr>
+                        <td colspan="2" style="padding: 8px; text-align: right;"><strong>Total Cost:</strong></td>
+                        <td style="padding: 8px; text-align: right;"><strong>$${response.total_cost.toFixed(2)}</strong></td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', totalCostRow);
+            }
+        };
+
+        const data = `num_pieces=${encodeURIComponent(numPieces)}`;
+        xhr.send(data);
     }
+}
+
 
 </script>
 

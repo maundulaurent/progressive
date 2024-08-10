@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['recipe_name'])) {
     }
 }
 
-include '../includes/header.php';
+include '../includes/head.php';
 include '../includes/sidebar.php';
 ?>
 

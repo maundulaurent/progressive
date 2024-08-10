@@ -2,12 +2,12 @@
 session_start();
 // Ensure the user is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../login.php");
+    header("location: ../../login.php");
     exit;
 }
 
 
-require_once 'includes/db.php';
+require_once '../includes/db.php';
 
 // Fetch the logged-in user's name from the database
 $username = $_SESSION['username'];
@@ -56,247 +56,11 @@ $row_total = $result_total->fetch_assoc();
 $totalItems = $row_total['total'];
 $totalPages = ceil($totalItems / $itemsPerPage);
 
-
+include '../includes/head.php';
+include '../includes/sidebar.php';
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bakewave | Admin Dashboard</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- IonIcons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-</head>
-
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="../index.php" class="nav-link">Home</a>
-      </li>
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
-
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        
-      </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="logout.php" class="nav-link">Logout</a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar  elevation-4">
-    <!-- Brand Logo -->
-    <a href="index.php" class="brand-link" style="margin-left: 20px;">
-      <span class="brand-text text-dark"><h3 class="fst-bold">Bakewave</h3></span>
-    </a>
-    
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <hr class="mt-3" style="border: 0; border-top: 1px solid #333;">
-      <div class="user-panel d-flex">
-        
-        <div class="image">
-        <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($user_name); ?>&background=random&rounded=true" class="img-circle elevation-2" alt="User Image" style="display: block; margin: 0 auto;">
-        </div>
-        <div class="info">
-          <a href="#" class="text-dark"><?php echo htmlspecialchars($user_name); ?></a>
-        </div>
-      </div>
-      <hr style="border: 0; border-top: 1px solid #333;">
-      
-      
-      
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Admin Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">WIDGETS</li>
-          <li class="nav-item">
-            <a href="index.php" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Admin dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">MANAGE RECIPES</li>
-          <li class="nav-item">
-            <a href="recipes/index.php" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Add Recipe
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="recipes/index.php" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Edit Recipe
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="recipes/index.php" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
-              <p>
-                Delete Recipes
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">MANAGE USERS</li>
-          <li class="nav-item">
-            <a href="users/index.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Create another Admin
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="users/index.php" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Delete Admin
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">STATISTICS</li>
-          <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                View all Recipes
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Approve Recipes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Check Approved Recipes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
-              <p>
-                User Customized Recipes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Mailbox
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Extras
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -305,12 +69,12 @@ $totalPages = ceil($totalItems / $itemsPerPage);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard Admin</h1>
+            <h3 class="m-0">Our Recipes</h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item active">available Recipes</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -327,7 +91,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
         <div class="col-lg-6">
           <div class="card">
             <div class="card-header border-0">
-              <h3 class="card-title">Recipes Available</h3>
+              <h3 class="card-title">Recipes </h3>
               <div class="card-tools">
                 <a href="#" class="btn btn-tool btn-sm">
                   <i class="fas fa-bars"></i>
@@ -387,70 +151,73 @@ $totalPages = ceil($totalItems / $itemsPerPage);
           </div>
         </div>
         <!-- /.col-lg-6 -->
-
+        <!-- Recipes Available Column -->
         <div class="col-lg-6">
-            <!-- Total Ingredients and Recipes Card -->
-            <div class="card">
-                <div class="card-header border-0">
-                    <h3 class="card-title">Statistics</h3>
-                    <div class="card-tools">
-                        <a href="#" class="btn btn-tool btn-sm">
-                            <i class="fas fa-bars"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>Total Ingredients</h4>
-                            <?php
-                            require_once 'includes/db.php';
+          <div class="card">
+            <div class="card-header border-0">
+              <h3 class="card-title">Recipes Shared</h3>
+              <div class="card-tools">
+                <a href="#" class="btn btn-tool btn-sm">
+                  <i class="fas fa-bars"></i>
+                </a>
+              </div>
+            </div>
 
-                            // Count total ingredients
-                            $sql_ingredients = "SELECT COUNT(*) as total_ingredients FROM recipe_ingredients";
-                            $result_ingredients = $conn->query($sql_ingredients);
+            <div class="card-body table-responsive p-0">
+              <table class="table table-striped table-valign-middle">
+                <thead>
+                  <tr>
+                    <th>Recipe</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if ($result_recipes->num_rows > 0) {
+                    while ($row = $result_recipes->fetch_assoc()) {
+                      $recipe_id = $row['id'];
+                      echo "<tr>
+                              <td>{$row['name']}</td>
+                              <td><a href='recipes/manage.php?id={$recipe_id}'>Manage Recipe</a></td>
+                            </tr>";
+                    }
+                  } else {
+                    echo "<tr><td colspan='2'>No recipes found.</td></tr>";
+                  }
+                  ?>
+                </tbody>
+              </table>
 
-                            if ($result_ingredients) {
-                                $row_ingredients = $result_ingredients->fetch_assoc();
-                                $total_ingredients = $row_ingredients['total_ingredients'];
-                            } else {
-                                $total_ingredients = "Error";
-                            }
-                            ?>
-                            <h2><?= htmlspecialchars($total_ingredients) ?></h2>
-                        </div>
-                        <!-- Total Recipes -->
-                        <div class="col-md-6">
-                            <h4>Total Recipes</h4>
-                            <?php
-                            // Count total recipes
-                            $sql_recipes = "SELECT COUNT(*) as total_recipes FROM recipes";
-                            $result_recipes = $conn->query($sql_recipes);
+                <div class="text-center mt-3">
+                  <nav class="box-pagination">
+                    <ul class="pagination">
+                      <?php if ($page > 1): ?>
+                        <li class="page-item">
+                          <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                        </li>
+                      <?php endif; ?>
 
-                            if ($result_recipes) {
-                                $row_recipes = $result_recipes->fetch_assoc();
-                                $total_recipes = $row_recipes['total_recipes'];
-                            } else {
-                                $total_recipes = "Error";
-                            }
-                            ?>
-                            <h2><?= htmlspecialchars($total_recipes) ?></h2>
-                        </div>
-                    </div>
+                      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item<?= $i == $page ? ' active' : '' ?>">
+                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                      <?php endfor; ?>
+
+                      <?php if ($page < $totalPages): ?>
+                        <li class="page-item">
+                          <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                        </li>
+                      <?php endif; ?>
+                    </ul>
+                  </nav>
                 </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                  <a href="recipes/index.php" class="btn btn-primary btn-block mb-3">Manage Recipes</a>
-              </div>
-              <div class="col-md-6">
-                  <a href="users/create-user.php" class="btn btn-primary btn-block mb-3">Users</a>
-              </div>
           </div>
-            <!-- /.card -->
         </div>
-
         <!-- /.col-lg-6 -->
+
+       
+
       </div>
       <!-- /.row -->
     </div>
@@ -713,36 +480,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
 
 
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    All rights reserved@moana
-    <div class="float-right d-none d-sm-inline-block">
-      <b>moanaltd</b>
-    </div>
-  </footer>
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE -->
-<script src="dist/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard3.js"></script>
-</body>
-</html>
+<?php
+include '../includes/footer.php';
+?>

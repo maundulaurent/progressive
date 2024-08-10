@@ -40,7 +40,7 @@ if ($recipe_id) {
     }
 }
 
-include '../includes/header.php';
+include '../includes/head.php';
 include '../includes/sidebar.php';
 ?>
 
