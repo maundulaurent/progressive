@@ -209,8 +209,8 @@ $conn->close();
         <div class="box-frature-image mb-60 wow fadeInUp">
         <div class="cardImage"> 
             <div class="datePost"> 
-                <div class="heading-52-medium color-white">14.</div>
-                <p class="text-14 color-white">Jun, 2022</p>
+                <div class="heading-52-medium color-white"><?php echo date('d', strtotime($recipe['created_at'])); ?>.</div>
+                <p class="text-14 color-white"><?php echo date('M, Y', strtotime($recipe['created_at'])); ?></p>
               </div><img src="admin/uploads/<?php echo htmlspecialchars($recipe['image_path']); ?>" alt="<?php echo htmlspecialchars($recipe['name']); ?>" >
             </div>
         </div>
