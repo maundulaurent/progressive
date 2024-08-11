@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
     $adjusted_cost = $recipe['total_cost'];
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -166,11 +167,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                     
                     <div class="border-bottom mt-30 mb-25"></div>
                             
-                    <h3 class="heading-24-medium color-text mb-15 wow fadeInUp">Cost Calculator</h3>
+                    <!-- <h3 class="heading-24-medium color-text mb-15 wow fadeInUp">Cost Calculator</h3>
                     
-                    <h5 class="mb-30 wow fadeInUp">This recipe produces : <?php echo htmlspecialchars($num_pieces); ?> pieces </h5>
+                    <h5 class="mb-30 wow fadeInUp">This recipe produces :  echo htmlspecialchars($num_pieces);  pieces </h5>
                     <h5 class=" mb-30 wow fadeInUp">find the ingredients ratios and costs of producing several pieces using this recipe.</h5>
-                    <div class="mt-30 wow fadeInUp">
+                    <button type="button" class="btn btn-primary btn-primary-small mt-3" >Enter cost</button>
+                    <div class="mt-30 wow fadeInUp" style="display:none";>
                         <form id="calculate-form">
                             <div class="form-group">
                                 <label for="num_pieces"></label>
@@ -180,43 +182,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                         </form>
 
                     </div>
-                   
-                    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($num_pieces)): ?>
-                        <div class="mt-30 wow fadeInUp">
-                            <h4 class="heading-20-medium color-text">Calculated Cost and Quantities</h4>
-                            <table style="width: 100%; border-collapse: collapse;" class="mt-15">
-                                <thead>
-                                    <tr>
-                                        <th style="padding: 8px; text-align: left;">Ingredient</th>
-                                        <th style="padding: 8px; text-align: right;">Quantity</th>
-                                        <th style="padding: 8px; text-align: right;">Cost</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($adjusted_ingredients as $ingredient): ?>
-                                        <tr>
-                                            <td style="padding: 8px; text-align: left;"><?php echo htmlspecialchars($ingredient['name']); ?></td>
-                                            <td style="padding: 8px; text-align: right;"><?php echo htmlspecialchars($ingredient['quantity'] . ' ' . $ingredient['unit']); ?></td>
-                                            <td style="padding: 8px; text-align: right;"><?php echo '$' . number_format($ingredient['cost'], 2); ?></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                    <tr>
-                                        <td colspan="2" style="padding: 8px; text-align: right;"><strong>Total Cost:</strong></td>
-                                        <td style="padding: 8px; text-align: right;"><strong><?php echo '$' . number_format($adjusted_cost, 2); ?></strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php endif; ?>
+                    -->
+                    <!-- <div id="calculated-results" style="display:none;" class="mt-4">
+                        <h4>Calculated Cost and Quantities</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Ingredient</th>
+                                    <th>Quantity</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calculated-ingredients-list">
+                               
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" style="text-align: right;"><strong>Total Cost:</strong></td>
+                                    <td id="calculated-total-cost" style="text-align: right;"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div> -->
 
 
                     <div class="mt-30"></div>
                     <div class="mt-30 mb-120 wow fadeInUp">
-                    <a class="btn btn-primary btn-primary-big w-100" href="#">View Analyzed Report
-                        <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
-                        </svg>
-                    </a>
+                    <div class="row">
+                            <div class="col-md-4">
+                            <form id="share-form" action="share_recipe.php" method="post">
+                                <input type="hidden" name="recipe_name" value="<?php echo htmlspecialchars($recipe['name']); ?>">
+                                <input type="hidden" name="ingredients" value='<?php echo json_encode($adjusted_ingredients); ?>'>
+                                <input type="hidden" name="description" value="<?php echo htmlspecialchars($description ?? ''); ?>">
+                                <button type="button" class="btn btn-primary btn-primary-big w-100" onclick="shareRecipe()">Share with platform</button>
+                            </form>
+
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-primary btn-primary-big w-100" href="#">Share with friends
+                                    <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-primary btn-primary-big w-100" href="#">Print
+                                    <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                    
                     </div>
                 </div>
                 </div>
@@ -349,6 +367,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
             xhr.send(data);
         }
     }
+
+    function shareRecipe() {
+    // Update the description hidden field with the current description text
+        const description = document.getElementById('description-text').textContent.trim();
+        document.querySelector('input[name="description"]').value = description;
+
+        const formData = new FormData(document.getElementById('share-form'));
+
+        fetch('share_recipe.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while sharing the recipe.');
+        });
+}
+
+
+
+
 
 </script>
 

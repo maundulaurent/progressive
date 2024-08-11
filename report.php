@@ -174,7 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-secondary no-print" onclick="history.back();"><i class="bi bi-arrow-left"></i></button>
+                    <!-- <a href="javascript:history.back()" class="mt-4"><i class="bi bi-arrow-left fs-3 text-dark"> Back</i></a>
+                    <button class="btn btn-secondary no-print" onclick="history.back();"><i class="bi bi-arrow-left"></i></button> -->
                     <button class="btn btn-primary no-print" onclick="printPage();">Print</button>
                 </div>
             </div>

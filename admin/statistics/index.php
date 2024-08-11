@@ -119,7 +119,7 @@ include '../includes/sidebar.php';
                       $recipe_id = $row['id'];
                       echo "<tr>
                               <td>{$row['name']}</td>
-                              <td><a href='recipes/manage.php?id={$recipe_id}'>Manage Recipe</a></td>
+                              <td><a href='recipes/manage.php?id={$recipe_id}'>Review Recipe</a></td>
                             </tr>";
                     }
                   } else {
@@ -184,7 +184,7 @@ include '../includes/sidebar.php';
                                     $recipe_id = $row['id'];
                                     echo "<tr>
                                             <td>{$row['name']}</td>
-                                            <td><a href='recipes/manage.php?id={$recipe_id}'>Manage Recipe</a></td>
+                                            <td><a href='details.php?id={$recipe_id}'>Review Recipe</a></td>
                                         </tr>";
                                 }
                             } else {

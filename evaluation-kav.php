@@ -253,7 +253,7 @@ $conn->close();
                 </table>
                 <button id="addPriceButton" class="btn btn-primary mt-3">Add Price per Item to Evaluate</button>
                 <div id="totalValue" class="mt-3" style="display: none;">
-                    <h5>Enter the Prices:</h5>
+                    <h5>Total Value of Kgs Required:</h5>
                     <p id="totalValueResult"></p>
                 </div>
                 <form id="budgetForm" action="report-custom.php" method="POST" style="display: none;">
@@ -342,7 +342,7 @@ $conn->close();
             </div>
           </div>
         
-        <a href="available.php" class="mt-4"><i class="bi bi-arrow-left fs-3 text-dark"> Back</i></a>
+        <a href="javascript:history.back()" class="mt-4"><i class="bi bi-arrow-left fs-3 text-dark"> Back</i></a>
 
         </div>
         <div class="box-tab-right">
