@@ -7,7 +7,7 @@
           <nav class="nav-main-menu d-none d-xl-block">
             <ul class="main-menu">
               <li><a class="active" href="index.php">Home</a></li>
-              <li><a href="about.php">About</a></li>
+              <li><a href="about">About</a></li>
               <li><a href="contact.php">Contact</a></li>
             </ul>
           </nav>

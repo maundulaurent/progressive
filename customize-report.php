@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include 'admin/includes/db.php'; // This includes the $conn object
+
 // Retrieve the recipe and additional costs from the session
 $recipe = $_SESSION['recipe'] ?? null;
 $additional_costs = $_SESSION['additional_costs'] ?? [];
@@ -8,6 +10,34 @@ $additional_costs = $_SESSION['additional_costs'] ?? [];
 if (!$recipe) {
     echo "No recipe found.";
     exit();
+}
+
+// Check if recipe data is available
+if ($recipe) {
+    // Prepare data for insertion
+    $name = $recipe['name'];
+    $ingredients = json_encode($recipe['ingredients']); // Convert ingredients array to JSON
+    $description = $recipe['description'] ?? ''; // Use an empty string if description is not set
+
+    // Prepare SQL statement
+    $stmt = $conn->prepare("INSERT INTO saved_recipes (name, ingredients, description) VALUES (?, ?, ?)");
+
+    if ($stmt) {
+        // Bind parameters
+        $stmt->bind_param('sss', $name, $ingredients, $description);
+
+        // Execute the statement
+        // if ($stmt->execute()) {
+        //     echo "Recipe saved successfully.";
+        // } else {
+        //     echo "Failed to save the recipe.";
+        // }
+
+        // Close the statement
+        $stmt->close();
+    } else {
+        echo "Failed to prepare the SQL statement.";
+    }
 }
 
 // Calculate the total additional cost
@@ -60,10 +90,23 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
     <main class="main">
         <section class="section bg-3 box-invoice-block">
             <div class="box-invoice"> 
-                <div class="inner-invoice"> 
+                <div class="inner-invoice">
+                
+                    <div class="d-flex invoice-top container"> 
+                        <div class="invoice-left">
+                            <div class="cardImage"><img src="assets/imgs/landing/mainlogo.png" alt="bakewave" style=" height: 80px; object-fit: cover; border-radius: 0px;"></div>
+                        </div>
+                        <div class="mb-50">
+                            <div class="invoice-left">
+                                <h3 class="fst-bold">Recipe Generator</h3>
+                                <p class="text-16-medium color-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom mt-10 mb-25"> </div>
                     <div class="d-flex invoice-top"> 
-                        <div class="invoice-left"> 
-                            <h3 class="fst-bold">Recipe Generator</h3>
+                        <div class="invoice-left">
+                            <!-- <h3 class="fst-bold">Recipe Generator</h3> -->
                             <h3 class="mb-4">Custom Recipe Report for <?php echo htmlspecialchars($recipe['name']); ?></h3>
                             <p class="text-16-medium color-text"></p>
                         </div>
@@ -87,48 +130,47 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
                     </div>
 
                     <div class="row">
-                        <!-- <h6 class="heading-20-medium color-text">Additional Costs</h6> -->
-                        <!-- <div class="col-md-6"> -->
-                            <!-- <div class="box-info-book-border wow fadeInUp">  -->
-                                <!-- <ul class="list-prices"> -->
-                                    <!-- <php foreach ($additional_costs as $cost): ?> -->
-                                    <!-- <li><span class="text-top"><php echo htmlspecialchars($cost['name']); ?></span><span class="text-bottom">sh<php echo number_format($cost['price'], 2); ?></span></li> -->
-                                    <!-- <php endforeach; ?> -->
-                                    <!-- <li><span class="text-top">Total Additional Costs</span><span class="text-bottom">sh<php echo number_format($total_additional_costs, 2); ?></span></li> -->
-                                <!-- </ul> -->
-                            <!-- </div> -->
-                        <!-- </div> -->
-                    <!-- </div> -->
+                        <p class="mb-65">Based on the provided recipe, the following quantities and costs for ingredients are required:</p>
 
-                    <p class="mb-65">Based on the provided recipe, the following quantities and costs for ingredients are required:</p>
+                        <table class="table table-invoice"> 
+                            <thead> 
+                                <tr>
+                                    <th>Ingredient Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price per Unit</th>
+                                    <th>Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($recipe['ingredients'] as $ingredient): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($ingredient['name']); ?></td>
+                                    <td><?php echo htmlspecialchars($ingredient['quantity']) . ' ' . htmlspecialchars($ingredient['unit']); ?></td>
+                                    <td>sh<?php echo number_format($ingredient['cost'], 2); ?></td>
+                                    <td>sh<?php echo number_format($ingredient['quantity'] * $ingredient['cost'], 2); ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
 
-                    <table class="table table-invoice"> 
-                        <thead> 
-                            <tr>
-                                <th>Ingredient Name</th>
-                                <th>Quantity</th>
-                                <th>Price per Unit</th>
-                                <th>Total Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($recipe['ingredients'] as $ingredient): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($ingredient['name']); ?></td>
-                                <td><?php echo htmlspecialchars($ingredient['quantity']) . ' ' . htmlspecialchars($ingredient['unit']); ?></td>
-                                <td>sh<?php echo number_format($ingredient['cost'], 2); ?></td>
-                                <td>sh<?php echo number_format($ingredient['quantity'] * $ingredient['cost'], 2); ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                        <div class="row mt-10">
+                            <div class="col-md-8">
+                                <div class="sidebar wow fadeInUp"> 
+                                    <ul class="list-prices list-prices-2"> 
+                                        <li> <span class="text">Total Production Cost:  </span><span class="price">sh <?php echo number_format($total_production_cost, 2); ?></span></li>
+                                        <li> <span class="text">Cost per piece: </span><span class="price">sh <?php echo number_format($cost_per_unit, 2); ?></span></li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-                    <h4>Total Production Cost: sh<?php echo number_format($total_production_cost, 2); ?></h4>
-                    <h4>Cost per piece: sh<?php echo number_format($cost_per_unit, 2); ?></h4>
+                        
+                        <p class="text-14 mt-10 color-text">Produced and printed by <a href="">bakewave</a>.</p>
+                    </div>
                 </div>
 
                 <div class="text-center no-print">
-                    
                     <button class="btn btn-primary" onclick="printPage()">Print Report</button>
                 </div>
             </div>

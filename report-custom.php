@@ -107,7 +107,7 @@ foreach ($adjusted_quantities as $quantity) {
                     <div class="invoice-right"> 
                         <div class="mb-60">
                             <div class="d-flex justify-content-between mb-6">                        
-                                <h6 class="text-16-medium color-text mb-5">Determining Ingredient</h6>
+                                <h6 class="text-16-medium color-text mb-5">Available Ingredient</h6>
                                 <span class="text-16-medium color-text">
                                     <?php 
                                     foreach ($ingredient_ids as $index => $id) {
@@ -119,7 +119,7 @@ foreach ($adjusted_quantities as $quantity) {
                                 </span>
                             </div>
                             <div class="d-flex justify-content-between mb-65">                        
-                                <h6 class="text-16-medium color-text mb-5">Units to Produce</h6>
+                                <h6 class="text-16-medium color-text mb-5">Available quantity </h6>
                                 <span class="text-16-medium color-text"><?php echo number_format($selected_quantity, 2); ?> kgs</span>
                             </div>
                         </div>

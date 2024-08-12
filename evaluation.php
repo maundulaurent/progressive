@@ -251,7 +251,7 @@ $conn->close();
                         <!-- Dynamic content will be inserted here -->
                     </tbody>
                 </table>
-                <button id="addPriceButton" class="btn btn-primary mt-3">Add Price per Item to Evaluate</button>
+                <button id="addPriceButton" class="btn btn-primary mt-3">Add ingredient Price to calculate cost</button>
                 <div id="totalValue" class="mt-3" style="display: none;">
                     <h5>Enter the Prices:</h5>
                     <p id="totalValueResult"></p>
@@ -338,7 +338,6 @@ $conn->close();
                       <a class="icon-socials icon-whatsapp" href="https://api.whatsapp.com/send?text=<?php echo urlencode($recipe_url); ?>" target="_blank"></a>
                   </div>
               </div>
-
             </div>
           </div>
         
