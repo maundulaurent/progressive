@@ -2888,7 +2888,7 @@ body {
   padding-left: 45px;
 }
 .header .main-header .header-left .header-right {
-  width: 45%;
+  width: 100%;
   text-align: right;
 }
 .header .main-header .header-left .header-right .icon-list {
@@ -9440,7 +9440,7 @@ textarea.form-control {
     width: 25%;
   }
   .header .main-header .header-left .header-nav {
-    width: 86%;
+    width: 66%;
   }
   .banner-home2, .block-padding-100 {
     padding-left: 10px;
@@ -9469,7 +9469,7 @@ textarea.form-control {
     width: 14%;
   }
   .header.header-homepage9 .main-header .header-left .header-right {
-    width: 36%;
+    width: 56%;
   }
   .box-our-fleet-home8 .fleet-style-3 {
     padding-left: 60px;

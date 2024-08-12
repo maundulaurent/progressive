@@ -25,6 +25,10 @@ $itemsPerPage = 5; // Number of items to show per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $itemsPerPage;
 
+// Pagination settings for Saved Recipes
+$itemsPerPageSaved = 5;
+$pageSaved = isset($_GET['pageSaved']) ? (int)$_GET['pageSaved'] : 1;
+$offsetSaved = ($pageSaved - 1) * $itemsPerPageSaved;
 
 // Fetch data for the chart
 $sql = "SELECT recipes.name AS recipe_name, COUNT(recipe_ingredients.id) AS ingredient_count
@@ -60,6 +64,17 @@ $totalPages = ceil($totalItems / $itemsPerPage);
 $sql_shared_recipes = "SELECT id, name FROM saved_recipes WHERE type = 'shared' LIMIT $itemsPerPage OFFSET $offset";
 $result_shared_recipes = $conn->query($sql_shared_recipes);
 
+// Fetch the paginated recipe list with type 'saved'
+$sql_saved_recipes = "SELECT id, name FROM saved_recipes WHERE type = 'saved' LIMIT $itemsPerPageSaved OFFSET $offsetSaved";
+$result_saved_recipes = $conn->query($sql_saved_recipes);
+
+
+// Fetch the total number of saved recipes for pagination
+$sql_total_saved = "SELECT COUNT(*) as total FROM saved_recipes WHERE type = 'saved'";
+$result_total_saved = $conn->query($sql_total_saved);
+$row_total_saved = $result_total_saved->fetch_assoc();
+$totalItemsSaved = $row_total_saved['total'];
+$totalPagesSaved = ceil($totalItemsSaved / $itemsPerPageSaved);
 
 include '../includes/head.php';
 include '../includes/sidebar.php';
@@ -96,7 +111,7 @@ include '../includes/sidebar.php';
         <div class="col-lg-6">
           <div class="card">
             <div class="card-header border-0">
-              <h3 class="card-title">Recipes </h3>
+              <h3 class="card-title">Saved Recipes </h3>
               <div class="card-tools">
                 <a href="#" class="btn btn-tool btn-sm">
                   <i class="fas fa-bars"></i>
@@ -114,12 +129,12 @@ include '../includes/sidebar.php';
                 </thead>
                 <tbody>
                   <?php
-                  if ($result_recipes->num_rows > 0) {
-                    while ($row = $result_recipes->fetch_assoc()) {
+                  if ($result_saved_recipes->num_rows > 0) {
+                    while ($row = $result_saved_recipes->fetch_assoc()) {
                       $recipe_id = $row['id'];
                       echo "<tr>
                               <td>{$row['name']}</td>
-                              <td><a href='recipes/manage.php?id={$recipe_id}'>Review Recipe</a></td>
+                              <td><a href='recipes/manage.php?id={$recipe_id}'>Check Recipe</a></td>
                             </tr>";
                     }
                   } else {
@@ -129,29 +144,30 @@ include '../includes/sidebar.php';
                 </tbody>
               </table>
 
-                <div class="text-center mt-3">
-                  <nav class="box-pagination">
-                    <ul class="pagination">
-                      <?php if ($page > 1): ?>
-                        <li class="page-item">
-                          <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
-                        </li>
-                      <?php endif; ?>
+              <div class="text-center mt-3">
+                <nav class="box-pagination">
+                  <ul class="pagination">
+                    <?php if ($pageSaved > 1): ?>
+                      <li class="page-item">
+                        <a class="page-link" href="?pageSaved=<?= $pageSaved - 1 ?>">Previous</a>
+                      </li>
+                    <?php endif; ?>
 
-                      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <li class="page-item<?= $i == $page ? ' active' : '' ?>">
-                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
-                      <?php endfor; ?>
+                    <?php for ($i = 1; $i <= $totalPagesSaved; $i++): ?>
+                      <li class="page-item<?= $i == $pageSaved ? ' active' : '' ?>">
+                        <a class="page-link" href="?pageSaved=<?= $i ?>"><?= $i ?></a>
+                      </li>
+                    <?php endfor; ?>
 
-                      <?php if ($page < $totalPages): ?>
-                        <li class="page-item">
-                          <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
-                        </li>
-                      <?php endif; ?>
-                    </ul>
-                  </nav>
-                </div>
+                    <?php if ($pageSaved < $totalPagesSaved): ?>
+                      <li class="page-item">
+                        <a class="page-link" href="?pageSaved=<?= $pageSaved + 1 ?>">Next</a>
+                      </li>
+                    <?php endif; ?>
+                  </ul>
+                </nav>
+              </div>
+
             </div>
           </div>
         </div>

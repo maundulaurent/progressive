@@ -129,6 +129,26 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
                         </div>
                     </div>
 
+                    <!-- <div class="row">
+                        <h6 class="heading-20-medium mb-20 color-text">Additional Costs</h6>
+                        <div class="col-md-8">
+                            <div class="box-info-book-border wow fadeInUp"> 
+                                <ul class="list-prices">
+                                        <li>
+                                            <span class="text-top"></span>
+                                            <span class="text-bottom"></span>
+                                        </li>
+                                    
+                                    <li>
+                                        <span class="text-top">Total Additional Costs</span>
+                                        <span class="text-bottom"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+
+
                     <div class="row">
                         <p class="mb-65">Based on the provided recipe, the following quantities and costs for ingredients are required:</p>
 

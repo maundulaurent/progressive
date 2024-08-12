@@ -244,11 +244,11 @@ if (isset($_POST['num_pieces'])) {
 
                             </div>
                             <div class="col-md-4">
-                                <a class="btn btn-primary btn-primary-big w-100" href="#">Download
-                                    <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
-                                    </svg>
-                                </a>
+                            <button class="btn btn-primary btn-primary-big w-100" onclick="saveRecipe()">Save recipe
+                                <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
+                                </svg>
+                            </button>
                             </div>
                         </div>
 
@@ -411,7 +411,37 @@ if (isset($_POST['num_pieces'])) {
         });
 }
 
-// 
+    function saveRecipe() {
+        <?php if (!isset($_SESSION['username'])): ?>
+            alert('You must be logged in to save a recipe.');
+            window.location.href = 'login.php';
+            return;
+        <?php endif; ?>
+
+        const description = document.getElementById('description-text').textContent.trim();
+        const formData = new FormData();
+        formData.append('recipe_name', '<?php echo htmlspecialchars($recipe['name']); ?>');
+        formData.append('ingredients', '<?php echo json_encode($adjusted_ingredients); ?>');
+        formData.append('description', description);
+        formData.append('type', 'saved');
+
+        fetch('save_recipe.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Recipe saved successfully!');
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while saving the recipe.');
+        });
+    }
 
 
 
