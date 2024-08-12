@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return [
                 'name' => $ingredient['name'],
                 'quantity' => $ingredient['quantity'],
+                // 'unit' => $ingredient['unit'],
                 'cost' => $ingredient['price']
             ];
         }, $ingredients),
@@ -43,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
         $adjusted_ingredients[] = [
             'name' => $ingredient['name'],
             'quantity' => $ingredient['quantity'] * $ratio,
+            'unit' => $ingredient['unit'],
             'cost' => $ingredient['cost'] * $ratio,
         ];
     }
@@ -83,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                         <div class="box-content-detail"> 
                             <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">Create Your Recipe</h3>
                             <div class="form-contact form-comment wow fadeInUp"> 
-                            <form id="recipe-form" action="javascript:void(0);" method="POST" onsubmit="showCostSection()">
+                                <form id="recipe-form" action="" method="POST" onsubmit="return validateIngredients()">
                                     <div class="row"> 
                                         <div class="col-lg-6">
                                             <div class="form-group"> 
@@ -147,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                                         </div>
                                     </div>
                                     <div class="mt-30 mb-120 wow fadeInUp">
-                                        <button type="submit" class="btn btn-primary btn-primary-big w-100">Add Extra Costs
+                                        <button type="submit" class="btn btn-primary btn-primary-big w-100">Continue 
                                             <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                                             </svg>
@@ -175,11 +177,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                     </div>
                 </div>
 
-                <!-- Hidden Summary Section -->
-                <div id="summary-section" class="box-row-tab mt-50" style="display: none;">
+                <!-- Summary Section -->
+                <?php if ($recipe): ?>
+                <div class="box-row-tab mt-50">
                     <div class="box-tab-left">
                         <div class="box-content-detail">
-                            <h3 class="heading-24-medium color-text mb-30 wow fadeInUp"><?php echo htmlspecialchars($recipe['name']); ?></h3>
+                            <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">Creating Recipe <?php echo htmlspecialchars($recipe['name']); ?></h3>
                             <div class="sidebar"> 
                                 <div class="d-flex align-items-center justify-content-between wow fadeInUp"> 
                                     <h6 class="text-20-medium color-text">Ingredients</h6><a class="text-14-medium color-text" href="#">Quantity</a>
@@ -187,8 +190,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                                 <div class="mt-20 wow fadeInUp">
                                     <div class="box-info-route">
                                         <table style="width: 100%; border-collapse: collapse;">
-                                            <tbody id="summary-ingredients">
-                                                <!-- AJAX loaded ingredients will appear here -->
+                                            <tbody>
+                                            <?php foreach ($adjusted_ingredients as $ingredient): ?>
+                                                <tr>
+                                                    <td style="padding: 8px; text-align: left;">
+                                                        <?php echo htmlspecialchars($ingredient['name']); ?>
+                                                    </td>
+                                                    <td style="padding: 8px; text-align: right;">
+                                                        <?php echo htmlspecialchars($ingredient['quantity'] ); ?> units
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -276,8 +288,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                             </div>
                         </div>
                     </div>
+                    <div class="box-tab-right mt-60">
+                        <div class="sidebar"> 
+                            <div class="d-flex align-items-center justify-content-between wow fadeInUp"> 
+                                <h6 class="text-20-medium color-text">Customizing Summary</h6>
+                            </div>               
+                            <div class="mt-20 wow fadeInUp">
+                                <div class="box-info-route"> 
+                                    <div class="info-route-left"> 
+                                        <span class="text-14 color-grey">Recipe Name</span><span class="text-14-medium color-text"><?php echo htmlspecialchars($recipe['name']); ?></span>
+                                    </div>
+                                </div>
+                                <div class="border-bottom mt-30 mb-25"></div>
+                                <div class="mt-0"> 
+                                    <span class="text-14 color-grey">On this Section</span><br>
+                                    <span class="text-14-medium color-text">Defining Description</span><br>
+                                    <span class="text-14-medium color-text">Additional Costs</span><br>
+                                    <span class="text-14-medium color-text">Cost Calculator</span><br>
+                                    <span class="text-14-medium color-text">Share Recipe</span>
+                                </div>
+                                <div class="border-bottom mt-30 mb-25"></div>
+                                <div class="mt-0"> 
+                                    <span class="text-14 color-grey">Others</span><br>
+                                    <span class="text-14-medium color-text">Analyze Report</span><br>
+                                    <span class="text-14-medium color-text">Print Recipe</span><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
+                <?php endif; ?>
             </div>
         </section>
     </main>
@@ -407,99 +447,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
                 alert('An error occurred while sharing the recipe.');
             });
         }
-
-        // Show summary section and load data via AJAX
-        function showSummary() {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'get_summary.php', true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    const summarySection = document.getElementById('summary-section');
-                    const summaryIngredients = document.getElementById('summary-ingredients');
-
-                    // Populate the ingredients table
-                    summaryIngredients.innerHTML = '';
-                    response.ingredients.forEach(function(ingredient) {
-                        const row = `
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">${ingredient.name}</td>
-                                <td style="padding: 8px; text-align: right;">${ingredient.quantity}</td>
-                            </tr>
-                        `;
-                        summaryIngredients.insertAdjacentHTML('beforeend', row);
-                    });
-
-                    // Show the summary section
-                    summarySection.style.display = 'block';
-                }
-            };
-            xhr.send();
-        }
-
-        function submitRecipeForm() {
-    if (!validateIngredients()) {
-        return;
-    }
-
-    const formData = new FormData(document.getElementById('recipe-form'));
-
-    fetch('', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();  // Changed to text for debugging purposes
-    })
-    .then(data => {
-        console.log('Server Response:', data);  // Log the server response
-        showSummary();  // Proceed to show the summary
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while submitting the recipe.');
-    });
-}
-
-function showCostSection() {
-    // Check if at least one ingredient is present
-    if (validateIngredients()) {
-        // Show the summary section
-        document.getElementById('summary-section').style.display = 'block';
-
-        // Get recipe details
-        const recipeName = document.getElementById('recipe_name').value;
-        const ingredientsTableBody = document.getElementById('summary-ingredients');
-
-        // Set the recipe name in the summary
-        document.getElementById('summary-recipe-name').textContent = `Creating Recipe : ${recipeName}`;
-
-        // Populate ingredients in the summary
-        ingredientsTableBody.innerHTML = ''; // Clear previous content
-        document.querySelectorAll('#ingredients-table-body tr').forEach(row => {
-            const ingredientName = row.children[0].textContent;
-            const quantity = row.children[1].textContent;
-            const price = row.children[2].textContent;
-
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>${ingredientName}</td>
-                <td>${quantity}</td>
-                <td>${price}</td>
-            `;
-            ingredientsTableBody.appendChild(newRow);
-        });
-
-        // Optionally, you can also populate additional costs if needed
-    }
-}
-
-
-
-
     </script>
 </body>
 </html>

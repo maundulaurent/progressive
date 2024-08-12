@@ -1,46 +1,64 @@
-
-
 <?php
 session_start();
 include 'admin/includes/db.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get the recipe data from the POST request
-    $recipe_name = $_POST['recipe_name'];
-    $pieces = $_POST['pieces'];
-    $ingredients = $_POST['ingredients'] ?? [];
+    // Handle additional costs first
+    if (isset($_POST['cost_name'], $_POST['cost_price'])) {
+        $cost_name = $_POST['cost_name'];
+        $cost_price = (float) $_POST['cost_price'];
 
-    // Store the recipe data in the session
-    $_SESSION['recipe'] = [
-        'name' => $recipe_name,
-        'pieces' => $pieces,
-        'ingredients' => array_map(function($ingredient) {
-            return [
-                'name' => $ingredient['name'],
-                'quantity' => $ingredient['quantity'],
-                'unit' => $ingredient['unit'],
-                'cost' => $ingredient['price']
-            ];
-        }, $ingredients),
-        'total_cost' => array_reduce($ingredients, function($carry, $ingredient) {
-            return $carry + ($ingredient['quantity'] * $ingredient['price']);
-        }, 0)
-    ];
+        // Store the additional cost in the session
+        if (!isset($_SESSION['additional_costs'])) {
+            $_SESSION['additional_costs'] = [];
+        }
 
-    // Redirect to the summary page
-    header('Location: customize-summary.php');
-    exit();
+        $_SESSION['additional_costs'][] = [
+            'name' => $cost_name,
+            'price' => $cost_price
+        ];
+    }
+
+    // Handle recipe data
+    if (isset($_POST['recipe_name'], $_POST['pieces'], $_POST['ingredients'])) {
+        $recipe_name = $_POST['recipe_name'];
+        $pieces = $_POST['pieces'];
+        $ingredients = $_POST['ingredients'];
+
+        // Store the recipe data in the session
+        $_SESSION['recipe'] = [
+            'name' => $recipe_name,
+            'pieces' => $pieces,
+            'ingredients' => array_map(function ($ingredient) {
+                return [
+                    'name' => $ingredient['name'],
+                    'quantity' => $ingredient['quantity'],
+                    'unit' => $ingredient['unit'],
+                    'cost' => $ingredient['price']
+                ];
+            }, $ingredients),
+            'total_cost' => array_reduce($ingredients, function ($carry, $ingredient) {
+                return $carry + ($ingredient['quantity'] * $ingredient['price']);
+            }, 0)
+        ];
+
+        // Redirect to the summary page
+        header('Location: customize-summary.php');
+        exit();
+    }
 }
 
+// Fetch the session data
 $recipe = $_SESSION['recipe'] ?? null;
+$additional_costs = $_SESSION['additional_costs'] ?? [];
 
 if (!$recipe) {
     echo "No recipe found.";
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
+// Handle pieces adjustment
+if (isset($_POST['num_pieces'])) {
     $num_pieces = $_POST['num_pieces'];
     $ratio = $num_pieces / $recipe['pieces'];
     $adjusted_ingredients = [];
@@ -60,9 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
     $adjusted_ingredients = $recipe['ingredients'];
     $adjusted_cost = $recipe['total_cost'];
 }
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -219,14 +236,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
 
                             </div>
                             <div class="col-md-4">
-                                <a class="btn btn-primary btn-primary-big w-100" href="#">Share with friends
-                                    <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
-                                    </svg>
-                                </a>
+                            <a class="btn btn-primary btn-primary-big w-100" href="customize-report.php" target="_blank">Print
+                                <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
+                                </svg>
+                            </a>
+
                             </div>
                             <div class="col-md-4">
-                                <a class="btn btn-primary btn-primary-big w-100" href="#">Print
+                                <a class="btn btn-primary btn-primary-big w-100" href="#">Download
                                     <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                                     </svg>
@@ -393,7 +411,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['num_pieces'])) {
         });
 }
 
-
+// 
 
 
 

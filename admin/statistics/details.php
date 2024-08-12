@@ -92,71 +92,6 @@ include '../includes/sidebar.php';
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <!-- Recipes Available Column -->
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header border-0">
-              <h3 class="card-title">Recipes </h3>
-              <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm">
-                  <i class="fas fa-bars"></i>
-                </a>
-              </div>
-            </div>
-
-            <div class="card-body table-responsive p-0">
-              <table class="table table-striped table-valign-middle">
-                <thead>
-                  <tr>
-                    <th>Recipe</th>
-                    <th>Ingredients</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if ($result_recipes->num_rows > 0) {
-                    while ($row = $result_recipes->fetch_assoc()) {
-                      $recipe_id = $row['id'];
-                      echo "<tr>
-                              <td>{$row['name']}</td>
-                              <td><a href='recipes/manage.php?id={$recipe_id}'>Review Recipe</a></td>
-                            </tr>";
-                    }
-                  } else {
-                    echo "<tr><td colspan='2'>No recipes found.</td></tr>";
-                  }
-                  ?>
-                </tbody>
-              </table>
-
-                <div class="text-center mt-3">
-                  <nav class="box-pagination">
-                    <ul class="pagination">
-                      <?php if ($page > 1): ?>
-                        <li class="page-item">
-                          <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
-                        </li>
-                      <?php endif; ?>
-
-                      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <li class="page-item<?= $i == $page ? ' active' : '' ?>">
-                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
-                      <?php endfor; ?>
-
-                      <?php if ($page < $totalPages): ?>
-                        <li class="page-item">
-                          <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
-                        </li>
-                      <?php endif; ?>
-                    </ul>
-                  </nav>
-                </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.col-lg-6 -->
-        <!-- Recipes Available Column -->
        <!-- Recipes Shared Column -->
         <div class="col-lg-6">
             <div class="card">
@@ -220,111 +155,12 @@ include '../includes/sidebar.php';
                 </div>
             </div>
         </div>
-
-
-       
-
       </div>
       <!-- /.row -->
     </div>
   </div>
     <!-- end to be main content -->
     
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Number of saved Recipes</h3>
-                  <a href="javascript:void(0);">View Report</a>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                  <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">820</span>
-                    <span>Visitors Over Time</span>
-                  </p>
-                  <p class="ml-auto d-flex flex-column text-right">
-                    <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 12.5%
-                    </span>
-                    <span class="text-muted">Since last week</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-
-                <div class="position-relative mb-4">
-                  <canvas id="visitors-chart" height="200"></canvas>
-                </div>
-
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This Week
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last Week
-                  </span>
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col-md-6 -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Users Shared Recipes</h3>
-                  <a href="javascript:void(0);">View Report</a>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                  <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">$18,230.00</span>
-                    <span>Sales Over Time</span>
-                  </p>
-                  <p class="ml-auto d-flex flex-column text-right">
-                    <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 33.1%
-                    </span>
-                    <span class="text-muted">Since last month</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-
-                <div class="position-relative mb-4">
-                  <canvas id="sales-chart" height="200"></canvas>
-                </div>
-
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This year
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last year
-                  </span>
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col-md-6 -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-
   </div>
   <!-- /.content-wrapper -->
 
