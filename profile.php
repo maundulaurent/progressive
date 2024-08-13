@@ -153,10 +153,30 @@ $username = $_SESSION['username'];
                   <div class="box-info-route"> 
                     <div class="info-route-left"> <span class="text-14 color-grey">Approved Recipes</span></div>
                     <div class="info-route-left"> 
-                      <ul class="text-14-medium color-text">
-                        <li>Avocado Toast</li>
-                        <li>Blueberry Muffins</li>
-                      </ul>
+                    <ul class="text-14-medium color-text">
+                        <?php
+                        try {
+                            $pdo = new PDO('mysql:host=localhost;dbname=recipe', 'root', '');
+                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            // Fetch recipes where the logged-in user is the creator
+                            $stmt = $pdo->prepare("SELECT name FROM recipes WHERE recipe_by = ?");
+                            $stmt->execute([$username]);
+                            $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            if ($recipes) {
+                                foreach ($recipes as $recipe) {
+                                    echo '<li>' . htmlspecialchars($recipe['name']) . '</li>';
+                                }
+                            } else {
+                                echo '<li>No recipes found.</li>';
+                            }
+                        } catch (PDOException $e) {
+                            echo '<li>Error retrieving recipes: ' . htmlspecialchars($e->getMessage()) . '</li>';
+                        }
+                        ?>
+                        </ul>
+
                     </div>
                   </div>
                 </div>
