@@ -62,6 +62,17 @@ $conn->close();
         <div class="container-sub"> 
           <div class="text-center"> 
             <h2 class="heading-44-medium wow fadeInUp">Sign in</h2>
+
+          <?php
+                // Display the success message if it exists
+                if (isset($_SESSION['signup_success'])) {
+                  echo '<div class="alert alert-success alert-dismissible fade show" style="width: 40%;">' . $_SESSION['signup_success'] . '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button></div>';
+                  unset($_SESSION['signup_success']); // Clear the message after displaying it
+              }
+          ?>
+       
+
+
           </div>
           <div class="box-login mt-70"> 
             <div class="form-contact form-comment wow fadeInUp"> 

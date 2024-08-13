@@ -12,6 +12,7 @@ if (isset($_SESSION['username'])) {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
     $avatar_path = !empty($user['avatar']) ? 'admin/uploads/' . htmlspecialchars($user['avatar']) : 'assets/imgs/landing/avatar1.png';
+    
 }
 ?>
 
@@ -36,7 +37,7 @@ if (isset($_SESSION['username'])) {
                     </nav>
                     <div class="burger-icon burger-icon-white"><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
                 </div>
-                <div class="header-right d-flex">
+                <div class="header-right d-flex" style="display: flex; align-items: center; justify-content: flex-end;">
                     <div class="box-button-login d-inline-block mr-10 align-middle">
                         <a class="btn btn-default hover-up" href="dashboard.php">Recipes</a>
                     </div>
