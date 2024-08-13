@@ -142,6 +142,8 @@ while ($row = $likes_dislikes_result->fetch_assoc()) {
 }
 $stmt_likes_dislikes->close();
 
+include_once 'includes/navbar.php';
+
 $conn->close();
 ?>
 
@@ -167,9 +169,9 @@ $conn->close();
   </head>
   <body>
 
-  <?php include_once 'includes/preloader.php'; ?>
 
-  <?php include_once 'includes/navbar.php'; ?>
+
+  <?php include_once 'includes/preloader.php'; ?>
 
 
   <main class="main">
