@@ -2,7 +2,7 @@
 session_start();
 // Ensure the user is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../login.php");
+    header("location: ../login");
     exit;
 }
 
@@ -87,7 +87,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../index.php" class="nav-link">Home</a>
+        <a href="../index" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -125,7 +125,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
       </li>
 
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="logout.php" class="nav-link">Logout</a>
+        <a href="logout" class="nav-link">Logout</a>
       </li>
     </ul>
   </nav>
@@ -134,8 +134,9 @@ $totalPages = ceil($totalItems / $itemsPerPage);
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar  elevation-4">
     <!-- Brand Logo -->
-    <a href="index.php" class="brand-link" style="margin-left: 20px;">
-      <span class="brand-text text-dark"><h3 class="fst-bold">Bakewave</h3></span>
+    <a href="index" class="brand-link mt-3" style="margin-left: 10px; display: flex; align-items: center;">
+    <div class="cardImage"><img src="../assets/imgs/landing/mainlogo.png" alt="bakewave" style="height: 40px; object-fit: cover; border-radius: 1px;"></div>
+    <span class="brand-text text-dark" style="margin-left: 10px;"><h3 class="fst-bold">Bakewave</h3></span>
     </a>
     
 
@@ -184,7 +185,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
           </li>
           <li class="nav-header">WIDGETS</li>
           <li class="nav-item">
-            <a href="index.php" class="nav-link">
+            <a href="index" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin dashboard
@@ -193,7 +194,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
           </li>
           <li class="nav-header">MANAGE RECIPES</li>
           <li class="nav-item">
-            <a href="recipes/index.php" class="nav-link">
+            <a href="recipes/index" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Add Recipe
@@ -202,7 +203,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="recipes/index.php" class="nav-link">
+            <a href="recipes/index" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Edit Recipe
@@ -211,7 +212,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="recipes/index.php" class="nav-link">
+            <a href="recipes/index" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Delete Recipes
@@ -221,7 +222,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
           </li>
           <li class="nav-header">MANAGE USERS</li>
           <li class="nav-item">
-            <a href="users/index.php" class="nav-link">
+            <a href="users/create-user" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Create another Admin
@@ -230,7 +231,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="users/index.php" class="nav-link">
+            <a href="users/create-user" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Delete Admin
@@ -240,7 +241,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
           </li>
           <li class="nav-header">STATISTICS</li>
           <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
+            <a href="statistics/index" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 View all Recipes
@@ -249,7 +250,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
+            <a href="statistics/index" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Approve Recipes
@@ -257,7 +258,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
+            <a href="statistics/index" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Check Approved Recipes
@@ -265,7 +266,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
+            <a href="statistics/index" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 User Customized Recipes
@@ -273,7 +274,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
+            <a href="statistics/index" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
                 Mailbox
@@ -283,7 +284,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
           </li>
 
           <li class="nav-item">
-            <a href="statistics/index.php" class="nav-link">
+            <a href="statistics/index" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
@@ -350,7 +351,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
                       $recipe_id = $row['id'];
                       echo "<tr>
                               <td>{$row['name']}</td>
-                              <td><a href='recipes/manage.php?id={$recipe_id}'>Manage Recipe</a></td>
+                              <td><a href='recipes/manage?id={$recipe_id}'>Manage Recipe</a></td>
                             </tr>";
                     }
                   } else {
@@ -441,10 +442,10 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </div>
             <div class="row">
               <div class="col-md-6">
-                  <a href="recipes/index.php" class="btn btn-primary btn-block mb-3">Manage Recipes</a>
+                  <a href="recipes/index" class="btn btn-primary btn-block mb-3">Manage Recipes</a>
               </div>
               <div class="col-md-6">
-                  <a href="users/create-user.php" class="btn btn-primary btn-block mb-3">Users</a>
+                  <a href="users/create-user" class="btn btn-primary btn-block mb-3">Users</a>
               </div>
           </div>
             <!-- /.card -->
@@ -557,9 +558,9 @@ $totalPages = ceil($totalItems / $itemsPerPage);
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    All rights reserved@moana
+    All rights reserved@bakewave
     <div class="float-right d-none d-sm-inline-block">
-      <b>moanaltd</b>
+      <b>Bakewave</b>
     </div>
   </footer>
 </div>

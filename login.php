@@ -32,6 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $stmt->close();
 }
+include_once 'includes/preloader.php';
+include_once 'includes/navbar.php';
+
 $conn->close();
 ?>
 
@@ -52,10 +55,6 @@ $conn->close();
   </head>
   <body>
   
-
-    <?php include_once 'includes/preloader.php'; ?>
-
-    <?php include_once 'includes/navbar.php'; ?>
 
     <main class="main">
       <section class="section mt-120 mb-100"> 

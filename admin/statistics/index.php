@@ -89,7 +89,7 @@ include '../includes/sidebar.php';
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3 class="m-0">Saved and Shared Recipes</h3>
+            <h3 class="m-0"> User Saved and Shared Recipes</h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

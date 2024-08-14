@@ -1,7 +1,7 @@
 <?php
 // Ensure the user is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../login.php");
+    header("location: ../login");
     exit;
 }
 
@@ -49,7 +49,7 @@ $stmt->close();
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../index.php" class="nav-link">Home</a>
+        <a href="../index" class="nav-link">Home</a>
       </li>
     </ul>
 

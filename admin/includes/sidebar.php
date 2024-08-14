@@ -60,7 +60,7 @@
           </li>
           <li class="nav-header">WIDGETS</li>
           <li class="nav-item">
-            <a href="../index.php" class="nav-link">
+            <a href="../index" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Admin dashboard
@@ -69,7 +69,7 @@
           </li>
           <li class="nav-header">MANAGE RECIPES</li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/recipes/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/recipes/index" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Add Recipe
@@ -78,7 +78,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/recipes/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/recipes/index" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Edit Recipe
@@ -87,7 +87,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/recipes/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/recipes/index" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Delete Recipes
@@ -97,7 +97,7 @@
           </li>
           <li class="nav-header">MANAGE USERS</li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/users/create-user.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/users/create-user" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Create another Admin
@@ -106,7 +106,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/users/create-user.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/users/create-user" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Delete Admin
@@ -116,7 +116,7 @@
           </li>
           <li class="nav-header">STATISTICS</li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 View all Recipes
@@ -125,7 +125,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Approve Recipes
@@ -133,7 +133,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Check Approved Recipes
@@ -141,7 +141,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 User Customized Recipes
@@ -149,7 +149,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
                 Mailbox
@@ -159,7 +159,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index.php" class="nav-link">
+            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras

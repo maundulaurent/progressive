@@ -207,28 +207,35 @@ include '../includes/sidebar.php';
       </div>
       <!-- /.row -->
 
+
+      <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
       <!-- Line Chart -->
       <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Recipes Created Over Time</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="lineChart" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
+          <div class="card-header">
+            <h3 class="card-title">Recipes Created Over Time</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
             </div>
-            <!-- /.card -->
-        
+          </div>
+          <div class="card-body">
+            <div class="chart">
+              <canvas id="lineChart" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+            </div>
+          </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        </div>
+        <div class="col-md-2"></div>
+          <!--End Graph  -->
           <!-- /.container-fluid -->
         </div>
         <!-- /.content -->
