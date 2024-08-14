@@ -3,6 +3,8 @@ session_start();
 
 include 'admin/includes/db.php'; // This includes the $conn object
 
+
+
 // Retrieve the recipe and additional costs from the session
 $recipe = $_SESSION['recipe'] ?? null;
 $additional_costs = $_SESSION['additional_costs'] ?? [];
@@ -11,6 +13,10 @@ if (!$recipe) {
     echo "No recipe found.";
     exit();
 }
+
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
 
 // Check if recipe data is available
 if ($recipe) {
@@ -50,6 +56,9 @@ $total_production_cost = $recipe['total_cost'] + $total_additional_costs;
 
 // Calculate cost per unit (e.g., per piece)
 $cost_per_unit = $total_production_cost / $recipe['pieces'];
+
+$_SESSION['additional_costs'] = [];
+
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +66,7 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Recipe Report</title>
+    <title>Bakewawve | Custom Recipe Report</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Include jQuery -->
@@ -71,7 +80,7 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
     <meta name="description" content="Custom Recipe Report">
     <meta name="keywords" content="recipe, report, customize">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/landing/icon2.png">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <style>
         @media print {
@@ -129,24 +138,27 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
                         </div>
                     </div>
 
-                    <!-- <div class="row">
+                    <div class="row">
                         <h6 class="heading-20-medium mb-20 color-text">Additional Costs</h6>
                         <div class="col-md-8">
                             <div class="box-info-book-border wow fadeInUp"> 
                                 <ul class="list-prices">
-                                        <li>
-                                            <span class="text-top"></span>
-                                            <span class="text-bottom"></span>
-                                        </li>
-                                    
+                                    <?php foreach ($additional_costs as $cost): ?>
+                                    <li> 
+                                        <span class="text-top"><?php echo htmlspecialchars($cost['name']); ?></span>
+                                        <span class="text-bottom">sh <?php echo number_format($cost['price'], 2); ?></span>
+                                    </li>
+                                    <?php endforeach; ?>
                                     <li>
                                         <span class="text-top">Total Additional Costs</span>
-                                        <span class="text-bottom"></span>
+                                        <span class="text-bottom">sh <?php echo number_format($total_additional_costs, 2); ?></span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+
+                  
 
 
                     <div class="row">
@@ -165,7 +177,7 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
                                 <?php foreach ($recipe['ingredients'] as $ingredient): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($ingredient['name']); ?></td>
-                                    <td><?php echo htmlspecialchars($ingredient['quantity']) . ' ' . htmlspecialchars($ingredient['unit']); ?></td>
+                                    <td><?php echo htmlspecialchars($ingredient['quantity']); ?></td>
                                     <td>sh<?php echo number_format($ingredient['cost'], 2); ?></td>
                                     <td>sh<?php echo number_format($ingredient['quantity'] * $ingredient['cost'], 2); ?></td>
                                 </tr>
@@ -177,7 +189,9 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
                             <div class="col-md-8">
                                 <div class="sidebar wow fadeInUp"> 
                                     <ul class="list-prices list-prices-2"> 
-                                        <li> <span class="text">Total Production Cost:  </span><span class="price">sh <?php echo number_format($total_production_cost, 2); ?></span></li>
+                                        <li> <span class="text">Cost for producing for ingredients:  </span><span class="price">sh <?php echo number_format($recipe['total_cost'], 2); ?></span></li>
+                                        <li> <span class="text">Additional Costs: </span><span class="price">sh <?php echo number_format($total_additional_costs, 2); ?></span></li>
+                                        <li> <span class="text">Total Production Cost for <?php echo htmlspecialchars($recipe['pieces']); ?> pieces:  </span><span class="price">sh <?php echo number_format($total_production_cost, 2); ?></span></li>
                                         <li> <span class="text">Cost per piece: </span><span class="price">sh <?php echo number_format($cost_per_unit, 2); ?></span></li>
                                         
                                     </ul>
@@ -186,13 +200,16 @@ $cost_per_unit = $total_production_cost / $recipe['pieces'];
                         </div>
 
                         
-                        <p class="text-14 mt-10 color-text">Produced and printed by <a href="">bakewave</a>.</p>
+                        
                     </div>
                 </div>
 
-                <div class="text-center no-print">
-                    <button class="btn btn-primary" onclick="printPage()">Print Report</button>
+                <div class="text-center  d-flex justify-content-between container mt-50 ">
+                    <div class=""><p class="text-14 mt-10 color-text">Produced and printed by <a class="text-decoration-underline" href="">bakewave</a>. Discover, like, comment on More Recipes @ <a class="text-decoration-underline" href="">bakewave Recipe Generator</a> </p></div>
+                    <div class="no-print"><button class="btn btn-primary me-3" onclick="printPage()"><i class="bi bi-printer"></i></button><small >print</small></div>
                 </div>
+                <div class="mb-90"></div>
+                <p>.</p>
             </div>
         </section>
     </main>

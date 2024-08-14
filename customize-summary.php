@@ -2,24 +2,19 @@
 session_start();
 include 'admin/includes/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Handle additional costs first
-    if (isset($_POST['cost_name'], $_POST['cost_price'])) {
-        $cost_name = $_POST['cost_name'];
-        $cost_price = (float) $_POST['cost_price'];
+// Clear additional costs when the page is loaded
+// $_SESSION['additional_costs'] = [];
 
-        // Store the additional cost in the session
-        if (!isset($_SESSION['additional_costs'])) {
-            $_SESSION['additional_costs'] = [];
-        }
 
-        $_SESSION['additional_costs'][] = [
-            'name' => $cost_name,
-            'price' => $cost_price
-        ];
+// Initialize additional costs only on page load, not on AJAX requests
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_SESSION['additional_costs'])) {
+        $_SESSION['additional_costs'] = [];
     }
+}
 
-    // Handle recipe data
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Handle recipe data first
     if (isset($_POST['recipe_name'], $_POST['pieces'], $_POST['ingredients'])) {
         $recipe_name = $_POST['recipe_name'];
         $pieces = $_POST['pieces'];
@@ -33,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 return [
                     'name' => $ingredient['name'],
                     'quantity' => $ingredient['quantity'],
-                    'unit' => $ingredient['unit'],
+                    // 'unit' => $ingredient['unit'],
                     'cost' => $ingredient['price']
                 ];
             }, $ingredients),
@@ -41,9 +36,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 return $carry + ($ingredient['quantity'] * $ingredient['price']);
             }, 0)
         ];
+    }
 
-        // Redirect to the summary page
-        header('Location: customize-summary.php');
+    // Handle additional costs via AJAX
+    if (isset($_POST['cost_name'], $_POST['cost_price'])) {
+        $cost_name = $_POST['cost_name'];
+        $cost_price = (float) $_POST['cost_price'];
+
+        // Store the additional cost in the session
+        if (!isset($_SESSION['additional_costs'])) {
+            $_SESSION['additional_costs'] = [];
+        }
+
+        $new_cost = [
+            'name' => $cost_name,
+            'price' => $cost_price
+        ];
+
+        $_SESSION['additional_costs'][] = $new_cost;
+
+        // Return the new cost as JSON
+        header('Content-Type: application/json');
+        echo json_encode($new_cost);
         exit();
     }
 }
@@ -67,7 +81,7 @@ if (isset($_POST['num_pieces'])) {
         $adjusted_ingredients[] = [
             'name' => $ingredient['name'],
             'quantity' => $ingredient['quantity'] * $ratio,
-            'unit' => $ingredient['unit'],
+            // 'unit' => $ingredient['unit'],
             'cost' => $ingredient['cost'] * $ratio,
         ];
     }
@@ -92,7 +106,7 @@ if (isset($_POST['num_pieces'])) {
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/landing/icon2.png">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Bakewave | Customize Your Own Recipe</title>
 </head>
@@ -122,7 +136,7 @@ if (isset($_POST['num_pieces'])) {
                                 <?php echo htmlspecialchars($ingredient['name']); ?>
                             </td>
                             <td style="padding: 8px; text-align: right;">
-                                <?php echo htmlspecialchars($ingredient['quantity'] . ' ' . $ingredient['unit']); ?> units
+                                <?php echo htmlspecialchars($ingredient['quantity']); ?> units
                             </td>
                             </tr>
                         <?php endforeach; ?>
@@ -162,6 +176,7 @@ if (isset($_POST['num_pieces'])) {
                         </div>
                         </div>
                     </div>
+                    
                     <button type="button" class="btn btn-primary btn-primary-small" onclick="addCost()">Add Cost</button>
                     </form>
 
@@ -236,7 +251,7 @@ if (isset($_POST['num_pieces'])) {
 
                             </div>
                             <div class="col-md-4">
-                            <a class="btn btn-primary btn-primary-big w-100" href="customize-report.php" target="_blank">Print
+                            <a class="btn btn-primary btn-primary-big w-100" href="customize-report" target="_blank">Print
                                 <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                                 </svg>
@@ -245,9 +260,7 @@ if (isset($_POST['num_pieces'])) {
                             </div>
                             <div class="col-md-4">
                             <button class="btn btn-primary btn-primary-big w-100" onclick="saveRecipe()">Save recipe
-                                <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
-                                </svg>
+                
                             </button>
                             </div>
                         </div>
@@ -298,32 +311,43 @@ if (isset($_POST['num_pieces'])) {
     let currentDescription = '';
 
     function addCost() {
-        const costName = document.getElementById('cost_name').value;
-        const costPrice = document.getElementById('cost_price').value;
+    const costName = document.getElementById('cost_name').value;
+    const costPrice = document.getElementById('cost_price').value;
 
-        if (costName && costPrice) {
-            const tableBody = document.getElementById('cost-table-body');
+    if (costName && costPrice) {
+        // Add cost to the session via AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'customize-summary.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-            // Create a new row
-            const row = document.createElement('tr');
+        const data = `cost_name=${encodeURIComponent(costName)}&cost_price=${encodeURIComponent(costPrice)}`;
 
-            // Add cells with cost details
-            row.innerHTML = `
-                <td style="padding: 8px; text-align: left;">${costName}</td>
-                <td style="padding: 8px; text-align: right;">${parseFloat(costPrice).toFixed(2)}</td>
-                <td style="padding: 8px; text-align: center;">
-                    <button style="padding-right: 15px; " type="button" class="btn btn-danger btn-sm" onclick="removeCost(this)">Delete</button>
-                </td>
-            `;
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                
+                // Append the new cost to the table
+                const tableBody = document.getElementById('cost-table-body');
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="padding: 8px; text-align: left;">${response.name}</td>
+                    <td style="padding: 8px; text-align: right;">${parseFloat(response.price).toFixed(2)}</td>
+                    <td style="padding: 8px; text-align: center;">
+                        <button style="padding-right: 15px;" type="button" class="btn btn-danger btn-sm" onclick="removeCost(this)">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
 
-            // Append the row to the table
-            tableBody.appendChild(row);
-
-            // Clear input fields
-            document.getElementById('cost_name').value = '';
-            document.getElementById('cost_price').value = '';
-        }
+                // Clear input fields after adding
+                document.getElementById('cost_name').value = '';
+                document.getElementById('cost_price').value = '';
+            }
+        };
+        xhr.send(data);
     }
+}
+
+
 
     function removeCost(button) {
         const row = button.parentElement.parentElement;
@@ -414,7 +438,7 @@ if (isset($_POST['num_pieces'])) {
     function saveRecipe() {
         <?php if (!isset($_SESSION['username'])): ?>
             alert('You must be logged in to save a recipe.');
-            window.location.href = 'login.php';
+            window.location.href = 'login';
             return;
         <?php endif; ?>
 

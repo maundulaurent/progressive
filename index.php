@@ -13,9 +13,9 @@ session_start();
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/landing/icon2.png">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
-    <title>Recipe Generator</title>
+    <title>Bakewave | Recipe Generator</title>
   </head>
   <body>
 
@@ -65,40 +65,42 @@ session_start();
      
       <section class="section pt-120 pb-20 bg-primary bg-how-it-works"> 
         <div class="container-sub"> 
-          <h2 class="heading-44-medium color-white mb-60 wow fadeInUp">How It Works</h2>
-          <div class="row"> 
-            <div class="col-lg-6 order-lg-last">
-              <div class="box-main-slider"> 
-                <div class="detail-gallery wow fadeInUp">
-                  <div class="main-image-slider">
-                    <figure><img src="assets/imgs/landing/works3.jpg" alt="luxride"></figure>
-                    <figure><img src="assets/imgs/landing/works2.jpg" alt="luxride"></figure>
-                    <figure><img src="assets/imgs/landing/works1.jpg" alt="luxride"></figure>
-                  </div>
+            <h2 class="heading-44-medium color-white mb-60 wow fadeInUp">How It Works</h2>
+            <div class="row"> 
+                <div class="col-lg-6 order-lg-last">
+                    <div class="box-main-slider pt-180"> 
+                        <div class="detail-gallery wow fadeInUp">
+                            <div class="main-image-slider">
+                                <figure><img src="assets/imgs/landing/works4.jpg" alt="luxride"></figure>
+                                <figure><img src="assets/imgs/landing/works2.jpg" alt="luxride"></figure>
+                                <figure><img src="assets/imgs/landing/works1.jpg" alt="luxride"></figure>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-6 order-lg-first justify-content-between position-z3 wow fadeInUp">
-              <ul class="slider-nav-thumbnails list-how"> 
-                <li> <span class="line-white"></span>
-                    <h4 class="text-20-medium mb-20">Select Your Recipe</h4>
-                    <p class="text-16">Choose from a variety of recipes that match your ingredients. You can view details, adjust ingredient quantities, and see cost calculations.</p>
-                </li>
+                <div class="col-lg-6 order-lg-first justify-content-between position-z3 wow fadeInUp">
+                    <ul class="slider-nav-thumbnails list-how"> 
+                        <li> <span class="line-white"></span>
+                            <h4 class="text-20-medium mb-20">Create and Customize Your Recipe</h4>
+                            <p class="text-16">Start by crafting your own unique recipes with your choice of ingredients. Adjust the recipe to your preferences, whether it's for personal use or to share with friends and the community.</p>
+                        </li>
 
-                <li> <span class="line-white"></span>
-                  <h4 class="text-20-medium mb-20">Enter Your Ingredients</h4>
-                  <p class="text-16">Provide the quantities and current prices of ingredients you have on hand. Our system will help you identify recipes and ratios that you can create with them.</p>
-                </li>
-                
-                <li> <span class="line-white"></span>
-                  <h4 class="text-20-medium mb-20">Calculate Costs and Quantities</h4>
-                  <p class="text-16">Use our tool to calculate the total cost of your recipe and the quantities needed for the desired number of servings. Get detailed cost breakdowns and ingredient requirements.</p>
-                </li>
-              </ul>
+                        <li> <span class="line-white"></span>
+                            <h4 class="text-20-medium mb-20">Explore and Tailor Available Recipes</h4>
+                            <p class="text-16">Browse through our extensive collection of recipes. Customize any recipe to match your dietary needs or ingredient availability. Our platform allows you to modify and enhance these recipes effortlessly.</p>
+                        </li>
+
+                        <li> <span class="line-white"></span>
+                            <h4 class="text-20-medium mb-20">Share, Download, and Collaborate</h4>
+                            <p class="text-16">Once your recipe is perfected, share it with the community or friends. You can also download your customized recipes, print them, and explore more ways to collaborate with other cooking enthusiasts.</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
       </section>
+
+
       <section class="section pt-120 pb-120 bg-our-service-2">
        
         <div class="container-sub"> 
@@ -106,7 +108,7 @@ session_start();
             <div class="col-lg-6 col-sm-7 col-7">
               <h2 class="color-white heading-44-medium title-fleet wow fadeInUp">Featured Recipes</h2>
             </div>
-            <div class="col-lg-6 col-sm-5 col-5 text-end"><a class="text-16-medium color-white d-flex align-items-center justify-content-end wow fadeInUp" href="dashboard.php">More Recipes
+            <div class="col-lg-6 col-sm-5 col-5 text-end"><a class="text-16-medium color-white d-flex align-items-center justify-content-end wow fadeInUp" href="available.php">More Recipes
                 <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                 </svg></a></div>
@@ -121,7 +123,7 @@ session_start();
                     <div class="cardInfo">
                       <h3 class="cardTitle text-20-medium color-white mb-10">Classic Chocolate Cake</h3>
                       <div class="box-inner-info">
-                        <p class="cardDesc text-14 color-white mb-30">A timeless favorite, this classic chocolate cake is rich, moist, and perfect for any occasion.</p><a class="cardLink btn btn-arrow-up" href="">
+                        <p class="cardDesc text-14 color-white mb-30">A timeless favorite, this classic chocolate cake is rich, moist, and perfect for any occasion.</p><a class="cardLink btn btn-arrow-up" href="available.php">
                           <svg class="icon-16" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                           </svg></a>
@@ -135,7 +137,7 @@ session_start();
                     <div class="cardInfo">
                       <h3 class="cardTitle text-20-medium color-white mb-10">Caesar Salad</h3>
                       <div class="box-inner-info">
-                        <p class="cardDesc text-14 color-white mb-30"> A fresh and crunchy Caesar salad with crisp romaine lettuce, creamy Caesar dressing</p><a class="cardLink btn btn-arrow-up" href="">
+                        <p class="cardDesc text-14 color-white mb-30"> A fresh and crunchy Caesar salad with crisp romaine lettuce, creamy Caesar dressing</p><a class="cardLink btn btn-arrow-up" href="available.php">
                           <svg class="icon-16" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                           </svg></a>
@@ -149,7 +151,7 @@ session_start();
                     <div class="cardInfo">
                       <h3 class="cardTitle text-20-medium color-white mb-10">Blueberry Muffins</h3>
                       <div class="box-inner-info">
-                        <p class="cardDesc text-14 color-white mb-30">Perfect for breakfast, brunch, or a delightful snack.</p><a class="cardLink btn btn-arrow-up" href="">
+                        <p class="cardDesc text-14 color-white mb-30">Perfect for breakfast, brunch, or a delightful snack.</p><a class="cardLink btn btn-arrow-up" href="available.php">
                           <svg class="icon-16" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                           </svg></a>
@@ -163,7 +165,7 @@ session_start();
                     <div class="cardInfo">
                       <h3 class="cardTitle text-20-medium color-white mb-10">Grilled Chicken Tacos</h3>
                       <div class="box-inner-info">
-                        <p class="cardDesc text-14 color-white mb-30">Flavorful and easy to make, these grilled chicken tacos are packed with seasoned chicken, fresh veggies, and a zesty lime crema. Ideal for a quick dinner or a fun weekend meal.</p><a class="cardLink btn btn-arrow-up" href="">
+                        <p class="cardDesc text-14 color-white mb-30">Flavorful and easy to make, these grilled chicken tacos are packed with seasoned chicken, fresh veggies, and a zesty lime crema. Ideal for a quick dinner or a fun weekend meal.</p><a class="cardLink btn btn-arrow-up" href="available.php">
                           <svg class="icon-16" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                           </svg></a>
@@ -190,39 +192,30 @@ session_start();
         </div>
       </section>
 
-      <section class="section mb-30 mt-80 box-showcase">
-        <div class="bg-showcase pt-100 pb-70">
+      <section class="section pt-120 pb-120 bg-region">
           <div class="container-sub"> 
-            <div class="row align-items-center"> 
-              <div class="col-lg-6 mb-30"> 
-                <h2 class="heading-44-medium color-white wow fadeInUp">In our Works.</h2>
+              <div class="row align-items-center"> 
+                  <div class="col-lg-6 mb-30">
+                      <div class="box-gallery justify-content-center justify-content-lg-start"> 
+                          <div class="gallery-1 wow fadeInUp"><img src="assets/imgs/landing/recipe4.jpg" style="height: 720px;" alt="recipe generator"></div>
+                          <div class="gallery-2 wow fadeInUp"><img src="assets/imgs/landing/profile1.jpg" alt="recipe generator"><img src="assets/imgs/landing/recipe3.jpg" alt="recipe generator"></div>
+                      </div>
+                  </div>
+                  <div class="col-lg-6 mb-30">
+                      <div class="box-region-right wow fadeInUp">
+                          <h2 class="heading-44-medium color-text mb-30">From Custom, to Tailored Recipes Just for You</h2>
+                          <p class="text-16 color-text mb-30">Our Recipe Generator empowers you to create and customize recipes that fit your unique preferences and ingredients. Whether you're cooking for yourself, family, or friends, discover new ways to enjoy your favorite meals.</p>
+                          <a class="btn btn-primary" href="available.php">Explore Recipes
+                              <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
+                              </svg>
+                          </a>
+                      </div>
+                  </div>
               </div>
-              <div class="col-lg-6">
-                <div class="row align-items-center">
-                  <div class="col-4 mb-30 wow fadeInUp">
-                    <div class="box-number"> 
-                      <h2 class="heading-44-medium color-white">90</h2>
-                      <p class="text-20 color-white">Recipes</p>
-                    </div>
-                  </div>
-                  <div class="col-4 mb-30 wow fadeInUp">
-                    <div class="box-number"> 
-                      <h2 class="heading-44-medium color-white">127</h2>
-                      <p class="text-20 color-white">Ingredients</p>
-                    </div>
-                  </div>
-                  <div class="col-sm-4 col-12 mb-30 wow fadeInUp">
-                    <div class="box-number"> 
-                      <h2 class="heading-44-medium color-white">8K</h2>
-                      <p class="text-20 color-white">Happy clients</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
       </section>
+
       
       <section class="section pt-130 pb-130 bg-primary box-testimonials">
         <div class="container-sub"> 
@@ -267,7 +260,7 @@ session_start();
                           </div>
                         </div>
                         <div class="content-quote">
-                        his recipe generator has completely transformed how we manage and cost our recipes. </div>
+                        This recipe generator has completely transformed how we manage and cost our recipes. </div>
                       </div>
                     </div>
                     
@@ -280,7 +273,7 @@ session_start();
               </div>
             </div>
             <div class="col-lg-7 col-md-6 mb-30 text-lg-end text-center d-none d-md-block">
-              <div class="box-video wow fadeInUp"> <a class="btn btn-play popup-youtube hover-up" href=""></a><img src="assets/imgs/landing/recipe1.jpg" alt="recipe"></div>
+              <div class="box-video wow fadeInUp"> <img src="assets/imgs/landing/recipe1.jpg" alt="recipe"></div>
             </div>
           </div>
         </div>
@@ -310,7 +303,7 @@ session_start();
                   </h5>
                   <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionFAQ">
                     <div class="accordion-body">
-                      Go to the 'Check Quantity' section, select the recipe, and enter the number of units you want to produce. The system will calculate and display the required quantities of each ingredient.
+                      Go to the 'Check Requirements' section, select the recipe, and enter the number of units you want to produce. The system will calculate and display the required quantities of each ingredient.
                     </div>
                   </div>
                 </div>

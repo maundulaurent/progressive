@@ -100,6 +100,8 @@ $conn->close();
                       <div class="d-flex justify-content-between"> 
                         <label class="text-14 color-text"> 
                           <input class="cb-rememberme" type="checkbox">Remember me
+                        </label><a class="text-14 color-text" href="">Forgot your password?</a>
+                        <!-- </label><a class="text-14 color-text" href="forgot_password.php">Forgot your password?</a> -->
                       </div>
                     </div>
                   </div>

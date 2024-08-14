@@ -14,7 +14,7 @@ session_start();
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/landing/icon2.png">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Bakewave | Customize Your Own Recipe</title>
 </head>
@@ -24,6 +24,17 @@ session_start();
     <?php include_once 'includes/navbar.php'; ?>
 
     <main class="main">
+        <div class="section pt-60 pb-60 bg-image" style="background-image: url('assets/imgs/landing/profile1.jpg'); background-size: cover; background-position: center;">
+            <div class="container-sub">
+                <h1 class="heading-44-medium color-white mb-5">Create a Recipe</h1>
+                <div class="box-breadcrumb">
+                    <ul>
+                        <li><a href="index">Home</a></li>
+                        <li><a href="customize">Customize</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <section class="section">
             <div class="container-sub"> 
 
@@ -32,7 +43,7 @@ session_start();
                         <div class="box-content-detail"> 
                             <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">Create Your Recipe</h3>
                             <div class="form-contact form-comment wow fadeInUp"> 
-                                <form id="recipe-form" action="customize-summary.php" method="POST" onsubmit="return validateIngredients()">
+                                <form id="recipe-form" action="customize-summary" method="POST" onsubmit="return validateIngredients()">
                                     <div class="row"> 
                                         <div class="col-lg-6">
                                             <div class="form-group"> 
@@ -108,21 +119,25 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="box-tab-right">
-                        <div class="sidebar"> 
-                            <div class="d-flex align-items-center justify-content-between wow fadeInUp"> 
-                            <h6 class="text-20-medium color-text">About Recipes</h6>
-                            </div>
-                        </div>
-                        <div class="sidebar wow fadeInUp"> 
-                            <ul class="list-ticks list-ticks-small list-ticks-small-booking">
-                            <li class="text-14 mb-20">+200 recipes available</li>
-                            <li class="text-14 mb-20">Instant recipe calculations</li>
-                            <li class="text-14 mb-20">Accurate cost estimation</li>
-                            <li class="text-14 mb-20">Easy ingredient management</li>
-                            </ul>
+                    <div class="box-tab-right mt-30">
+                    <div class="sidebar"> 
+                        <div class="d-flex align-items-center justify-content-between wow fadeInUp"> 
+                            <h6 class="text-20-medium color-text">About Creating Custom Recipes</h6>
                         </div>
                     </div>
+                    <div class="sidebar wow fadeInUp"> 
+                        <ul class="list-ticks list-ticks-small list-ticks-small-booking">
+                            <!-- <li class="text-14 mb-20">Customize existing recipes to your taste</li> -->
+                            <li class="text-14 mb-20">Create your own unique recipes from scratch</li>
+                            <li class="text-14 mb-20">Share your recipes with the our platform</li>
+                            <li class="text-14 mb-20">Share your recipes with the community</li>
+                            <li class="text-14 mb-20">Save recipes for later use</li>
+                            <li class="text-14 mb-20">Access your saved recipes in your profile</li>
+                            <li class="text-14 mb-20">Receive feedback and comments on your recipes</li>
+                        </ul>
+                    </div>
+                </div>
+
                 </div>
             </div>
         </section>

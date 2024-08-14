@@ -2872,7 +2872,7 @@ body {
   width: 100%;
 }
 .header .main-header .header-left .header-logo {
-  max-width: 150px;
+  max-width: 350px;
   width: 100%;
 }
 .header .main-header .header-left .header-logo a {
@@ -8175,7 +8175,7 @@ footer a {
   top: 0px;
   width: 100%;
   height: calc(100% + 50px);
-  background: url(../imgs/page/about/banner2.png) no-repeat top center;
+  background: url(../imgs/landing/about2.jpg) no-repeat top center;
   background-size: cover;
 }
 
@@ -9466,7 +9466,7 @@ textarea.form-control {
     width: 50%;
   }
   .header.header-homepage9 .main-header .header-left .header-logo {
-    width: 14%;
+    width: 20%;
   }
   .header.header-homepage9 .main-header .header-left .header-right {
     width: 56%;
@@ -9886,7 +9886,7 @@ textarea.form-control {
 }
 @media (max-width: 767.98px) {
   .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-top .mobile-header-logo a img {
-    max-width: 140px;
+    max-width: 240px;
   }
   .cardFleet {
     padding: 15px;

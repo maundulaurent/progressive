@@ -12,9 +12,9 @@ session_start();
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/landing/icon2.png">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
-    <title>Recipes - Choosing the right recipe</title>
+    <title>Bakewave | Choosing the right recipe</title>
   </head>
   <body>
   <?php include_once 'includes/preloader.php'; ?>
@@ -26,7 +26,7 @@ session_start();
         <div class="container-sub"> 
           <div class="box-row-tab mt-50">
             <div class="box-content-detail"> 
-              <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">Select Your Recipe</h3>
+              <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">Explore Our Recipe Collection</h3>
               <div class="row">
                 <?php
                     include 'admin/includes/db.php';

@@ -41,8 +41,8 @@ $username = $_SESSION['username'];
             <h1 class="heading-44-medium color-white mb-5">My Profile</h1>
             <div class="box-breadcrumb">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="index">Home</a></li>
+                    <li><a href="profile">My Profile</a></li>
                 </ul>
             </div>
         </div>
