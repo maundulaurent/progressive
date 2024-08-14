@@ -158,8 +158,6 @@ $_SESSION['additional_costs'] = [];
                         </div>
                     </div>
 
-                  
-
 
                     <div class="row">
                         <p class="mb-65">Based on the provided recipe, the following quantities and costs for ingredients are required:</p>
@@ -189,7 +187,7 @@ $_SESSION['additional_costs'] = [];
                             <div class="col-md-8">
                                 <div class="sidebar wow fadeInUp"> 
                                     <ul class="list-prices list-prices-2"> 
-                                        <li> <span class="text">Cost for producing for ingredients:  </span><span class="price">sh <?php echo number_format($recipe['total_cost'], 2); ?></span></li>
+                                        <li> <span class="text">Cost for producing ingredients:  </span><span class="price">sh <?php echo number_format($recipe['total_cost'], 2); ?></span></li>
                                         <li> <span class="text">Additional Costs: </span><span class="price">sh <?php echo number_format($total_additional_costs, 2); ?></span></li>
                                         <li> <span class="text">Total Production Cost for <?php echo htmlspecialchars($recipe['pieces']); ?> pieces:  </span><span class="price">sh <?php echo number_format($total_production_cost, 2); ?></span></li>
                                         <li> <span class="text">Cost per piece: </span><span class="price">sh <?php echo number_format($cost_per_unit, 2); ?></span></li>
@@ -205,7 +203,7 @@ $_SESSION['additional_costs'] = [];
                 </div>
 
                 <div class="text-center  d-flex justify-content-between container mt-50 ">
-                    <div class=""><p class="text-14 mt-10 color-text">Produced and printed by <a class="text-decoration-underline" href="">bakewave</a>. Discover, like, comment on More Recipes @ <a class="text-decoration-underline" href="">bakewave Recipe Generator</a> </p></div>
+                    <div class=""><p class="text-14 mt-10 color-text">Produced and printed by <a class="text-decoration-underline" href="" target="_blank">bakewave</a>. Discover, like, comment on More Recipes @ <a class="text-decoration-underline" href="" target="_blank">bakewave Recipe Generator</a> </p></div>
                     <div class="no-print"><button class="btn btn-primary me-3" onclick="printPage()"><i class="bi bi-printer"></i></button><small >print</small></div>
                 </div>
                 <div class="mb-90"></div>

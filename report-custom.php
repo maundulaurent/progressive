@@ -72,7 +72,7 @@ foreach ($adjusted_quantities as $quantity) {
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/landing/icon2.png">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <style>
         @media print {
@@ -91,7 +91,21 @@ foreach ($adjusted_quantities as $quantity) {
     <main class="main">
         <section class="section bg-3 box-invoice-block">
             <div class="box-invoice"> 
-                <div class="inner-invoice"> 
+                <div class="inner-invoice">
+
+                <div class="d-flex invoice-top container"> 
+                        <div class="invoice-left">
+                            <div class="cardImage"><img src="assets/imgs/landing/mainlogo.png" alt="bakewave" style=" height: 80px; object-fit: cover; border-radius: 0px;"></div>
+                        </div>
+                        <div class="mb-50">
+                            <div class="invoice-left">
+                                <h3 class="fst-bold">Recipe Generator</h3>
+                                <p class="text-16-medium color-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom mt-10 mb-25"> </div>
+
                     <div class="d-flex invoice-top"> 
                         <div class="invoice-left"> 
                             <h3 class="fst-bold">Recipe Generator</h3>
@@ -126,7 +140,7 @@ foreach ($adjusted_quantities as $quantity) {
                     </div>
 
                     <div class="row">
-                        <h6 class="heading-20-medium color-text">Additional Costs</h6>
+                        <h6 class="heading-20-medium mb-20 color-text">Additional Costs</h6>
                         <div class="col-md-6">
                             <div class="box-info-book-border wow fadeInUp"> 
                                 <ul class="list-prices">
@@ -203,17 +217,28 @@ foreach ($adjusted_quantities as $quantity) {
                     </tbody>
                 </table>
 
-                <h4>Total Cost for Producing <?php echo number_format($total_quantity, 2); ?> kgs: <?php echo number_format($total_ingredient_cost, 2); ?></h4>
-                <h4>Additional Costs: <?php echo number_format($total_additional_costs, 2); ?></h4>
-                <h4>Total Production Cost: <?php echo number_format($total_ingredient_cost + $total_additional_costs, 2); ?></h4>
-                <h4>Cost per Kg: <?php echo number_format(($total_ingredient_cost + $total_additional_costs) / $total_quantity, 2); ?></h4>
+                <div class="row mt-10">
+                            <div class="col-md-8">
+                                <div class="sidebar wow fadeInUp"> 
+                                    <ul class="list-prices list-prices-2"> 
+                                        <li> <span class="text">Cost for producing:  <?php echo number_format($total_quantity, 2); ?> kgs:  </span><span class="price">sh <?php echo number_format($total_ingredient_cost, 2); ?></span></li>
+                                        <li> <span class="text">Additional Costs: </span><span class="price">sh <?php echo number_format($total_additional_costs, 2); ?></span></li>
+                                        <li> <span class="text">Total Production Cost for <?php echo number_format($total_quantity, 2); ?> kgs:  </span><span class="price">sh <?php echo number_format($total_ingredient_cost + $total_additional_costs, 2); ?></span></li>
+                                        <li> <span class="text">Cost per Kg: </span><span class="price">sh <?php echo number_format(($total_ingredient_cost + $total_additional_costs) / $total_quantity, 2); ?></span></li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
                 </div>
 
-                <div class="text-center no-print">
-                    <button class="btn btn-secondary" onclick="history.back();"><i class="bi bi-arrow-left"></i></button>
-                    <button class="btn btn-primary" onclick="printPage()">Print Report</button>
+                <div class="text-center  d-flex justify-content-between container mt-50 ">
+                    <div class=""><p class="text-14 mt-10 color-text">Produced and printed by <a class="text-decoration-underline" href="" target="_blank">bakewave</a>. Discover, like, comment on More Recipes @ <a class="text-decoration-underline" href="" target="_blank">bakewave Recipe Generator</a> </p></div>
+                    <div class="no-print"><button class="btn btn-primary me-3" onclick="printPage()"><i class="bi bi-printer"></i></button><small >print</small></div>
                 </div>
+                <div class="mb-90"></div>
+                <p>.</p>
             </div>
         </section>
     </main>

@@ -32,6 +32,52 @@ if (isset($_POST['update_image'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['update_email'])) {
+        $new_email = $_POST['new_email'];
+
+        // Update the email in the database
+        try {
+            $stmt = $conn->prepare("UPDATE users SET email = ? WHERE username = ?");
+            $stmt->bind_param("ss", $new_email, $username);
+            if ($stmt->execute()) {
+                $_SESSION['message'] = "Email updated successfully.";
+            } else {
+                $_SESSION['error'] = "Failed to update email.";
+            }
+            $stmt->close();
+        } catch (Exception $e) {
+            $_SESSION['error'] = "Error updating email: " . $e->getMessage();
+        }
+
+        // Redirect back to profile page
+        header('Location: profile.php');
+        exit();
+    }
+
+    if (isset($_POST['update_phone_number'])) {
+        $new_phone_number = $_POST['new_phone_number'];
+
+        // Update the phone number in the database
+        try {
+            $stmt = $conn->prepare("UPDATE users SET phone_number = ? WHERE username = ?");
+            $stmt->bind_param("ss", $new_phone_number, $username);
+            if ($stmt->execute()) {
+                $_SESSION['message'] = "Phone number updated successfully.";
+            } else {
+                $_SESSION['error'] = "Failed to update phone number.";
+            }
+            $stmt->close();
+        } catch (Exception $e) {
+            $_SESSION['error'] = "Error updating phone number: " . $e->getMessage();
+        }
+
+        // Redirect back to profile page
+        header('Location: profile.php');
+        exit();
+    }
+}
+
 // Handle password update
 if (isset($_POST['update_password'])) {
     $currentPassword = md5($_POST['currentPassword']);

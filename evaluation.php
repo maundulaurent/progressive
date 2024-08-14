@@ -159,7 +159,7 @@ $conn->close();
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/landing/icon2.png">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Recipe Evaluation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -258,7 +258,7 @@ $conn->close();
                     <h5>Enter the Prices:</h5>
                     <p id="totalValueResult"></p>
                 </div>
-                <form id="budgetForm" action="report-custom.php" method="POST" style="display: none;">
+                <form id="budgetForm" action="report-custom" method="POST" style="display: none;">
                     <input type="hidden" name="recipe_id" value="<?php echo $recipe_id; ?>">
                     <input type="hidden" name="selected_ingredient_id" id="selectedIngredientId" name="selected_ingredient_id">
                     <input type="hidden" name="selected_quantity" id="selectedQuantity" name="selected_quantity">
@@ -284,10 +284,12 @@ $conn->close();
                     ?>
                     <div id="additionalCostsSection" class="mt-4">
                     <h4>Additional Costs</h4>
-                    <div id="additionalCostsContainer" class="list-group mb-3">
+                    <button type="button" class="btn btn-secondary mt-2 " id="addCostButton">Add Additional Cost</button>
+                    <div class="mt-20"></div>
+                    <div id="additionalCostsContainer" class="list-group mt-2 mb-3">
                             <!-- Dynamic additional cost inputs will be inserted here -->
                         </div>
-                        <button type="button" class="btn btn-secondary mt-2" id="addCostButton">Add Additional Cost</button>
+                        
                     </div>
                     <button type="submit" class="btn btn-success mt-3">Check Evaluated Report</button>
                 </form>
@@ -316,10 +318,11 @@ $conn->close();
                 }
                 ?>
                 <h4 class="mt-4">Additional Costs</h4>
+                <button type="button" class="btn btn-secondary mt-2" id="requirementsButton">Add Additional Cost</button>
                 <div id="requirementsextra" class="list-group mb-3">
                     <!-- Dynamic additional cost inputs will be inserted here -->
                 </div>
-                <button type="button" class="btn btn-secondary mt-2" id="requirementsButton">Add Additional Cost</button>
+                
                 <button type="submit" class="btn btn-primary mt-3">Check Requirements</button>
             </form>
         </div>
@@ -343,7 +346,7 @@ $conn->close();
             </div>
           </div>
         
-        <a href="available.php" class="mt-4"><i class="bi bi-arrow-left fs-3 text-dark"> Back</i></a>
+        <a href="available" class="mt-4"><i class="bi bi-arrow-left fs-3 text-dark"> Back</i></a>
 
         </div>
         <div class="box-tab-right">
@@ -402,7 +405,7 @@ $conn->close();
                     </div>
                 </form>
                 <?php else: ?>
-                    <p class="text-14 color-text">Please <a href="login.php">login</a> to leave a comment.</p>
+                    <p class="text-14 color-text">Please <a href="login">login</a> to leave a comment.</p>
                 <?php endif; ?>
             </div>
           </div>
