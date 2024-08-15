@@ -96,7 +96,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
@@ -115,7 +115,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </div>
           </form>
         </div>
-      </li>
+      </li> -->
 
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
@@ -160,17 +160,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
       
       
 
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -224,7 +214,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
           </li>
           <li class="nav-header mt-4">MANAGE USERS</li>
           <li class="nav-item">
-            <a href="users/create-user" class="nav-link">
+            <a href="users/admin" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Create another Admin
@@ -233,11 +223,19 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </a>
           </li>
           <li class="nav-item">
-            <a href="users/create-user" class="nav-link">
+            <a href="users/admin" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Delete Admin
                 
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="users/create-user" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                View users
               </p>
             </a>
           </li>

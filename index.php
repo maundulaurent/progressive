@@ -145,7 +145,7 @@ if ($result->num_rows > 0) {
             <div class="row mt-60 cardIconTitleDescLeft"> 
                 <div class="col-lg-4 col-md-6 col-sm-6 mb-30"> 
                     <div class="cardIconTitleDesc wow fadeInUp">
-                        <div class="cardIcon"><img src="assets/imgs/select/per-icon.png" style="width:70px; height:70px;" alt="personalized recipes"></div>
+                        <div class="cardIcon"><img src="assets/imgs/select/per-icon.png" style="width:70px; height:70px;" alt="bakewave"></div>
                         <div class="cardTitle">
                             <h5 class="text-20-medium color-text">Personalized Recipes</h5>
                         </div>
@@ -156,7 +156,7 @@ if ($result->num_rows > 0) {
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 mb-30"> 
                     <div class="cardIconTitleDesc wow fadeInUp">
-                        <div class="cardIcon"><img src="assets/imgs/select/cost-icon.png" style="width:70px; height:70px;" alt="cost estimation"></div>
+                        <div class="cardIcon"><img src="assets/imgs/select/cost-icon.png" style="width:70px; height:70px;" alt="bakewave"></div>
                         <div class="cardTitle">
                             <h5 class="text-20-medium color-text">Accurate Cost Estimation</h5>
                         </div>
@@ -177,7 +177,7 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
             </div>
-                <div class="mt-5 wow fadeInUp"> <a class="btn btn-white-big" href="customize">Customize a Recipe
+                <div class="mt-5 wow fadeInUp"> <a class="btn btn-primary" href="customize">Customize a Recipe
                       <svg class="icon-16" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
                       </svg></a></div>
@@ -248,7 +248,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/phone.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/phone.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">24/7 Access <br class="d-none d-lg-block">To Recipe Tools</p>
                 </div>
@@ -272,7 +272,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/price.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/price.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">Accurate Pricing <br class="d-none d-lg-block">and estimations</p>
                 </div>
@@ -280,7 +280,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/select/expert-icon.png" style="width:70px; height:70px;" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/select/expert-icon.png" style="width:70px; height:70px;" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">Expert Recipe <br class="d-none d-lg-block">Guidance</p>
                 </div>

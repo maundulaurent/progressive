@@ -253,27 +253,128 @@ if (isset($_POST['num_pieces'])) {
 
 
                     <!-- Cost Calculator Section -->
-                    <div class="cost-calculator-section">
-                        <h5 class="text-18-medium color-text mb-15">Cost Calculator</h5>
-                        
-                        <!-- Form for Cost Calculation -->
-                        <form id="cost-calculator-form" class="mb-4">
-                            <div class="form-group">
-                                <label for="number-of-pieces"></label>
-                                <input type="number" placeholder="Enter number of pieces to produce " id="number-of-pieces" name="number_of_pieces"  class="form-control" required min="1">
-                            </div>
-                            <button type="button" id="calculate-cost" class="btn btn-primary">Calculate</button>
-                            <button type="button" id="clear-form" class="btn btn-secondary ms-2">Clear</button>
-                        </form>
+                    <!-- Cost Calculator Section -->
+<!-- Cost Calculator Section -->
+<div class="cost-calculator-section mt-30">
+    <h5 class="text-18-medium color-text mb-15">Cost Calculator</h5>
+    
+    <!-- Form for Cost Calculation -->
+    <form id="cost-calculator-form" class="mb-4">
+        <div class="form-group">
+            <label for="number-of-pieces"></label>
+            <input type="number" placeholder="Enter number of pieces to produce using this recipe" id="number-of-pieces" name="number_of_pieces" class="form-control" required min="1">
+        </div>
+        <button type="button" id="calculate-cost" class="btn btn-primary">Calculate</button>
+        <button type="button" id="clear-form" class="btn btn-secondary ms-2">Clear</button>
+    </form>
 
-                        <!-- Results Section -->
-                        <div id="cost-calculator-results" class="d-none">
-                            <h6 class="text-16-medium color-text mb-5">Results</h6>
-                            <ul id="results-list" class="list-unstyled">
-                                <!-- Results will be dynamically inserted here -->
-                            </ul>
-                        </div>
-                    </div>
+    <!-- Results Section -->
+    <div id="cost-calculator-results" class="d-none">
+        <h6 class="text-16-medium color-text mb-5">Results</h6>
+        
+        <!-- Report Details -->
+        <p class="text-14-medium color-text">Your recipe makes: <strong id="original-pieces"></strong> pieces.</p>
+        <p class="text-14-medium color-text">To produce <strong id="user-pieces"></strong> pieces, the ingredients will be required in these quantities:</p>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ingredient</th>
+                    <th>Quantity</th>
+                    <th>price per unit</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody id="calculated-ingredients-list">
+                <!-- Results will be dynamically inserted here -->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" style="text-align: right;"><strong>Total Cost:</strong></td>
+                    <td id="calculated-total-cost" style="text-align: right;"></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- <p class="text-14-medium color-text">Total additional costs: <strong id="total-additional-costs"></strong></p> -->
+        <!-- <p class="text-14-medium color-text">Cost per piece: <strong id="cost-per-piece"></strong></p> -->
+        <p class="text-14-medium color-text">Total production cost for <strong id="user-pieces-final"></strong> pieces: <strong id="total-production-cost"></strong></p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const calculateButton = document.getElementById('calculate-cost');
+        const clearButton = document.getElementById('clear-form');
+        const resultsSection = document.getElementById('cost-calculator-results');
+        const ingredientsList = document.getElementById('calculated-ingredients-list');
+        const totalCostElement = document.getElementById('calculated-total-cost');
+        const numberOfPiecesInput = document.getElementById('number-of-pieces');
+        
+        const originalPieces = <?php echo json_encode($recipe['pieces']); ?>;
+        const recipe = <?php echo json_encode($_SESSION['recipe']); ?>;
+        const additionalCosts = <?php echo json_encode($_SESSION['additional_costs']); ?>;
+        
+        calculateButton.addEventListener('click', function () {
+            const numberOfPieces = parseInt(numberOfPiecesInput.value);
+            if (isNaN(numberOfPieces) || numberOfPieces < 1) {
+                alert('Please enter a valid number of pieces.');
+                return;
+            }
+            
+            // Calculate the ratio for scaling the recipe
+            const ratio = numberOfPieces / originalPieces;
+            
+            // Calculate total additional costs
+            const totalAdditionalCosts = additionalCosts.reduce((total, cost) => total + parseFloat(cost.price), 0);
+            
+            // Adjust ingredients based on the ratio and calculate total cost
+            let totalCost = 0;
+            ingredientsList.innerHTML = ''; // Clear the previous results
+            recipe.ingredients.forEach(function(ingredient) {
+                const adjustedQuantity = ingredient.quantity * ratio;
+                // const adjustedCost = ingredient.cost * ratio;
+                const adjustedCost = ingredient.cost * adjustedQuantity;
+                totalCost += adjustedCost;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${ingredient.name}</td>
+                    <td>${ingredient.cost}</td>
+                    <td>${adjustedQuantity.toFixed(2)}</td>
+                    <td>kes ${adjustedCost.toFixed(2)}</td>
+                `;
+                ingredientsList.appendChild(row);
+            });
+            
+            // Add the total additional costs to the total cost
+            // totalCost += totalAdditionalCosts;
+
+            // Calculate the cost per piece
+            const costPerPiece = totalCost / numberOfPieces;
+
+            // Display the calculated values
+            document.getElementById('original-pieces').textContent = originalPieces;
+            document.getElementById('user-pieces').textContent = numberOfPieces;
+            document.getElementById('user-pieces-final').textContent = numberOfPieces;
+            totalCostElement.textContent = `kes ${totalCost.toFixed(2)}`;
+            // document.getElementById('total-additional-costs').textContent = `kes ${totalAdditionalCosts.toFixed(2)}`;
+            // document.getElementById('cost-per-piece').textContent = `kes ${costPerPiece.toFixed(2)}`;
+            document.getElementById('total-production-cost').textContent = `kes ${(totalAdditionalCosts+totalCost).toFixed(2)}`;
+
+            // Show the results section
+            resultsSection.classList.remove('d-none');
+        });
+        
+        clearButton.addEventListener('click', function () {
+            document.getElementById('cost-calculator-form').reset();
+            resultsSection.classList.add('d-none');
+            ingredientsList.innerHTML = '';
+            totalCostElement.textContent = '';
+        });
+    });
+</script>
+
 
                     <!-- end cost calculator -->
 
@@ -506,71 +607,7 @@ if (isset($_POST['num_pieces'])) {
             alert('An error occurred while saving the recipe.');
         });
     }
-    // for the cost calculator
-        document.addEventListener('DOMContentLoaded', function () {
-            const calculateButton = document.getElementById('calculate-cost');
-            const clearButton = document.getElementById('clear-form');
-            const resultsSection = document.getElementById('cost-calculator-results');
-            const resultsList = document.getElementById('results-list');
-            const numberOfPiecesInput = document.getElementById('number-of-pieces');
-            
-            // Assuming these are the variables available from the session or server-side
-            const recipe = <?php echo json_encode($_SESSION['recipe']); ?>;
-            const additionalCosts = <?php echo json_encode($_SESSION['additional_costs']); ?>;
-            
-            calculateButton.addEventListener('click', function () {
-                const numberOfPieces = parseInt(numberOfPiecesInput.value);
-                if (isNaN(numberOfPieces) || numberOfPieces < 1) {
-                    alert('Please enter a valid number of pieces.');
-                    return;
-                }
-                
-                // Calculate total additional cost
-                const totalAdditionalCosts = additionalCosts.reduce((total, cost) => total + cost.price, 0);
-                
-                // Calculate total production cost
-                const totalProductionCost = recipe.total_cost + totalAdditionalCosts;
-                
-                // Calculate cost per unit
-                const costPerUnit = totalProductionCost / recipe.pieces;
-                
-                // Calculate ingredient costs for the specified number of pieces
-                const ingredientCosts = recipe.ingredients.map(ingredient => {
-                    const totalIngredientCost = (ingredient.quantity / recipe.pieces) * costPerUnit * numberOfPieces;
-                    return {
-                        name: ingredient.name,
-                        quantity: ingredient.quantity,
-                        cost: ingredient.cost,
-                        totalCost: totalIngredientCost
-                    };
-                });
-                
-                // Populate results
-                resultsList.innerHTML = `
-                    <li><span class="text">Total Additional Costs:</span><span class="price">kes ${totalAdditionalCosts.toFixed(2)}</span></li>
-                    <li><span class="text">Total Production Cost for ${numberOfPieces} pieces:</span><span class="price">kes ${totalProductionCost.toFixed(2)}</span></li>
-                    <li><span class="text">Cost per piece:</span><span class="price">kes ${costPerUnit.toFixed(2)}</span></li>
-                `;
-                
-                ingredientCosts.forEach(ingredient => {
-                    resultsList.innerHTML += `
-                        <li>
-                            <span class="text">Ingredient: ${ingredient.name}</span>
-                            <span class="price">kes ${ingredient.totalCost.toFixed(2)}</span>
-                        </li>
-                    `;
-                });
-                
-                resultsSection.classList.remove('d-none');
-            });
-            
-            clearButton.addEventListener('click', function () {
-                document.getElementById('cost-calculator-form').reset();
-                resultsSection.classList.add('d-none');
-            });
-        });
-
-
+    
 </script>
 
 </body>

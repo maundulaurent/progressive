@@ -42,6 +42,7 @@ session_start();
                     <div class="box-tab-left">
                         <div class="box-content-detail"> 
                             <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">Create Your Recipe</h3>
+                            <h5 class="mb-30 wow fadeInUp">Enter your recipe as it exists</h5>
                             <div class="form-contact form-comment wow fadeInUp"> 
                                 <form id="recipe-form" action="customize-summary" method="POST" onsubmit="return validateIngredients()">
                                     <div class="row"> 
@@ -53,7 +54,7 @@ session_start();
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group"> 
-                                                <label class="form-label" for="pieces">No of pieces. e.g, this recipe makes 1 loaf:</label>
+                                                <label class="form-label" for="pieces">Number of pieces produced by the recipe:</label>
                                                 <input class="form-control" id="pieces" name="pieces" type="number" required>
                                             </div>
                                         </div>

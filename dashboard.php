@@ -217,7 +217,7 @@ if ($result->num_rows > 0) {
           <div class="row mt-50 justify-content-between"> 
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/limo.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/limo.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">Diverse Recipe <br class="d-none d-lg-block">Selection</p>
                 </div>
@@ -225,7 +225,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/phone.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/phone.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">24/7 Access <br class="d-none d-lg-block">To Recipe Tools</p>
                 </div>
@@ -233,7 +233,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/wheel.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/wheel.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">Easy Recipe <br class="d-none d-lg-block">Customization</p>
                 </div>
@@ -241,7 +241,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/seat.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/seat.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">Accurate Cost <br class="d-none d-lg-block">Estimations</p>
                 </div>
@@ -249,7 +249,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/price.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/price.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">Transparent Pricing <br class="d-none d-lg-block">and Bonuses</p>
                 </div>
@@ -257,7 +257,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-sm-6"> 
               <div class="cardImageText wow fadeInUp"> 
-                <div class="cardImage"> <img src="assets/imgs/page/homepage4/driver.svg" alt="luxride"></div>
+                <div class="cardImage"> <img src="assets/imgs/page/homepage4/driver.svg" alt="bakewave"></div>
                 <div class="cardInfo">
                   <p class="text-20-medium color-text">Expert Recipe <br class="d-none d-lg-block">Guidance</p>
                 </div>

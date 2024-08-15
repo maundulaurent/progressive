@@ -15,7 +15,7 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $itemsPerPage;
 
 // Fetch users with pagination
-$sql_users = "SELECT id, username, phone_number, email, role FROM users WHERE role = 'user' LIMIT ? OFFSET ?";
+$sql_users = "SELECT id, username, role FROM users WHERE role = 'admin' LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($sql_users);
 $stmt->bind_param("ii", $itemsPerPage, $offset);
 $stmt->execute();
@@ -52,7 +52,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
           <div class="card">
             <div class="card-header border-0">
               <h3 class="card-title">Users Available</h3>
@@ -68,8 +68,6 @@ $totalPages = ceil($totalItems / $itemsPerPage);
               <thead>
                   <tr>
                       <th>Username</th>
-                      <th>Phone Number</th>
-                      <th>Email</th>
                       <th>Role</th>
                       <th>Delete</th>
                   </tr>
@@ -81,10 +79,8 @@ $totalPages = ceil($totalItems / $itemsPerPage);
                           $user_id = $row['id'];
                           echo "<tr>
                                   <td>{$row['username']}</td>
-                                  <td>{$row['phone_number']}</td>
-                                  <td>{$row['email']}</td>
                                   <td>{$row['role']}</td>
-                                  <td><a href='create-user.php?delete_user={$user_id}' onclick=\"return confirm('Are you sure you want to delete this user?');\" class='btn btn-danger'>Delete</a></td>
+                                  <td><a href='admin.php?delete_user={$user_id}' onclick=\"return confirm('Are you sure you want to delete this user?');\" class='btn btn-danger'>Delete</a></td>
                               </tr>";
                       }
                   } else {
@@ -121,39 +117,40 @@ $totalPages = ceil($totalItems / $itemsPerPage);
             </div>
           </div>
           <!-- /.card -->
-      </div>
-                            <!-- /.col-md-6 -->
+        </div>
+        <!-- /.col-md-6 -->
         <div class="col-lg-6">
         <div class="card">
           <div class="card-info">
-            <div class="card-header">
-                <h3 class="card-title">Add a new User</h3>
-            </div>
-            <form class="form-horizontal" action="create-user.php" method="post">
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label for="username" class="col-sm-2 col-form-label">Username</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <button type="submit" name="add_user" class="btn btn-info">Add User</button>
-                    <button type="reset" class="btn btn-default float-right">Cancel</button>
-                </div>
-                <!-- /.card-footer -->
-            </form>
+              <div class="card-header">
+                  <h3 class="card-title">Add a new admin</h3>
+              </div>
+              <form class="form-horizontal" action="admin.php" method="post">
+                  <div class="card-body">
+                      <div class="form-group row">
+                          <label for="username" class="col-sm-2 col-form-label">Username</label>
+                          <div class="col-sm-10">
+                              <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label for="password" class="col-sm-2 col-form-label">Password</label>
+                          <div class="col-sm-10">
+                              <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                      <button type="submit" name="add_user" class="btn btn-info">Add admin</button>
+                      <button type="reset" class="btn btn-default float-right">Cancel</button>
+                  </div>
+                  <!-- /.card-footer -->
+              </form>
           </div>
-        </div>
-        </div>
+         </div>
+
+      </div>
     </div>
   </div>
   <!-- /.content -->
@@ -165,16 +162,16 @@ $totalPages = ceil($totalItems / $itemsPerPage);
 if (isset($_POST['add_user'])) {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hashing the password for security
-    $role = 'user'; // Default role
+    $role = 'admin'; // Default role
 
     // Inserting the new user into the database
     $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $username, $password, $role);
 
     if ($stmt->execute()) {
-        echo "<script>alert('User added successfully!'); window.location.href='create-user.php';</script>";
+        echo "<script>alert('User added successfully!'); window.location.href='admin.php';</script>";
     } else {
-        echo "<script>alert('Error adding user. Please try again.'); window.location.href='create-user.php';</script>";
+        echo "<script>alert('Error adding user. Please try again.'); window.location.href='admin.php';</script>";
     }
 
     $stmt->close();
@@ -189,9 +186,9 @@ if (isset($_GET['delete_user'])) {
     $stmt->bind_param("i", $user_id);
 
     if ($stmt->execute()) {
-        echo "<script>alert('User deleted successfully!'); window.location.href='create-user.php';</script>";
+        echo "<script>alert('User deleted successfully!'); window.location.href='admin.php';</script>";
     } else {
-        echo "<script>alert('Error deleting user. Please try again.'); window.location.href='create-user.php';</script>";
+        echo "<script>alert('Error deleting user. Please try again.'); window.location.href='admin.php';</script>";
     }
 
     $stmt->close();

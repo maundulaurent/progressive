@@ -98,7 +98,7 @@
           </li>
           <li class="nav-header mt-4">MANAGE USERS</li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/users/create-user" class="nav-link">
+            <a href="/projects/finrecipe/admin/users/admin" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Create another Admin
@@ -107,11 +107,18 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/projects/finrecipe/admin/users/admin" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Delete Admin                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/projects/finrecipe/admin/users/create-user" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Delete Admin
-                
+                View Users
               </p>
             </a>
           </li>

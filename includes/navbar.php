@@ -23,13 +23,13 @@ if (isset($_SESSION['username'])) {
                 <div class="header-logo d-flex">
                     <div class="cardImage"><img src="assets/imgs/landing/mainlogo.png" alt="bakewave" style="height: 40px; object-fit: cover; border-radius: 1px;"></div>
                     <div class="mx-4">
-                        <a class=" d-flex" href="index"><h3 class="text-white">Recipe Generator</h3></a>
+                        <a class=" d-flex" href="./"><h3 class="text-white">Recipe Generator</h3></a>
                     </div>
                 </div>
                 <div class="header-nav">
                     <nav class="nav-main-menu d-none d-xl-block">
                         <ul class="main-menu">
-                            <li><a class="active" href="index">Home</a></li>
+                            <li><a class="active" href="./">Home</a></li>
                             <li><a href="about">About</a></li>
                             <li><a href="contact">Contact</a></li>
                             <li><a href="customize">Create Recipes</a></li>
