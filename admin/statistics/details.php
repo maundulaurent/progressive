@@ -2,7 +2,7 @@
 session_start();
 // Ensure the user is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../../login.php");
+    header("location: ../../login");
     exit;
 }
 
@@ -86,28 +86,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve'])) {
         </div>";
 
         // Remove the recipe from the saved_recipes table
-        $delete_query = "DELETE FROM saved_recipes WHERE id = ?";
-        $delete_stmt = $conn->prepare($delete_query);
-        $delete_stmt->bind_param("i", $recipe_id);
-        if ($delete_stmt->execute()) {
-            echo "
-                <div class='alert alert-info alert-dismissible fade show' role='alert' style='width: 40%;'>
-                    Recipe removed from pending recipes.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>   
-                </div>";
-        } else {
+        // $delete_query = "DELETE FROM saved_recipes WHERE id = ?";
+        // $delete_stmt = $conn->prepare($delete_query);
+        // $delete_stmt->bind_param("i", $recipe_id);
+        // if ($delete_stmt->execute()) {
+        //     echo "
+        //         <div class='alert alert-info alert-dismissible fade show' role='alert' style='width: 40%;'>
+        //             Recipe removed from pending recipes.
+        //             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        //                 <span aria-hidden='true'>&times;</span>
+        //             </button>   
+        //         </div>";
+        // } else {
             
-            echo "
-                <div class='alert alert-warning alert-dismissible fade show' role='alert' style='width: 40%;'>
-                    Error removing the recipe from pending recipes.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>   
-                </div>";
-        }
-        $delete_stmt->close();
+        //     echo "
+        //         <div class='alert alert-warning alert-dismissible fade show' role='alert' style='width: 40%;'>
+        //             Error removing the recipe from pending recipes.
+        //             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        //                 <span aria-hidden='true'>&times;</span>
+        //             </button>   
+        //         </div>";
+        // }
+        // $delete_stmt->close();
     } else {
         echo "<div class='alert alert-danger' role='alert'>There was an error approving the recipe.</div>";
     }

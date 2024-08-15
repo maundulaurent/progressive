@@ -10,8 +10,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar  elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link" style="margin-left: 20px;">
-      <span class="brand-text text-dark"><h3 class="fst-bold">Bakewave</h3></span>
+    <a href="index" class="brand-link mt-3" style="margin-left: 10px; display: flex; align-items: center;">
+    <div class="cardImage"><img src="../../assets/imgs/landing/mainlogo.png" alt="bakewave" style="height: 40px; object-fit: cover; border-radius: 1px;"></div>
+    <span class="brand-text text-dark" style="margin-left: 10px;"><h3 class="fst-bold">Bakewave</h3></span>
     </a>
     
 
@@ -58,7 +59,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">WIDGETS</li>
+          <li class="nav-header mt-4">WIDGETS</li>
           <li class="nav-item">
             <a href="../index" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -67,13 +68,13 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">MANAGE RECIPES</li>
+          <li class="nav-header mt-4">MANAGE RECIPES</li>
           <li class="nav-item">
             <a href="/projects/finrecipe/admin/recipes/index" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Add Recipe
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
@@ -82,7 +83,7 @@
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Edit Recipe
-                <i class="right fas fa-angle-left"></i>
+                
               </p>
             </a>
           </li>
@@ -91,17 +92,17 @@
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Delete Recipes
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
-          <li class="nav-header">MANAGE USERS</li>
+          <li class="nav-header mt-4">MANAGE USERS</li>
           <li class="nav-item">
             <a href="/projects/finrecipe/admin/users/create-user" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Create another Admin
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
@@ -110,60 +111,43 @@
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Delete Admin
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
-          <li class="nav-header">STATISTICS</li>
+          <li class="nav-header mt-4">STATISTICS</li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
+            <a href="../statistics/saved" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                View all Recipes
-                <i class="fas fa-angle-left right"></i>
+                View Saved Recipes
+                
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
+            <a href="../statistics/shared" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                Approve Recipes
+                View Shared Recipes
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
+            <a href="../statistics/approved" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Check Approved Recipes
+                View Approved Recipes
               </p>
             </a>
           </li>
+          <li class="nav-header mt-4">EXTRAS</li> 
           <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
-              <p>
-                User Customized Recipes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Mailbox
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/projects/finrecipe/admin/statistics/index" class="nav-link">
+            <a href="../statistics/index" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>

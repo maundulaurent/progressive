@@ -1,7 +1,7 @@
 <?php
 // Ensure the user is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../login");
+    header("location: ../../login");
     exit;
 }
 
@@ -33,6 +33,8 @@ $stmt->close();
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- icon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/imgs/landing/icon2.png">
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- include Bootsstrap -->

@@ -38,15 +38,15 @@ if (isset($_SESSION['username'])) {
                     <div class="burger-icon burger-icon-white"><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
                 </div>
                 <div class="header-right d-flex" style="display: flex; align-items: center; justify-content: flex-end;">
-                    <div class="box-button-login d-inline-block mr-10 align-middle">
+                    <div class="box-button-login d-inline-block mr-5 align-middle">
                         <a class="btn btn-default hover-up" href="dashboard">Recipes</a>
                     </div>
                     <?php if (isset($_SESSION['username'])): ?>
-                        <div class="box-button-login d-inline-block mr-10 align-middle">
-                            <a class="btn btn-white hover-up" href="profile">Profile</a>
+                        <div class="box-button-login d-inline-block mr-5 align-middle">
+                            <a class="btn btn-white hover-up" href="user-dashboard">Dashboard</a>
                         </div>
 
-                        <div class="box-button-login d-inline-block mr-10 align-middle">
+                        <div class="box-button-login d-inline-block mr-5 align-middle">
                             <a class="btn btn-white hover-up" href="admin/logout">Logout</a>
                         </div>
 

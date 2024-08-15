@@ -1,16 +1,33 @@
 <?php
 session_start();
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../login.php");
+    header("location: ../login");
     exit;
 }
 require_once '../includes/db.php';
 
 include '../includes/head.php';
 include '../includes/sidebar.php';
+
+// Pagination settings
+$itemsPerPage = 5;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $itemsPerPage;
+
+// Fetch users with pagination
+$sql_users = "SELECT id, username, role FROM users LIMIT ? OFFSET ?";
+$stmt = $conn->prepare($sql_users);
+$stmt->bind_param("ii", $itemsPerPage, $offset);
+$stmt->execute();
+$result_users = $stmt->get_result();
+
+// Get the total number of users for pagination
+$sql_total_users = "SELECT COUNT(*) as total FROM users";
+$result_total = $conn->query($sql_total_users);
+$row_total = $result_total->fetch_assoc();
+$totalItems = $row_total['total'];
+$totalPages = ceil($totalItems / $itemsPerPage);
 ?>
-
-
 
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -51,19 +68,18 @@ include '../includes/sidebar.php';
               <thead>
                   <tr>
                       <th>Username</th>
+                      <th>Role</th>
                       <th>Delete</th>
                   </tr>
               </thead>
               <tbody>
                   <?php
-                  // Fetch users from the database
-                  $result = $conn->query("SELECT * FROM users");
-
-                  if ($result->num_rows > 0) {
-                      while ($row = $result->fetch_assoc()) {
+                  if ($result_users->num_rows > 0) {
+                      while ($row = $result_users->fetch_assoc()) {
                           $user_id = $row['id'];
                           echo "<tr>
                                   <td>{$row['username']}</td>
+                                  <td>{$row['role']}</td>
                                   <td><a href='create-user.php?delete_user={$user_id}' onclick=\"return confirm('Are you sure you want to delete this user?');\" class='btn btn-danger'>Delete</a></td>
                               </tr>";
                       }
@@ -72,7 +88,32 @@ include '../includes/sidebar.php';
                   }
                   ?>
               </tbody>
-          </table>
+            </table>
+
+            <div class="text-center mt-3">
+              <nav class="justify-content-end">
+                <ul class="pagination">
+                  <?php if ($page > 1): ?>
+                    <li class="page-item">
+                      <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                    </li>
+                  <?php endif; ?>
+
+                  <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <li class="page-item<?= $i == $page ? ' active' : '' ?>">
+                      <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                  <?php endfor; ?>
+
+                  <?php if ($page < $totalPages): ?>
+                    <li class="page-item">
+                      <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                    </li>
+                  <?php endif; ?>
+                </ul>
+              </nav>
+            </div>
+
             </div>
           </div>
           <!-- /.card -->

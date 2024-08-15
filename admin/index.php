@@ -71,6 +71,8 @@ $totalPages = ceil($totalItems / $itemsPerPage);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- icon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/imgs/landing/icon2.png">
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
@@ -192,13 +194,13 @@ $totalPages = ceil($totalItems / $itemsPerPage);
               </p>
             </a>
           </li>
-          <li class="nav-header">MANAGE RECIPES</li>
+          <li class="nav-header mt-4">MANAGE RECIPES</li>
           <li class="nav-item">
             <a href="recipes/index" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Add Recipe
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
@@ -207,7 +209,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Edit Recipe
-                <i class="right fas fa-angle-left"></i>
+                
               </p>
             </a>
           </li>
@@ -216,17 +218,17 @@ $totalPages = ceil($totalItems / $itemsPerPage);
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Delete Recipes
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
-          <li class="nav-header">MANAGE USERS</li>
+          <li class="nav-header mt-4">MANAGE USERS</li>
           <li class="nav-item">
             <a href="users/create-user" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Create another Admin
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
@@ -235,60 +237,44 @@ $totalPages = ceil($totalItems / $itemsPerPage);
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Delete Admin
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
-          <li class="nav-header">STATISTICS</li>
+          
+          <li class="nav-header mt-4">STATISTICS</li>
           <li class="nav-item">
-            <a href="statistics/index" class="nav-link">
+            <a href="statistics/saved" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                View all Recipes
-                <i class="fas fa-angle-left right"></i>
+                View Saved Recipes
+                
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="statistics/index" class="nav-link">
+            <a href="statistics/shared" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                Approve Recipes
+                View Shared Recipes
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="statistics/index" class="nav-link">
+            <a href="statistics/approved" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Check Approved Recipes
+                View Approved Recipes
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="statistics/index" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
-              <p>
-                User Customized Recipes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="statistics/index" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Mailbox
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-
+          <li class="nav-header mt-4">EXTRAS</li> 
           <li class="nav-item">
             <a href="statistics/index" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>

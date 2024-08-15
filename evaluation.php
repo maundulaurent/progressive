@@ -11,6 +11,7 @@ if ($recipe_id === 0) {
 }
 
 // Fetch the recipe details
+// a prepared statement
 $sql_recipe = "SELECT * FROM recipes WHERE id = ?";
 $stmt_recipe = $conn->prepare($sql_recipe);
 $stmt_recipe->bind_param('i', $recipe_id);
@@ -45,7 +46,7 @@ if (!$stmt_comments->execute()) {
 $comments_result = $stmt_comments->get_result();
 $stmt_comments->close();
 
-// For adding the comments
+// For adding the comments. Handle the adding comments if logged in
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment']) && isset($_SESSION['username'])) {
   $comment = trim($_POST['comment']);
   $username = $_SESSION['username'];
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment']) && isset($_
   }
 }
 
-// For the likes and dislikes
+// For the likes and dislikes if logged in
 if (isset($_SESSION['username'])) {
   $username = $_SESSION['username'];
 

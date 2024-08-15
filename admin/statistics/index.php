@@ -2,7 +2,7 @@
 session_start();
 // Ensure the user is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../../login.php");
+    header("location: ../../login");
     exit;
 }
 
