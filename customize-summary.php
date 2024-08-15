@@ -116,6 +116,17 @@ if (isset($_POST['num_pieces'])) {
     <?php include_once 'includes/navbar.php'; ?>
 
 <main class="main">
+        <div class="section pt-60 pb-60 bg-image" style="background-image: url('assets/imgs/landing/dash1.jpg'); background-size: cover; background-position: center;">
+            <div class="container-sub">
+                <h1 class="heading-44-medium color-white mb-5">Create a Recipe</h1>
+                <div class="box-breadcrumb">
+                    <ul>
+                        <li><a href="index">Home</a></li>
+                        <li><a href="customize-summary">Customize</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     <section class="section">
         <div class="container-sub">
         <div class="box-row-tab mt-50">
@@ -198,24 +209,27 @@ if (isset($_POST['num_pieces'])) {
                     </div>
                     
                     <div class="border-bottom mt-30 mb-25"></div>
-                            
+                            <!-- cost calculator -->
                     <!-- <h3 class="heading-24-medium color-text mb-15 wow fadeInUp">Cost Calculator</h3>
                     
-                    <h5 class="mb-30 wow fadeInUp">This recipe produces :  echo htmlspecialchars($num_pieces);  pieces </h5>
+                    <h5 class="mb-30 wow fadeInUp">This recipe produces :   pieces </h5>
                     <h5 class=" mb-30 wow fadeInUp">find the ingredients ratios and costs of producing several pieces using this recipe.</h5>
-                    <button type="button" class="btn btn-primary btn-primary-small mt-3" >Enter cost</button>
-                    <div class="mt-30 wow fadeInUp" style="display:none";>
+                    
+                    <div class="mt-30 wow fadeInUp" >
                         <form id="calculate-form">
                             <div class="form-group">
-                                <label for="num_pieces"></label>
-                                <input id="num_pieces" name="num_pieces" type="number" class="form-control" min="1" placeholder="Enter pieces to calculate" required>
+                                <div class="row">
+                                    <div class="col-md-4"><button type="button" class="btn btn-primary btn-primary-small " >Enter pieces</button></div>
+                                    <div class="col-md-8">
+                                        <input id="num_pieces1" name="1num_pieces" type="number" class="form-control" min="1" placeholder="Enter pieces to calculate"  required>
+                                    </div>
+                                </div>
                             </div>
-                            <button type="button" class="btn btn-primary btn-primary-small mt-3" onclick="calculateCost()">Calculate</button>
+                            <button type="button" class="btn btn-primary btn-primary-small mt-3"">Calculate</button>
                         </form>
 
                     </div>
-                    -->
-                    <!-- <div id="calculated-results" style="display:none;" class="mt-4">
+                     <div id="calculated-results"  class="mt-4">
                         <h4>Calculated Cost and Quantities</h4>
                         <table class="table table-bordered">
                             <thead>
@@ -236,6 +250,32 @@ if (isset($_POST['num_pieces'])) {
                             </tfoot>
                         </table>
                     </div> -->
+
+
+                    <!-- Cost Calculator Section -->
+                    <div class="cost-calculator-section">
+                        <h5 class="text-18-medium color-text mb-15">Cost Calculator</h5>
+                        
+                        <!-- Form for Cost Calculation -->
+                        <form id="cost-calculator-form" class="mb-4">
+                            <div class="form-group">
+                                <label for="number-of-pieces"></label>
+                                <input type="number" placeholder="Enter number of pieces to produce " id="number-of-pieces" name="number_of_pieces"  class="form-control" required min="1">
+                            </div>
+                            <button type="button" id="calculate-cost" class="btn btn-primary">Calculate</button>
+                            <button type="button" id="clear-form" class="btn btn-secondary ms-2">Clear</button>
+                        </form>
+
+                        <!-- Results Section -->
+                        <div id="cost-calculator-results" class="d-none">
+                            <h6 class="text-16-medium color-text mb-5">Results</h6>
+                            <ul id="results-list" class="list-unstyled">
+                                <!-- Results will be dynamically inserted here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- end cost calculator -->
 
 
                     <div class="mt-30"></div>
@@ -466,7 +506,69 @@ if (isset($_POST['num_pieces'])) {
             alert('An error occurred while saving the recipe.');
         });
     }
-
+    // for the cost calculator
+        document.addEventListener('DOMContentLoaded', function () {
+            const calculateButton = document.getElementById('calculate-cost');
+            const clearButton = document.getElementById('clear-form');
+            const resultsSection = document.getElementById('cost-calculator-results');
+            const resultsList = document.getElementById('results-list');
+            const numberOfPiecesInput = document.getElementById('number-of-pieces');
+            
+            // Assuming these are the variables available from the session or server-side
+            const recipe = <?php echo json_encode($_SESSION['recipe']); ?>;
+            const additionalCosts = <?php echo json_encode($_SESSION['additional_costs']); ?>;
+            
+            calculateButton.addEventListener('click', function () {
+                const numberOfPieces = parseInt(numberOfPiecesInput.value);
+                if (isNaN(numberOfPieces) || numberOfPieces < 1) {
+                    alert('Please enter a valid number of pieces.');
+                    return;
+                }
+                
+                // Calculate total additional cost
+                const totalAdditionalCosts = additionalCosts.reduce((total, cost) => total + cost.price, 0);
+                
+                // Calculate total production cost
+                const totalProductionCost = recipe.total_cost + totalAdditionalCosts;
+                
+                // Calculate cost per unit
+                const costPerUnit = totalProductionCost / recipe.pieces;
+                
+                // Calculate ingredient costs for the specified number of pieces
+                const ingredientCosts = recipe.ingredients.map(ingredient => {
+                    const totalIngredientCost = (ingredient.quantity / recipe.pieces) * costPerUnit * numberOfPieces;
+                    return {
+                        name: ingredient.name,
+                        quantity: ingredient.quantity,
+                        cost: ingredient.cost,
+                        totalCost: totalIngredientCost
+                    };
+                });
+                
+                // Populate results
+                resultsList.innerHTML = `
+                    <li><span class="text">Total Additional Costs:</span><span class="price">kes ${totalAdditionalCosts.toFixed(2)}</span></li>
+                    <li><span class="text">Total Production Cost for ${numberOfPieces} pieces:</span><span class="price">kes ${totalProductionCost.toFixed(2)}</span></li>
+                    <li><span class="text">Cost per piece:</span><span class="price">kes ${costPerUnit.toFixed(2)}</span></li>
+                `;
+                
+                ingredientCosts.forEach(ingredient => {
+                    resultsList.innerHTML += `
+                        <li>
+                            <span class="text">Ingredient: ${ingredient.name}</span>
+                            <span class="price">kes ${ingredient.totalCost.toFixed(2)}</span>
+                        </li>
+                    `;
+                });
+                
+                resultsSection.classList.remove('d-none');
+            });
+            
+            clearButton.addEventListener('click', function () {
+                document.getElementById('cost-calculator-form').reset();
+                resultsSection.classList.add('d-none');
+            });
+        });
 
 
 </script>

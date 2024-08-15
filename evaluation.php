@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment']) && isset($_
 }
 
 // For the likes and dislikes if logged in
-if (isset($_SESSION['username'])) {
-  $username = $_SESSION['username'];
+// if (isset($_SESSION['username'])) {
+//   $username = $_SESSION['username'];
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
       $action = $_POST['action'];
@@ -120,10 +120,10 @@ if (isset($_SESSION['username'])) {
           exit;
       }
   }
-} else {
-  header("Location: login.php");
-  exit;
-}
+// } else {
+//   header("Location: login.php");
+//   exit;
+// }
 
 // Fetch the number of likes and dislikes
 $sql_likes_dislikes = "SELECT type, COUNT(*) as count FROM recipe_likes_dislikes WHERE recipe_id = ? GROUP BY type";

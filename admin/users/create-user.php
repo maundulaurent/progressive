@@ -10,7 +10,7 @@ include '../includes/head.php';
 include '../includes/sidebar.php';
 
 // Pagination settings
-$itemsPerPage = 5;
+$itemsPerPage = 4;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $itemsPerPage;
 

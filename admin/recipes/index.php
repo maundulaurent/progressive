@@ -209,8 +209,8 @@ include '../includes/sidebar.php';
 
 
       <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
       <!-- Line Chart -->
       <div class="card card-success">
           <div class="card-header">
@@ -234,7 +234,7 @@ include '../includes/sidebar.php';
           <!-- /.card -->
         </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
           <!--End Graph  -->
           <!-- /.container-fluid -->
         </div>

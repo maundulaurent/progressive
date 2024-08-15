@@ -133,7 +133,7 @@ $_SESSION['additional_costs'] = [];
                             </div>
                             <div class="d-flex justify-content-between mb-65">                        
                                 <h6 class="text-16-medium color-text mb-5">Total Ingredient Cost</h6>
-                                <span class="text-16-medium color-text">sh<?php echo number_format($recipe['total_cost'], 2); ?></span>
+                                <span class="text-16-medium color-text">kes<?php echo number_format($recipe['total_cost'], 2); ?></span>
                             </div>
                         </div>
                     </div>
@@ -146,12 +146,12 @@ $_SESSION['additional_costs'] = [];
                                     <?php foreach ($additional_costs as $cost): ?>
                                     <li> 
                                         <span class="text-top"><?php echo htmlspecialchars($cost['name']); ?></span>
-                                        <span class="text-bottom">sh <?php echo number_format($cost['price'], 2); ?></span>
+                                        <span class="text-bottom">kes <?php echo number_format($cost['price'], 2); ?></span>
                                     </li>
                                     <?php endforeach; ?>
                                     <li>
                                         <span class="text-top">Total Additional Costs</span>
-                                        <span class="text-bottom">sh <?php echo number_format($total_additional_costs, 2); ?></span>
+                                        <span class="text-bottom">kes <?php echo number_format($total_additional_costs, 2); ?></span>
                                     </li>
                                 </ul>
                             </div>
@@ -176,8 +176,8 @@ $_SESSION['additional_costs'] = [];
                                 <tr>
                                     <td><?php echo htmlspecialchars($ingredient['name']); ?></td>
                                     <td><?php echo htmlspecialchars($ingredient['quantity']); ?></td>
-                                    <td>sh<?php echo number_format($ingredient['cost'], 2); ?></td>
-                                    <td>sh<?php echo number_format($ingredient['quantity'] * $ingredient['cost'], 2); ?></td>
+                                    <td>kes <?php echo number_format($ingredient['cost'], 2); ?></td>
+                                    <td>kes <?php echo number_format($ingredient['quantity'] * $ingredient['cost'], 2); ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -187,10 +187,10 @@ $_SESSION['additional_costs'] = [];
                             <div class="col-md-8">
                                 <div class="sidebar wow fadeInUp"> 
                                     <ul class="list-prices list-prices-2"> 
-                                        <li> <span class="text">Cost for producing ingredients:  </span><span class="price">sh <?php echo number_format($recipe['total_cost'], 2); ?></span></li>
-                                        <li> <span class="text">Additional Costs: </span><span class="price">sh <?php echo number_format($total_additional_costs, 2); ?></span></li>
-                                        <li> <span class="text">Total Production Cost for <?php echo htmlspecialchars($recipe['pieces']); ?> pieces:  </span><span class="price">sh <?php echo number_format($total_production_cost, 2); ?></span></li>
-                                        <li> <span class="text">Cost per piece: </span><span class="price">sh <?php echo number_format($cost_per_unit, 2); ?></span></li>
+                                        <li> <span class="text">Cost for producing ingredients:  </span><span class="price">kes <?php echo number_format($recipe['total_cost'], 2); ?></span></li>
+                                        <li> <span class="text">Additional Costs: </span><span class="price">kes <?php echo number_format($total_additional_costs, 2); ?></span></li>
+                                        <li> <span class="text">Total Production Cost for <?php echo htmlspecialchars($recipe['pieces']); ?> pieces:  </span><span class="price">kes <?php echo number_format($total_production_cost, 2); ?></span></li>
+                                        <li> <span class="text">Cost per piece: </span><span class="price">kes <?php echo number_format($cost_per_unit, 2); ?></span></li>
                                         
                                     </ul>
                                 </div>
