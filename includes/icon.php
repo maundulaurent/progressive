@@ -1,0 +1,1 @@
+<link rel="shortcut icon" href="/projects/quotations/assets/img/favicon.png" type="image/x-icon">

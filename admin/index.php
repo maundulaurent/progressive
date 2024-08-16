@@ -1,567 +1,1599 @@
-<?php
-session_start();
-// Ensure the user is logged in
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("location: ../login");
-    exit;
-}
-
-
-require_once 'includes/db.php';
-
-// Fetch the logged-in user's name from the database
-$username = $_SESSION['username'];
-$query = "SELECT username FROM users WHERE username = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$stmt->bind_result($user_name);
-$stmt->fetch();
-$stmt->close();
-
-
-// Pagination settings
-$itemsPerPage = 5; // Number of items to show per page
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$offset = ($page - 1) * $itemsPerPage;
-
-
-// Fetch data for the chart
-$sql = "SELECT recipes.name AS recipe_name, COUNT(recipe_ingredients.id) AS ingredient_count
-        FROM recipes
-        LEFT JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipe_id
-        GROUP BY recipes.name";
-
-$result = $conn->query($sql);
-
-$recipes = [];
-$ingredient_counts = [];
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $recipes[] = $row['recipe_name'];
-        $ingredient_counts[] = $row['ingredient_count'];
-    }
-}
-
-
-// Fetch the paginated recipe list
-$sql_recipes = "SELECT id, name FROM recipes LIMIT $itemsPerPage OFFSET $offset";
-$result_recipes = $conn->query($sql_recipes);
-
-// Get the total number of recipes for pagination
-$sql_total = "SELECT COUNT(*) as total FROM recipes";
-$result_total = $conn->query($sql_total);
-$row_total = $result_total->fetch_assoc();
-$totalItems = $row_total['total'];
-$totalPages = ceil($totalItems / $itemsPerPage);
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bakewave | Admin Dashboard</title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<title>Kofejob - Bootstrap Admin HTML Template</title>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="assets/img/favicon.png">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- icon -->
-  <link rel="shortcut icon" type="image/x-icon" href="../assets/imgs/landing/icon2.png">
-  <!-- IonIcons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-</head>
+		<!-- Feather CSS -->
+		<link rel="stylesheet" href="assets/css/feather.css">
 
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="../index" class="nav-link">Home</a>
-      </li>
-    </ul>
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li> -->
+		<!-- Date Tine Picker  CSS -->
+		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
 
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        
-      </li>
+		<!-- Datatables CSS -->
+		<link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+		
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="assets/css/style.css">
+		
+    </head>
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			<!-- Header -->
+			<div class="header">
+			
+				<!-- Logo -->
+				<div class="header-left">
+					<a href="index.html" class="logo">
+						<img src="assets/img/logo.png" alt="Logo">
+					</a>
+					<a href="index.html" class="logo logo-small">
+						<img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+					</a>
+					<!-- Sidebar Toggle -->
+					<a href="javascript:void(0);" id="toggle_btn">
+						<i class="feather-chevrons-left"></i>
+					</a>
+					<!-- /Sidebar Toggle -->
+					
+					<!-- Mobile Menu Toggle -->
+					<a class="mobile_btn" id="mobile_btn">
+						<i class="feather-chevrons-left"></i>
+					</a>
+					<!-- /Mobile Menu Toggle -->
+				</div>
+				<!-- /Logo -->
+				
+				<!-- Search -->
+				<div class="top-nav-search">
+					<form>
+						<input type="text" class="form-control" placeholder="Start typing your Search...">
+						<button class="btn" type="submit"><i class="feather-search"></i></button>
+					</form>
+				</div>
+				<!-- /Search -->
+				
+				<!-- Header Menu -->
+				<ul class="nav user-menu">
 
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="logout" class="nav-link">Logout</a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
+					<!-- Notifications -->
+					<li class="nav-item dropdown">
+						<a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+							<i class="feather-bell"></i> <span class="badge badge-pill">5</span>
+						</a>
+						<div class="dropdown-menu notifications">
+							<div class="topnav-dropdown-header">
+								<span class="notification-title">Notifications</span>
+								<a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+							</div>
+							<div class="noti-content">
+								<ul class="notification-list">
+									<li class="notification-message">
+										<a href="javascript:void(0);">
+											<div class="media d-flex">
+												<span class="avatar avatar-sm flex-shrink-0">
+													<img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-02.jpg">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the invoice <span class="noti-title">#DF65485</span></p>
+													<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="javascript:void(0);">
+											<div class="media d-flex">
+												<span class="avatar avatar-sm flex-shrink-0">
+													<img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-03.jpg">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">Marie Canales</span> has accepted your estimate <span class="noti-title">#GTR458789</span></p>
+													<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="javascript:void(0);">
+											<div class="media d-flex">
+												<div class="avatar avatar-sm flex-shrink-0">
+													<span class="avatar-title rounded-circle bg-primary-light"><i class="far fa-user"></i></span>
+												</div>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">New user registered</span></p>
+													<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="javascript:void(0);">
+											<div class="media d-flex">
+												<span class="avatar avatar-sm flex-shrink-0">
+													<img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-04.jpg">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">Barbara Moore</span> declined the invoice <span class="noti-title">#RDW026896</span></p>
+													<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="javascript:void(0);">
+											<div class="media d-flex">
+												<div class="avatar avatar-sm flex-shrink-0">
+													<span class="avatar-title rounded-circle bg-info-light"><i class="far fa-comment"></i></span>
+												</div>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">You have received a new message</span></p>
+													<p class="noti-time"><span class="notification-time">2 days ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="topnav-dropdown-footer">
+								<a href="javascript:void(0);">View all Notifications</a>
+							</div>
+						</div>
+					</li>
+					<!-- /Notifications -->
+					
+					<!-- User Menu -->
+					<li class="nav-item dropdown has-arrow main-drop">
+						<a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+							<span class="user-img">
+								<img src="assets/img/profiles/avatar-07.jpg" alt="Img">
+								<span class="status online"></span>
+							</span>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="profile.html"><i data-feather="user" class="me-1"></i> Profile</a>
+							<a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i> Settings</a>
+							<a class="dropdown-item" href="login.html"><i data-feather="log-out" class="me-1"></i> Logout</a>
+						</div>
+					</li>
+					<!-- /User Menu -->
+					
+				</ul>
+				<!-- /Header Menu -->
+				
+			</div>
+			<!-- /Header -->
+			
+			<!-- Sidebar -->
+			<div class="sidebar" id="sidebar">
+				<div class="sidebar-inner slimscroll">
+					<div id="sidebar-menu" class="sidebar-menu">
+						<ul>
+							<li class="menu-title"><span>Main</span></li>
+							<li class="active">
+								<a href="index.html"><i data-feather="home"></i> <span>Dashboard</span></a>
+							</li>
+							<li>
+								<a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
+							</li>
+							<li>
+								<a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
+							</li>
+							<li>
+								<a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
+							</li>
+							<li>
+								<a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
+							</li>
+							<li>
+								<a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
+							</li>
+							<li>
+								<a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>
+							</li>
+							<li>
+								<a href="providers.html"><i data-feather="user-check"></i> <span>Providers</span></a>
+							</li>
+							<li>
+								<a href="subscription.html"><i data-feather="user-check"></i> <span>Subscription</span></a>
+							</li>
+							<li>
+								<a href="reports.html"><i data-feather="pie-chart"></i> <span>Reports</span></a>
+							</li>
+							<li>
+								<a href="roles.html"><i data-feather="clipboard"></i> <span>Roles</span></a>
+							</li>
+							<li>
+								<a href="skills.html"><i data-feather="award"></i> <span>Skills</span></a>
+							</li>							
+							<li>
+								<a href="verify-identity.html"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
+							</li>
+							<li>
+								<a href="settings.html"><i data-feather="settings"></i> <span>Settings</span></a>
+							</li>
+							<li class="menu-title"><span>UI Interface</span></li>
+							<li>
+								<a href="components.html"><i data-feather="pocket"></i> <span>Components</span></a>
+							</li>
+							<li class="submenu">
+								<a href="javascript:void(0);"><i data-feather="file-minus"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="form-basic-inputs.html">Basic Inputs</a></li>
+									<li><a href="form-input-groups.html">Input Groups</a></li>
+									<li><a href="form-horizontal.html">Horizontal Form</a></li>
+									<li><a href="form-vertical.html">Vertical Form</a></li>
+									<li><a href="form-mask.html">Form Mask</a></li>
+									<li><a href="form-validation.html">Form Validation</a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+								<a href="javascript:void(0);"><i data-feather="align-justify"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="tables-basic.html">Basic Tables</a></li>
+									<li><a href="data-tables.html">Data Table</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /Sidebar -->
+			
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="page-title">Dashboard</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+									<li class="breadcrumb-item active">Dashboard</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>
+					<!-- /Page Header -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar  elevation-4">
-    <!-- Brand Logo -->
-    <a href="index" class="brand-link mt-3" style="margin-left: 10px; display: flex; align-items: center;">
-    <div class="cardImage"><img src="../assets/imgs/landing/mainlogo.png" alt="bakewave" style="height: 40px; object-fit: cover; border-radius: 1px;"></div>
-    <span class="brand-text text-dark" style="margin-left: 10px;"><h3 class="fst-bold">Bakewave</h3></span>
-    </a>
-    
+					
+						<div class="row">
+						<div class="col-md-8">
+							<!--/Wizard-->
+							<div class="row">
+								<div class="col-md-4 d-flex">
+									<div class="card wizard-card flex-fill">
+										<div class="card-body">
+											<p class="text-primary mt-0 mb-2">Users</p>
+											<h5>1682</h5>
+											<p><a href="users.html">view details</a></p>
+											<span class="dash-widget-icon bg-1">
+												<i class="fas fa-users"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 d-flex">
+									<div class="card wizard-card flex-fill">
+										<div class="card-body">
+											<p class="text-primary mt-0 mb-2">Completed Projects</p>
+											<h5>15k</h5>
+											<p><a href="projects.html">view details</a></p>
+											
+											<span class="dash-widget-icon bg-1">
+												<i class="fas fa-th-large"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 d-flex">
+									<div class="card wizard-card flex-fill">
+										<div class="card-body">
+											<p class="text-primary mt-0 mb-2">Active Projects</p>
+											<h5>1568</h5>
+											<p><a href="projects.html">view details</a></p>
+											
+											<span class="dash-widget-icon bg-1">
+												<i class="fas fa-bezier-curve"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--/Wizard-->
+							<div class="row">
+								<div class="col-lg-12 d-flex">
+									<div class="card w-100">
+										<div class="card-body pt-0 pb-2">
+											<div class="card-header">
+												<h5 class="card-title">Over view</h5>
+											</div>
+											<div id="chart" class="mt-4"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>	
+						<div class="col-md-4 d-flex">
+							<div class="card w-100">
+								<div class="card-body pt-0">
+									<div class="card-header">
+										<div class="row">
+											<div class="col-7">
+												<p>Welcome back,</p>
+												<h6 class="text-primary">Super Admin</h6>
+											</div>
+											<div class="col-5 text-end">
+												<span class="welcome-dash-icon bg-1">
+													<i class="fas fa-user"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="account-balance">
+										<p>Account balance</p>
+										<h6>$50,000,00 </h6>
+									</div>
+									<div class="mt-3">
+										<h6 class="text-primary">Payments</h6>
+										<div class="table-responsive">
+											<table class="table table-center table-hover mb-0">
+												<thead>
+													<tr>
+														<th class="text-nowrap">Client or Freelancer</th>
+														<th>Amount</th>
+														<th class="text-end">Status</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="text-nowrap">Sakib Khan</td>
+														<td>$2222</td>
+														<td class="text-end">Completed</td>
+													</tr>
+													<tr>
+														<td class="text-nowrap">Pixel Inc Ltd</td>
+														<td>$750</td>
+														<td class="text-end">
+															<a href="javascript:void(0);" class="btn btn-sm btn-success me-2"><i class="far fa-edit"></i></a> 
+															<a href="javascript:void(0);" class="btn btn-sm btn-danger me-2"><i class="far fa-trash-alt"></i></a>
+														</td>
+													</tr>
+													<tr>
+														<td class="text-nowrap">Jon M Mullins</td>
+														<td>$3150</td>
+														<td class="text-end text-nowrap">Money released to Freelancer</td>
+													</tr>
+													<tr>
+														<td class="text-nowrap">Rose M Milewski</td>
+														<td>$1455</td>
+														<td class="text-end text-nowrap">Money returned to Client</td>
+													</tr>
+													<tr>
+														<td class="text-nowrap">Gerald K Myers</td>
+														<td>$3000</td>
+														<td class="text-end">
+															<a href="javascript:void(0);" class="btn btn-sm btn-success me-2"><i class="far fa-edit"></i></a> 
+															<a href="javascript:void(0);" class="btn btn-sm btn-danger me-2"><i class="far fa-trash-alt"></i></a>
+														</td>
+													</tr>
+													<tr>
+														<td class="text-nowrap">Marcin Kowalski</td>
+														<td>$895</td>
+														<td class="text-end">
+															<a href="javascript:void(0);" class="btn btn-sm btn-success me-2"><i class="far fa-edit"></i></a> 
+															<a href="javascript:void(0);" class="btn btn-sm btn-danger me-2"><i class="far fa-trash-alt"></i></a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>			
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card bg-white projects-card">
+								<div class="card-body pt-0">
+									<div class="card-header">
+										<h5 class="card-title">Reviews</h5>
+									</div>
+									<div class="reviews-menu-links">
+										<ul role="tablist" class="nav nav-pills card-header-pills nav-justified">
+											<li class="nav-item">
+												<a href="#tab-4" data-bs-toggle="tab" class="nav-link active">All (272)</a>
+											</li>
+											<li class="nav-item">
+												<a href="#tab-5" data-bs-toggle="tab" class="nav-link">Active (218)</a>
+											</li>
+											<li class="nav-item">
+												<a href="#tab-6" data-bs-toggle="tab" class="nav-link"> Pending Approval (03)
+												</a>
+											</li>
+											<li class="nav-item">
+												<a href="#tab-7" data-bs-toggle="tab" class="nav-link">Trash (0)</a>
+											</li>
+										</ul>
+									</div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <hr class="mt-3" style="border: 0; border-top: 1px solid #333;">
-      <div class="user-panel d-flex">
-        
-        <div class="image">
-        <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($user_name); ?>&background=random&rounded=true" class="img-circle elevation-2" alt="User Image" style="display: block; margin: 0 auto;">
-        </div>
-        <div class="info">
-          <a href="#" class="text-dark"><?php echo htmlspecialchars($user_name); ?></a>
-        </div>
-      </div>
-      <hr style="border: 0; border-top: 1px solid #333;">
-      
-      
-      
+									<div class="tab-content pt-0">
+										<div role="tabpanel" id="tab-4" class="tab-pane fade active show">
+											<div class="table-responsive">
+												<table class="table table-hover table-center mb-0 datatable">
+													<thead>
+														<tr>
+															<th></th>
+															<th>Profile</th>	
+															<th>Designation</th>	
+															<th>comments</th>	
+															<th>Stars</th>	
+															<th>Category</th>
+															<th class="text-end">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck1">
+																  <label class="form-check-label" for="customCheck1"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-14.jpg" alt="User Image">
+																	Janet Paden
+																	</a>
+																</h2>
+															</td>
+															<td>
+																CEO
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck2">
+																  <label class="form-check-label" for="customCheck2"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-01.jpg" alt="User Image">
+																		George Wells
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Tech Lead
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Node
+															</td>
+															
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck3">
+																  <label class="form-check-label" for="customCheck3"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-15.jpg" alt="User Image">
+																		Timothy Smith
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck10">
+																  <label class="form-check-label" for="customCheck10"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-16.jpg" alt="User Image">
+																		Lois Alexander
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Designer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Laravel
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck4">
+																  <label class="form-check-label" for="customCheck4"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-03.jpg" alt="User Image">
+																		Sara Grayson
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Developer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck5">
+																  <label class="form-check-label" for="customCheck5"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-04.jpg" alt="User Image">
+																		Deboarah
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Associate Engineer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																React
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck6">
+																  <label class="form-check-label" for="customCheck6"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-11.jpg" alt="User Image">
+																		Sofia Briant
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																JAVA
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck7">
+																  <label class="form-check-label" for="customCheck7"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-02.jpg" alt="User Image">
+																		Bess Twishes
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Designer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																.NET
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck8">
+																  <label class="form-check-label" for="customCheck8"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+																		Rayan Lester
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Python
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck9">
+																  <label class="form-check-label" for="customCheck9"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-06.jpg" alt="User Image">
+																		Sarah Alexander
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Designer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Golang
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+													
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div role="tabpanel" id="tab-5" class="tab-pane fade">
+											<div class="table-responsive">
+												<table class="table table-center table-bordered table-hover datatable">
+													<thead>
+														<tr>
+															<th></th>
+															<th>Profile</th>
+															<th>Designation</th>	
+															<th>comments</th>	
+															<th>Stars</th>	
+															<th>Category</th>
+															<th class="text-end">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck11">
+																  <label class="form-check-label" for="customCheck11"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-04.jpg" alt="User Image">
+																		Deboarah
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Associate Engineer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																React
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck12">
+																  <label class="form-check-label" for="customCheck12"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-11.jpg" alt="User Image">
+																		Sofia Briant
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																JAVA
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck13">
+																  <label class="form-check-label" for="customCheck13"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-02.jpg" alt="User Image">
+																		Bess Twishes
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Designer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																.NET
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck14">
+																  <label class="form-check-label" for="customCheck14"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+																		Rayan Lester
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Python
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck15">
+																  <label class="form-check-label" for="customCheck15"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-06.jpg" alt="User Image">
+																		Sarah Alexander
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Designer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Golang
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck16">
+																  <label class="form-check-label" for="customCheck16"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-14.jpg" alt="User Image">
+																	Janet Paden
+																	</a>
+																</h2>
+															</td>
+															<td>
+																CEO
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck17">
+																  <label class="form-check-label" for="customCheck17"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-01.jpg" alt="User Image">
+																		George Wells
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Tech Lead
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Node
+															</td>
+															
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck18">
+																  <label class="form-check-label" for="customCheck18"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-15.jpg" alt="User Image">
+																		Timothy Smith
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>											
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div role="tabpanel" id="tab-6" class="tab-pane fade">
+											<div class="table-responsive">
+												<table class="table table-bordered table-hover datatable">
+													<thead>
+														<tr>
+															<th></th>
+															<th>Profile</th>	
+															<th>Designation</th>	
+															<th>comments</th>	
+															<th>Stars</th>	
+															<th>Category</th>
+															<th class="text-end">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck21">
+																  <label class="form-check-label" for="customCheck21"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+																		Albert Boone
+																	</a>
+																</h2>
+															</td>
+															<td>
+																CEO
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																React
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck22">
+																  <label class="form-check-label" for="customCheck22"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-14.jpg" alt="User Image">
+																	Janet Paden
+																	</a>
+																</h2>
+															</td>
+															<td>
+																CEO
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck23">
+																  <label class="form-check-label" for="customCheck23"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-01.jpg" alt="User Image">
+																		George Wells
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Tech Lead
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Node
+															</td>
+															
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck24">
+																  <label class="form-check-label" for="customCheck24"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-15.jpg" alt="User Image">
+																		Timothy Smith
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck25">
+																  <label class="form-check-label" for="customCheck25"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-06.jpg" alt="User Image">
+																		Jessie Montoya
+																	</a>
+																</h2>
+															</td>
+															<td>
+																PROJECT LEAD
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Node
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck26">
+																  <label class="form-check-label" for="customCheck26"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-10.jpg" alt="User Image">
+																		Gary Green
+																	</a>
+																</h2>
+															</td>
+															<td>
+																TEAM LEAD
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Angular
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck27">
+																  <label class="form-check-label" for="customCheck27"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-11.jpg" alt="User Image">
+																		Sofia Briant
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																JAVA
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck28">
+																  <label class="form-check-label" for="customCheck28"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-02.jpg" alt="User Image">
+																		Bess Twishes
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Designer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																.NET
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck29">
+																  <label class="form-check-label" for="customCheck29"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+																		Rayan Lester
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Technial Manager
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Python
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="form-check custom-checkbox">
+																  <input type="checkbox" class="form-check-input" id="customCheck30">
+																  <label class="form-check-label" for="customCheck30"></label>
+																</div>
+															</td>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-06.jpg" alt="User Image">
+																		Sarah Alexander
+																	</a>
+																</h2>
+															</td>
+															<td>
+																Designer
+															</td>
+															<td>
+																<div class="desc-info">
+																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat
+																</div>
+															</td>
+															<td class="text-nowrap">
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-primary"></i>
+																<i class="fas fa-star text-muted"></i>
+															</td>
+															<td>
+																Golang
+															</td>
+															<td class="text-end text-nowrap">
+																<a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+																<a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+															</td>
+														</tr>
+													
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div role="tabpanel" id="tab-7" class="tab-pane fade">
+											<div class="table-responsive">
+												<table class="table table-bordered table-hover datatable">
+													<thead>
+														<tr>
+															<th></th>
+															<th>Profile</th>
+															<th>Designation</th>	
+															<th>comments</th>	
+															<th>Stars</th>	
+															<th>Category</th>
+															<th class="text-end">Actions</th>
+														</tr>
+													</thead>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
+					</div>
+				</div>
+			<!-- /Page Wrapper -->
+		
+        	</div>
+		<!-- /Main Wrapper -->
+		</div>
+	
+		<!-- jQuery -->
+		<script src="assets/js/jquery-3.7.1.min.js"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		
+		<!-- Feather Icon JS -->
+		<script src="assets/js/feather.min.js"></script>
+		
+		<!-- Slimscroll JS -->
+		<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+		
+		<!-- Select2 JS -->
+		<script src="assets/plugins/select2/js/select2.min.js"></script>
+		
+		<!-- Datatables JS -->
+		<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+		<script src="assets/plugins/datatables/datatables.min.js"></script>
+		
+		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+		<!-- Custom JS -->
+		<script src="assets/js/script.js"></script>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Admin Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">WIDGETS</li>
-          <li class="nav-item">
-            <a href="index" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Admin dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-header mt-4">MANAGE RECIPES</li>
-          <li class="nav-item">
-            <a href="recipes/index" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Add Recipe
-                
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="recipes/index" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Edit Recipe
-                
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="recipes/index" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
-              <p>
-                Delete Recipes
-                
-              </p>
-            </a>
-          </li>
-          <li class="nav-header mt-4">MANAGE USERS</li>
-          <li class="nav-item">
-            <a href="users/admin" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Create another Admin
-                
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="users/admin" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Delete Admin
-                
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="users/create-user" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                View users
-              </p>
-            </a>
-          </li>
-          
-          <li class="nav-header mt-4">STATISTICS</li>
-          <li class="nav-item">
-            <a href="statistics/saved" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                View Saved Recipes
-                
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="statistics/shared" class="nav-link">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                View Shared Recipes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="statistics/approved" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                View Approved Recipes
-              </p>
-            </a>
-          </li>
-          <li class="nav-header mt-4">EXTRAS</li> 
-          <li class="nav-item">
-            <a href="statistics/index" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Extras
-                
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard Admin</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-
-          <!-- to be main content wrapper -->
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Recipes Available Column -->
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header border-0">
-              <h3 class="card-title">Recipes Available</h3>
-              <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm">
-                  <i class="fas fa-bars"></i>
-                </a>
-              </div>
-            </div>
-
-            <div class="card-body table-responsive p-0">
-              <table class="table table-striped table-valign-middle">
-                <thead>
-                  <tr>
-                    <th>Recipe</th>
-                    <th>Ingredients</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if ($result_recipes->num_rows > 0) {
-                    while ($row = $result_recipes->fetch_assoc()) {
-                      $recipe_id = $row['id'];
-                      echo "<tr>
-                              <td>{$row['name']}</td>
-                              <td><a href='recipes/manage?id={$recipe_id}'>Manage Recipe</a></td>
-                            </tr>";
-                    }
-                  } else {
-                    echo "<tr><td colspan='2'>No recipes found.</td></tr>";
-                  }
-                  ?>
-                </tbody>
-              </table>
-
-                <div class="text-center mt-3">
-                  <nav class="box-pagination">
-                    <ul class="pagination">
-                      <?php if ($page > 1): ?>
-                        <li class="page-item">
-                          <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
-                        </li>
-                      <?php endif; ?>
-
-                      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <li class="page-item<?= $i == $page ? ' active' : '' ?>">
-                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
-                      <?php endfor; ?>
-
-                      <?php if ($page < $totalPages): ?>
-                        <li class="page-item">
-                          <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
-                        </li>
-                      <?php endif; ?>
-                    </ul>
-                  </nav>
-                </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.col-lg-6 -->
-
-        <div class="col-lg-6">
-            <!-- Total Ingredients and Recipes Card -->
-            <div class="card">
-                <div class="card-header border-0">
-                    <h3 class="card-title">Statistics</h3>
-                    <div class="card-tools">
-                        <a href="#" class="btn btn-tool btn-sm">
-                            <i class="fas fa-bars"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>Total Ingredients</h4>
-                            <?php
-                            require_once 'includes/db.php';
-
-                            // Count total ingredients
-                            $sql_ingredients = "SELECT COUNT(*) as total_ingredients FROM recipe_ingredients";
-                            $result_ingredients = $conn->query($sql_ingredients);
-
-                            if ($result_ingredients) {
-                                $row_ingredients = $result_ingredients->fetch_assoc();
-                                $total_ingredients = $row_ingredients['total_ingredients'];
-                            } else {
-                                $total_ingredients = "Error";
-                            }
-                            ?>
-                            <h2><?= htmlspecialchars($total_ingredients) ?></h2>
-                        </div>
-                        <!-- Total Recipes -->
-                        <div class="col-md-6">
-                            <h4>Total Recipes</h4>
-                            <?php
-                            // Count total recipes
-                            $sql_recipes = "SELECT COUNT(*) as total_recipes FROM recipes";
-                            $result_recipes = $conn->query($sql_recipes);
-
-                            if ($result_recipes) {
-                                $row_recipes = $result_recipes->fetch_assoc();
-                                $total_recipes = $row_recipes['total_recipes'];
-                            } else {
-                                $total_recipes = "Error";
-                            }
-                            ?>
-                            <h2><?= htmlspecialchars($total_recipes) ?></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                  <a href="recipes/index" class="btn btn-primary btn-block mb-3">Manage Recipes</a>
-              </div>
-              <div class="col-md-6">
-                  <a href="users/create-user" class="btn btn-primary btn-block mb-3">Users</a>
-              </div>
-          </div>
-            <!-- /.card -->
-        </div>
-
-        <!-- /.col-lg-6 -->
-      </div>
-      <!-- /.row -->
-    </div>
-  </div>
-    <!-- end to be main content -->
-    
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Recipes most liked</h3>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                  <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">820</span>
-                    <span>Recipe Likes</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-
-                <div class="position-relative mb-4">
-                  <canvas id="visitors-chart" height="200"></canvas>
-                </div>
-
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This Week
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last Week
-                  </span>
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col-md-6 -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Recipes created</h3>
-                  <a href="javascript:void(0);">View Report</a>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                  <p class="d-flex flex-column">
-                    <span>Recipes</span>
-                  </p>
-                  <p class="ml-auto d-flex flex-column text-right">
-                    <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 33.1%
-                    </span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-
-                <div class="position-relative mb-4">
-                  <canvas id="sales-chart" height="200"></canvas>
-                </div>
-
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This year
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last year
-                  </span>
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-
-            
-          </div>
-          <!-- /.col-md-6 -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-
-  </div>
-  <!-- /.content-wrapper -->
-
-
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    All rights reserved@bakewave
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Bakewave</b>
-    </div>
-  </footer>
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE -->
-<script src="dist/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard3.js"></script>
-</body>
+	</body>
 </html>

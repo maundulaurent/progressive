@@ -1,14 +1,15 @@
 <?php
+
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "recipe";
+$dbname = "quotations";
 
-// Create connection
+// create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+// check if connection is successful
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Connection failed" . $conn->connect_error);
 }
 ?>

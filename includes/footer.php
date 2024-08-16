@@ -1,45 +1,122 @@
-<footer class="footer">
-      <div class="footer-1">
-        <div class="container-sub">
-          <div class="box-footer-top">
-            <div class="row align-items-center">
-              <div class="col-lg-6 col-md-6 text-md-start text-center mb-15 wow fadeInUp">
-                <div class="d-flex align-items-center justify-content-md-start justify-content-center"><a class="mr-30" href="#"><h3 class="text-light">Recipe Generator</h3></a><a class="text-14-medium call-phone color-white hover-up" href="tel:+254723056447">+254723056447</a></div>
-              </div>
-              <div class="col-lg-6 col-md-6 text-md-end text-center mb-15 wow fadeInUp">
-                <div class="d-flex align-items-center justify-content-md-end justify-content-center"><span class="text-18-medium color-white mr-10">Follow Us</span><a class="icon-socials icon-facebook" href="#"></a><a class="icon-socials icon-twitter" href="#"></a><a class="icon-socials icon-instagram" href="#"></a><a class="icon-socials icon-linkedin" href="#"></a></div>
-              </div>
-            </div>
-          </div>
-          <div class="row mb-40">
-            <div class="col-lg-4 width-20">
-              <h5 class="text-18-medium color-white mb-20 wow fadeInUp">Our Offices</h5>
-            </div> 
-            <div class="col-lg-4 width-30">
-              <h5 class="text-18-medium color-white mb-20 wow fadeInUp">3rd Godown after Odds and Ends, Next to Plaza 2000, Mombasa Road</h5>
-            </div> 
-            <div class="col-lg-4 width-30">
-              <h3 class="text-18-medium color-white mb-20 wow fadeInUp">About Us</h3>
-              <h5 class="text-18-medium color-white mb-20 wow fadeInUp">Are you an aspiring baker in Kenya today?  Bakewave offers end-to-end solutions in the baking industry in Kenya.</h5>
-            </div>          
-          </div>
-        </div>
-      </div>
-      <div class="footer-2">
-        <div class="container-sub">
-          <div class="footer-bottom">
-            <div class="row align-items-center">
-              <div class="col-lg-8 col-md-12 text-center text-lg-start"><span class="text-14 color-white mr-50">© 2024 Recipe Generator</span>
-                <ul class="menu-bottom">
-                  <li><a href="">Terms</a></li>
-                  <li><a href="">Privacy policy</a></li>
-                  <li><a href="">Legal notice</a></li>
-                  <li><a href="#">Accessibility</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-4 col-md-12 text-center text-lg-end"><a class="btn btn-link-location" href="#">Nairobi</a><a class="btn btn-link-globe active" href="#">Kenya</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+<footer class="footer footer-four">
+				<div class="footer-top ">
+					<div class="container">
+
+						<div class="row row-gap">
+							<div class="col-lg-6">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="subscribe-four">
+											<div class="banner-content">
+												<form class="form" name="store" method="post" action="project.html">
+													<div class="form-inner">
+														<div class="input-group">
+															<input type="email" class="form-control" placeholder="Your Email address.....">
+															<button class="btn btn-primary sub-btn" type="submit">Send mail</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4">
+										<div class="footer-widget footer-menu">
+											<h2 class="footer-title">Useful Links</h2>
+											<ul>
+												<li><a href="about.html">About Us</a></li>
+												<li><a href="blog-list.html">Blog</a></li>
+												<li><a href="login.html">Login</a></li>
+												<li><a href="register.html">Register</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4">
+										<div class="footer-widget footer-menu">
+											<h2 class="footer-title">Help & Support</h2>
+											<ul>
+												<li><a href="javascript:void(0);">Browse Candidates</a></li>
+												<li><a href="javascript:void(0);">Employers Dashboard</a></li>
+												<li><a href="javascript:void(0);">Job Packages</a></li>
+												<li><a href="javascript:void(0);">Jobs Featured</a></li>
+												<li><a href="javascript:void(0);">Post A Job</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4">
+										<div class="footer-widget footer-menu">
+											<h2 class="footer-title">Catgeories</h2>
+											<ul>
+												<li><a href="project.html">Website Design</a></li>
+												<li><a href="project.html">Mobile Apps</a></li>
+												<li><a href="project.html">Android Apps</a></li>
+												<li><a href="project.html">iPhone Apps</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="footer-widget footer-menu play-app">
+											<div class="row">
+												<div class="col-lg-4 col-md-4">
+													<div class="free-customer">
+														<p>Toll Free Customer Care</p>
+														<h6>+91 26447 99875</h6>
+													</div>
+												</div>
+												<div class="col-lg-4 col-md-4">
+													<div class="free-customer">
+														<p>Customization Email</p>
+														<h6>custom@example.com</h6>
+													</div>
+												</div>
+												<div class="col-lg-4 col-md-4">
+													<div class="free-customer">
+														<p>Need live support?</p>
+														<h6>info@example.com</h6>
+													</div>
+												</div>
+											</div>
+											<div class="applicate-mobile-blk">
+												<h6>Mobile Application</h6>
+												<p>Download our App and get the latest Breaking News Alerts and latest headlines and daily articles near you.</p>
+											</div>
+											<div class="row g-2">
+												<div class="col-lg-4">
+													<a href="javascript:void(0);"><img class="img-fluid" src="../assets/img/app-store.svg" alt="app-store"></a>
+												</div>
+												<div class="col-lg-4">
+													<a href="javascript:void(0);"><img class="img-fluid" src="../assets/img/google-play.svg" alt="google-play"></a>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Footer Top -->
+				
+				<!-- Footer Bottom -->
+                <div class="footer-bottom">
+					<div class="container">
+					
+						<!-- Copyright -->
+						<div class="copyright">
+							<div class="row">
+								<div class="col-md-12 ">
+									<div class="copyright-text text-center">
+										<p class="mb-0">Copyright 2024 © KofeJob. All right reserved.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Copyright -->						
+					</div>
+				</div>
+				<!-- /Footer Bottom -->				
+			</footer>
