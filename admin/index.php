@@ -1,34 +1,18 @@
+<?php 
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		<title>Kofejob - Bootstrap Admin HTML Template</title>
+		<title>Quotations - Admin Dashboard</title>
 		
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="assets/img/favicon.png">
+		<?php include_once 'includes/icon.php' ?>
 		
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- Fontawesome CSS -->
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-
-		<!-- Feather CSS -->
-		<link rel="stylesheet" href="assets/css/feather.css">
-
-		<!-- Select2 CSS -->
-		<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
-
-		<!-- Date Tine Picker  CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-
-		<!-- Datatables CSS -->
-		<link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
-		
-		<!-- Main CSS -->
-		<link rel="stylesheet" href="assets/css/style.css">
+		<?php include_once 'includes/links.php' ?>
 		
     </head>
     <body>
@@ -37,224 +21,11 @@
         <div class="main-wrapper">
 		
 			<!-- Header -->
-			<div class="header">
-			
-				<!-- Logo -->
-				<div class="header-left">
-					<a href="index.html" class="logo">
-						<img src="assets/img/logo.png" alt="Logo">
-					</a>
-					<a href="index.html" class="logo logo-small">
-						<img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
-					</a>
-					<!-- Sidebar Toggle -->
-					<a href="javascript:void(0);" id="toggle_btn">
-						<i class="feather-chevrons-left"></i>
-					</a>
-					<!-- /Sidebar Toggle -->
-					
-					<!-- Mobile Menu Toggle -->
-					<a class="mobile_btn" id="mobile_btn">
-						<i class="feather-chevrons-left"></i>
-					</a>
-					<!-- /Mobile Menu Toggle -->
-				</div>
-				<!-- /Logo -->
-				
-				<!-- Search -->
-				<div class="top-nav-search">
-					<form>
-						<input type="text" class="form-control" placeholder="Start typing your Search...">
-						<button class="btn" type="submit"><i class="feather-search"></i></button>
-					</form>
-				</div>
-				<!-- /Search -->
-				
-				<!-- Header Menu -->
-				<ul class="nav user-menu">
-
-					<!-- Notifications -->
-					<li class="nav-item dropdown">
-						<a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-							<i class="feather-bell"></i> <span class="badge badge-pill">5</span>
-						</a>
-						<div class="dropdown-menu notifications">
-							<div class="topnav-dropdown-header">
-								<span class="notification-title">Notifications</span>
-								<a href="javascript:void(0)" class="clear-noti"> Clear All</a>
-							</div>
-							<div class="noti-content">
-								<ul class="notification-list">
-									<li class="notification-message">
-										<a href="javascript:void(0);">
-											<div class="media d-flex">
-												<span class="avatar avatar-sm flex-shrink-0">
-													<img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-02.jpg">
-												</span>
-												<div class="media-body flex-grow-1">
-													<p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the invoice <span class="noti-title">#DF65485</span></p>
-													<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="javascript:void(0);">
-											<div class="media d-flex">
-												<span class="avatar avatar-sm flex-shrink-0">
-													<img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-03.jpg">
-												</span>
-												<div class="media-body flex-grow-1">
-													<p class="noti-details"><span class="noti-title">Marie Canales</span> has accepted your estimate <span class="noti-title">#GTR458789</span></p>
-													<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="javascript:void(0);">
-											<div class="media d-flex">
-												<div class="avatar avatar-sm flex-shrink-0">
-													<span class="avatar-title rounded-circle bg-primary-light"><i class="far fa-user"></i></span>
-												</div>
-												<div class="media-body flex-grow-1">
-													<p class="noti-details"><span class="noti-title">New user registered</span></p>
-													<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="javascript:void(0);">
-											<div class="media d-flex">
-												<span class="avatar avatar-sm flex-shrink-0">
-													<img class="avatar-img rounded-circle" alt="Img" src="assets/img/profiles/avatar-04.jpg">
-												</span>
-												<div class="media-body flex-grow-1">
-													<p class="noti-details"><span class="noti-title">Barbara Moore</span> declined the invoice <span class="noti-title">#RDW026896</span></p>
-													<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="javascript:void(0);">
-											<div class="media d-flex">
-												<div class="avatar avatar-sm flex-shrink-0">
-													<span class="avatar-title rounded-circle bg-info-light"><i class="far fa-comment"></i></span>
-												</div>
-												<div class="media-body flex-grow-1">
-													<p class="noti-details"><span class="noti-title">You have received a new message</span></p>
-													<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-												</div>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<div class="topnav-dropdown-footer">
-								<a href="javascript:void(0);">View all Notifications</a>
-							</div>
-						</div>
-					</li>
-					<!-- /Notifications -->
-					
-					<!-- User Menu -->
-					<li class="nav-item dropdown has-arrow main-drop">
-						<a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-							<span class="user-img">
-								<img src="assets/img/profiles/avatar-07.jpg" alt="Img">
-								<span class="status online"></span>
-							</span>
-						</a>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="profile.html"><i data-feather="user" class="me-1"></i> Profile</a>
-							<a class="dropdown-item" href="settings.html"><i data-feather="settings" class="me-1"></i> Settings</a>
-							<a class="dropdown-item" href="login.html"><i data-feather="log-out" class="me-1"></i> Logout</a>
-						</div>
-					</li>
-					<!-- /User Menu -->
-					
-				</ul>
-				<!-- /Header Menu -->
-				
-			</div>
+			<?php include_once 'includes/header.php' ?>
 			<!-- /Header -->
 			
 			<!-- Sidebar -->
-			<div class="sidebar" id="sidebar">
-				<div class="sidebar-inner slimscroll">
-					<div id="sidebar-menu" class="sidebar-menu">
-						<ul>
-							<li class="menu-title"><span>Main</span></li>
-							<li class="active">
-								<a href="index.html"><i data-feather="home"></i> <span>Dashboard</span></a>
-							</li>
-							<li>
-								<a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
-							</li>
-							<li>
-								<a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
-							</li>
-							<li>
-								<a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
-							</li>
-							<li>
-								<a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
-							</li>
-							<li>
-								<a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
-							</li>
-							<li>
-								<a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>
-							</li>
-							<li>
-								<a href="providers.html"><i data-feather="user-check"></i> <span>Providers</span></a>
-							</li>
-							<li>
-								<a href="subscription.html"><i data-feather="user-check"></i> <span>Subscription</span></a>
-							</li>
-							<li>
-								<a href="reports.html"><i data-feather="pie-chart"></i> <span>Reports</span></a>
-							</li>
-							<li>
-								<a href="roles.html"><i data-feather="clipboard"></i> <span>Roles</span></a>
-							</li>
-							<li>
-								<a href="skills.html"><i data-feather="award"></i> <span>Skills</span></a>
-							</li>							
-							<li>
-								<a href="verify-identity.html"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
-							</li>
-							<li>
-								<a href="settings.html"><i data-feather="settings"></i> <span>Settings</span></a>
-							</li>
-							<li class="menu-title"><span>UI Interface</span></li>
-							<li>
-								<a href="components.html"><i data-feather="pocket"></i> <span>Components</span></a>
-							</li>
-							<li class="submenu">
-								<a href="javascript:void(0);"><i data-feather="file-minus"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
-								<ul>
-									<li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-									<li><a href="form-input-groups.html">Input Groups</a></li>
-									<li><a href="form-horizontal.html">Horizontal Form</a></li>
-									<li><a href="form-vertical.html">Vertical Form</a></li>
-									<li><a href="form-mask.html">Form Mask</a></li>
-									<li><a href="form-validation.html">Form Validation</a></li>
-								</ul>
-							</li>
-							<li class="submenu">
-								<a href="javascript:void(0);"><i data-feather="align-justify"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
-								<ul>
-									<li><a href="tables-basic.html">Basic Tables</a></li>
-									<li><a href="data-tables.html">Data Table</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<?php include_once 'includes/sidebar.php' ?>
 			<!-- /Sidebar -->
 			
 			
@@ -464,7 +235,7 @@
 															</td>
 															<td>
 																<h2 class="table-avatar">
-																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="assets/img/profiles/avatar-14.jpg" alt="User Image">
+																	<a href="profile.html"><img class="avatar-img rounded-circle me-2" src="../assets/img/profiles/avatar-14.jpg" alt="User Image">
 																	Janet Paden
 																	</a>
 																</h2>

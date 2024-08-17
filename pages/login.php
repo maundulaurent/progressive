@@ -41,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: ../buyer/dashboard');
                 } elseif ($type === 'seller') {
                     header('Location: ../seller/dashboard');
+                }  elseif ($type === 'admin') {
+                    header('Location: ../admin');
                 } else {
                     $_SESSION['error'] = 'Unauthorized access.';
                     header('Location: login.php');
@@ -132,9 +134,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-8 dont-have d-flex align-items-center">New to Kofejob <a href="register.html" class="ms-2">Signup?</a></div>
+                                <div class="col-sm-8 dont-have d-flex align-items-center">New to Kofejob <a href="signup" class="ms-2">Signup?</a></div>
                                 <div class="col-sm-4 text-sm-end">
-                                    <a class="forgot-link" href="forgot-password.html">Lost Password?</a>
+                                    <a class="forgot-link" href="">Lost Password?</a>
                                 </div>
                             </div>
                         </div>

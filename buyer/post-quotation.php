@@ -7,7 +7,7 @@ session_start();
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-		<title>KofeJob</title>
+		<title>Post Quotation</title>
 		
 		<?php include_once '../includes/icon.php' ?>
 		<?php include_once '../includes/links.php' ?>
@@ -29,11 +29,11 @@ session_start();
 					<div class="row align-items-center inner-banner">
 						<div class="col-md-12 col-12 text-center">
 							<div class="breadcrumb-list">
-								<h3>Post a Project</h3>
+								<h3>Post a Quotation</h3>
 								<nav aria-label="breadcrumb" class="page-breadcrumb">
 									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-										<li class="breadcrumb-item" aria-current="page">Post a Project</li>
+										<li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+										<li class="breadcrumb-item" aria-current="page">Post a Quotation</li>
 									</ol>
 								</nav>
 							</div>
@@ -57,13 +57,13 @@ session_start();
 											</div>
 											<div class="col-lg-12 col-md-12">
 												<div class="mb-3">
-													<label class="focus-label">Project Title</label>
+													<label class="focus-label">Quotation Title</label>
 													<input type="text" class="form-control">
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-12">
 												<div class="mb-3">
-													<label class="focus-label">Project Category</label>
+													<label class="focus-label">Quotation Category</label>
 													<select  class="form-control select">
 														<option value="0">Select</option>
 														<option value="1" >Category</option>
