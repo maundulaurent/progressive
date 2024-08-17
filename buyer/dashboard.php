@@ -7,10 +7,11 @@ session_start();
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-		<title>Seller DashBoard</title>
+		<title>Buyer DashBoard</title>
 		
         <?php include_once '../includes/icon.php' ?>
         <?php include_once '../includes/links.php' ?>
+
 	</head>
 	<body class="dashboard-page">
 
@@ -20,7 +21,8 @@ session_start();
 			<!-- Start Navigation -->
 			<!-- Header -->
             <?php include_once '../includes/header.php' ?>
-			<!-- /Header -->
+
+			<!-- /Header -->		
 			
 			<!-- Page Content -->
 			<div class="content content-page">
@@ -29,17 +31,17 @@ session_start();
 						<div class="col-xl-3 col-lg-4 theiaStickySidebar">
 							<div class="settings-widget">
 								<div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
-									<a href="freelancer-profile.html"><img alt="profile image" src="../assets/img/user/avatar-1.jpg" class="avatar-lg rounded-circle"></a>
+									<a href="freelancer-profile.html"><img alt="profile image" src="../assets/img/user/table-avatar-03.jpg" class="avatar-lg rounded-circle"></a>
 									<div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
-										<h3 class="mb-0"><a href="freelancer-profile.html">Bruce Bush</a><img src="../assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
-										<p class="mb-0">@brucebush</p>
+										<h3 class="mb-0"><a href="profile-settings.html">Walter Griffin</a><img src="../assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
+										<p class="mb-0">@waltergriffin</p>
 									</div>
 								</div>
 								<div class="settings-menu">
 									<div id="sidebar-menu" class="sidebar-menu">
 										<ul>
 											<li class="nav-item">
-												<a href="freelancer-dashboard.html" class="nav-link active">
+												<a href="dashboard.html" class="nav-link active">
 													<img src="../assets/img/icon/sidebar-icon-01.svg" alt="Img"> Dashboard
 													
 												</a>
@@ -51,16 +53,22 @@ session_start();
 												</a>
 												<ul class="sub-menu-ul">
 													<li>
-														<a href="freelancer-project-proposals.html">My Proposal</a>
+														<a href="manage-projects.html">All Projects</a>
 													</li>
 													<li>
-														<a href="freelancer-ongoing-projects.html">Ongoing Projects</a>
+														<a href="ongoing-projects.html">Ongoing Projects</a>
 													</li>
 													<li>
-														<a href="freelancer-completed-projects.html">Completed Projects</a>
+														<a href="completed-projects.html">Completed Projects</a>
 													</li>
 													<li>
-														<a href="freelancer-cancelled-projects.html">Cancelled Projects</a>
+														<a href="pending-projects.html">Pending Projects</a>
+													</li>
+													<li>
+														<a href="cancelled-projects.html">Cancelled Projects</a>
+													</li>
+													<li>
+														<a href="expired-projects.html">Expired Projects</a>
 													</li>
 												</ul>
 											</li>
@@ -71,41 +79,26 @@ session_start();
 												</a>
 												<ul class="sub-menu-ul">
 													<li>
-														<a href="freelancer-favourites.html">Bookmarked Projects</a>
+														<a href="favourites.html">Bookmarked Projects</a>
 													</li>
 													<li>
-														<a href="freelancer-invitations.html">Invitations</a>
+														<a href="invited-favourites.html">Invitations</a>
 													</li>
 												</ul>
 											</li>
 											<li class="nav-item">
-												<a href="freelancer-review.html" class="nav-link">
+												<a href="review.html" class="nav-link">
 													<img src="../assets/img/icon/sidebar-icon-04.svg" alt="Img"> Reviews
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="freelancer-portfolio.html" class="nav-link">
-													<img src="../assets/img/icon/sidebar-icon-05.svg" alt="Img"> Portfolio
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="freelancer-chats.html" class="nav-link">
+												<a href="chats.html" class="nav-link">
 													<img src="../assets/img/icon/sidebar-icon-06.svg" alt="Img"> Chat
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="freelancer-withdraw-money.html" class="nav-link">
+												<a href="deposit-funds.html" class="nav-link">
 													<img src="../assets/img/icon/sidebar-icon-07.svg" alt="Img"> Payments
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="freelancer-payout.html" class="nav-link">
-													<img src="../assets/img/icon/sidebar-icon-08.svg" alt="Img"> Payout
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="freelancer-withdraw-money.html" class="nav-link">
-													<img src="../assets/img/icon/sidebar-icon-09.svg" alt="Img"> Statement
 												</a>
 											</li>
 											<li class="nav-item">
@@ -115,19 +108,19 @@ session_start();
 												</a>
 												<ul class="sub-menu-ul">
 													<li>
-														<a href="freelancer-profile-settings.html">Profile Setting</a>
+														<a href="profile-settings.html">Profile</a>
 													</li>
 													<li>
-														<a href="freelancer-membership.html">Plan & Billing</a>
+														<a href="membership-plans.html">Plan & Billing</a>
 													</li>
 													<li>
-														<a href="freelancer-verify-identity.html">Verify Identity</a>
+														<a href="verify-identity.html">Verify Identity</a>
 													</li>
 													<li>
-														<a href="freelancer-change-password.html">Changes Password</a>
+														<a href="change-password.html">Change Password</a>
 													</li>
 													<li>
-														<a href="freelancer-delete-account.html">Delete Account</a>
+														<a href="delete-account.html">Delete Account</a>
 													</li>
 												</ul>
 											</li>
@@ -254,149 +247,81 @@ session_start();
 								<!-- /Chart Content -->
 								
 								<div class="row">				
-									<!-- Ongoing Projects -->
-									<div class="col-xl-6 d-flex">					
-										<div class="card flex-fill ongoing-project-card">
-											<div class="pro-head">
-												<h2>Ongoing Projects</h2>
-												<a href="freelancer-ongoing-projects.html" class="btn fund-btn">View All</a>
-											</div>
-											<div class="pro-body p-0">
-												<div class="on-project">
-													<span>A2Z Tech Information</span>
-													<h5>Landing Page Redesign / Sales Page Redesign</h5>
-													<div class="pro-info">
-														<ul class="list-details">
-															<li>
-																<div class="slot">
-																	<p>Project type</p>
-																	<h5>Hourly</h5>
-																</div>
-															</li>
-															<li>
-																<div class="slot">
-																	<p>Location</p>
-																	<h5 class="d-flex align-items-center"><img src="../assets/img/icon/flag-icon.svg" class="me-2" alt="Icon">UK</h5>
-																</div>
-															</li>
-															
-															<li>
-																<div class="slot">
-																	<p>Expiry</p>
-																	<h5>5 Days Left</h5>
-																</div>
-															</li>
-															<li>
-																<div class="slot">
-																	<p>Price</p>
-																	<h5>$280</h5>
-																</div>
-															</li>
-														</ul>
-													</div>
-												</div>
-												<div class="on-project">
-													<span>Amaze Tech</span>
-													<h5>Landing Page Redesign / Sales Page Redesign</h5>
-													<div class="pro-info">
-														<ul class="list-details">
-															<li>
-																<div class="slot">
-																	<p>Project type</p>
-																	<h5>Hourly</h5>
-																</div>
-															</li>
-															<li>
-																<div class="slot">
-																	<p>Location</p>
-																	<h5 class="d-flex align-items-center"><img src="../assets/img/icon/flag-icon.svg" class="me-2" alt="Icon">UK</h5>
-																</div>
-															</li>
-															
-															<li>
-																<div class="slot">
-																	<p>Expiry</p>
-																	<h5>5 Days Left</h5>
-																</div>
-															</li>
-															<li>
-																<div class="slot">
-																	<p>Price</p>
-																	<h5>$280</h5>
-																</div>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- /Ongoing Projects -->
+									
 									<!-- Past Earnings -->
-								<div class="col-xl-6">
+								<div class="col-xl-12">
 									<div class="card mb-4 ongoing-project-card">
 										<div class="pro-head">
 											<h2>Recent Earnings</h2>
+											<a href="view-project-detail.html" class="btn fund-btn">View All</a>
 										</div>
 										<div class="table-responsive recent-earnings flex-fill">
 											<table class="table mb-0">
 												<thead>
 													<tr>
-														<th>Date</th>
-														<th>Client</th>
-														<th>Amount</th>
+														<th>Details</th>
+														<th>Job Type</th>
+														<th>Budget</th>
+														<th>Create On</th>
+														<th>Expiring On</th>
+														<th>Proposals</th>
+														<th>Action</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
+														<td>Website Designer Required </td>
+														<td>Hourly</td>
+														<td>$2222</td>
 														<td>29 Sep 2023</td>
-														<td><h2 class="table-avatar table-user">
-															<a href="javascript:void(0);" class="avatar avatar-m me-2"><img class="avatar-img" src="../assets/img/user/avatar-1.jpg" alt="User Image"></a>
-															<a href="javascript:void(0);">
-																Janet Paden
-															</a>
-														</h2></td>
-														<td class="action-bg">$80.00</td>
+														<td>10 Oct 2023</td>
+														<td>47</td>
+														<td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
 													</tr>
 													<tr>
+														<td>Create desktop applications </td>
+														<td>Full time</td>
+														<td>$5762</td>
+														<td>25 Sep 2023</td>
+														<td>05 Oct 2023</td>
+														<td>15</td>
+														<td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+													</tr>
+													<tr>
+														<td>PHP, Javascript Projects  </td>
+														<td>Part time</td>
+														<td>$4879</td>
 														<td>17 Sep 2023</td>
-														<td><h2 class="table-avatar table-user">
-															<a href="javascript:void(0);" class="avatar avatar-m me-2"><img class="avatar-img" src="../assets/img/user/table-avatar-02.jpg" alt="User Image"></a>
-															<a href="javascript:void(0);">
-																Mary Hawkins
-															</a>
-														</h2></td>
-														<td class="action-bg">$20.50</td>
+														<td>29 Sep 2023</td>
+														<td>26</td>
+														<td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
 													</tr>
 													<tr>
+														<td>Website Designer Required </td>
+														<td>Hourly</td>
+														<td>$2222</td>
+														<td>29 Sep 2023</td>
+														<td>10 Oct 2023</td>
+														<td>47</td>
+														<td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+													</tr>
+													<tr>
+														<td>Swift / SwiftUI Developer</td>
+														<td>Hourly</td>
+														<td>$2789</td>
+														<td>05 Sep 2023</td>
+														<td>17 Sep 2023</td>
+														<td>19</td>
+														<td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
+													</tr>
+													<tr>
+														<td>Full-stack Developer  </td>
+														<td>Part time</td>
+														<td>$7853</td>
+														<td>01 Sep 2023</td>
 														<td>13 Sep 2023</td>
-														<td><h2 class="table-avatar table-user">
-															<a href="javascript:void(0);" class="avatar avatar-m me-2"><img class="avatar-img" src="../assets/img/user/table-avatar-03.jpg" alt="User Image"></a>
-															<a href="javascript:void(0);">
-																Jerry Garica
-															</a>
-														</h2></td>
-														<td class="action-bg">$35.70</td>
-													</tr>
-													<tr>
-														<td>07 Sep 2023</td>
-														<td><h2 class="table-avatar table-user">
-															<a href="javascript:void(0);" class="avatar avatar-m me-2"><img class="avatar-img" src="../assets/img/user/table-avatar-04.jpg" alt="User Image"></a>
-															<a href="javascript:void(0);">
-																Barton Taylor
-															</a>
-														</h2></td>
-														<td class="action-bg">$62.80</td>
-													</tr>
-													<tr>
-														<td>02 Sep 2023</td>
-														<td><h2 class="table-avatar table-user">
-															<a href="javascript:void(0);" class="avatar avatar-m me-2"><img class="avatar-img" src="../assets/img/user/table-avatar-05.jpg" alt="User Image"></a>
-															<a href="javascript:void(0);">
-																Jeffrey Bovee
-															</a>
-														</h2></td>
-														<td class="action-bg">$73.30</td>
+														<td>38</td>
+														<td><a href="javascript:void(0);"><i class="feather-eye"></i></a></td>
 													</tr>
 												</tbody>
 											</table>
@@ -416,13 +341,14 @@ session_start();
 			<!-- /Page Content -->
    
 			<!-- Footer -->	
-			<?php include_once '../includes/footer.php' ?>
+            <?php include_once '../includes/footer.php' ?>
 			<!-- /Footer -->
 		   
 		</div>
 		<!-- /Main Wrapper -->
 	  
-		<?php include_once '../includes/scripts.php' ?>
+        <?php include_once '../includes/scripts.php' ?>
+
 		
 		
 	</body>
