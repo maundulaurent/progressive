@@ -20,3 +20,14 @@
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="/projects/quotations/assets/css/style.css">
+
+
+<!-- Datepicker CSS -->
+<link rel="stylesheet" href="/projects/quotations/assets/css/bootstrap-datetimepicker.min.css">			
+
+<!-- Summernote CSS -->
+<link rel="stylesheet" href="/projects/quotations/assets/plugins/summernote/dist/summernote-lite.css">
+
+<!-- Datatables CSS -->
+<link rel="stylesheet" href="/projects/quotations/assets/plugins/datatables/datatables.min.css">
+		
