@@ -7,6 +7,9 @@
 								<a href="/projects/quotations/admin"><i data-feather="home"></i> <span>Dashboard</span></a>
 							</li>
 							<li>
+								<a href="/projects/quotations/admin/categories/industry"><i data-feather="copy"></i> <span>Industries</span></a>
+							</li>
+							<li>
 								<a href="/projects/quotations/admin/categories/categories"><i data-feather="copy"></i> <span>Categories</span></a>
 							</li>
 							<li>

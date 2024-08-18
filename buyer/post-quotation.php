@@ -1,5 +1,11 @@
 <?php
 session_start();
+require_once '../admin/includes/db.php'; // Include your database connection
+
+// Fetch categories from the database
+$query = "SELECT id, name FROM categories ORDER BY name ASC";
+$result = $conn->query($query);
+
 ?>
 
 <!DOCTYPE html>
@@ -66,14 +72,21 @@ session_start();
 													<label class="focus-label">Quotation Category</label>
 													<select  class="form-control select">
 														<option value="0">Select</option>
-														<option value="1" >Category</option>
-														<option value="2">Project</option>
+														<?php
+															if ($result->num_rows > 0) {
+																while ($row = $result->fetch_assoc()) {
+																	echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['name']) . '</option>';
+																}
+															} else {
+																echo '<option value="0">No categories available</option>';
+															}
+															?>
 													</select>
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-12">
 												<div class="mb-3">
-													<label class="focus-label">Project Duration</label>
+													<label class="focus-label">Quotation Duration</label>
 													<select  class="form-control select">
 														<option>1-3 Week</option>
 														<option>1 Month</option>

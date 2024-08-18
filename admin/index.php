@@ -49,7 +49,7 @@ session_start();
 					<!-- /Page Header -->
 
 					
-						<div class="row">
+					<div class="row">
 						<div class="col-md-8">
 							<!--/Wizard-->
 							<div class="row">
@@ -68,7 +68,7 @@ session_start();
 								<div class="col-md-4 d-flex">
 									<div class="card wizard-card flex-fill">
 										<div class="card-body">
-											<p class="text-primary mt-0 mb-2">Completed Projects</p>
+											<p class="text-primary mt-0 mb-2">Completed Requests</p>
 											<h5>15k</h5>
 											<p><a href="projects.html">view details</a></p>
 											
@@ -81,7 +81,7 @@ session_start();
 								<div class="col-md-4 d-flex">
 									<div class="card wizard-card flex-fill">
 										<div class="card-body">
-											<p class="text-primary mt-0 mb-2">Active Projects</p>
+											<p class="text-primary mt-0 mb-2">Active Requests</p>
 											<h5>1568</h5>
 											<p><a href="projects.html">view details</a></p>
 											
