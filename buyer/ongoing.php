@@ -77,11 +77,11 @@ $result = $stmt->get_result();
                                 <?php while ($row = $result->fetch_assoc()) { 
                                     // Counting the number of proposals
                                     if (!empty($row['proposals'])) {
-										$proposalsArray = explode(',', $row['proposals']);
-										$proposalCount = count($proposalsArray);
-									} else {
-										$proposalCount = 0;
-									}
+                                        $proposalsArray = explode(',', $row['proposals']);
+                                        $proposalCount = count($proposalsArray);
+                                    } else {
+                                        $proposalCount = 0;
+                                    }
 
                                     // Location
                                     $location = $row['town'] . ', ' . $row['county'];
@@ -127,7 +127,8 @@ $result = $stmt->get_result();
                                                             <ul class="employee-project">
                                                                 <li>
                                                                     <div class="project-action text-center">
-                                                                        <a href="proposals" class="projects-btn">View Proposal</a>
+                                                                        <!-- Pass project ID in the URL -->
+                                                                        <a href="proposals.php?project_id=<?php echo intval($row['id']); ?>" class="projects-btn">View Proposal</a>
                                                                         <a href="javascript:void(0);" class="projects-btn completed-btn"><i class="fa fa-award me-2"></i>Completed</a>
                                                                     </div>
                                                                 </li>
