@@ -1,3 +1,4 @@
+
 <header class="header">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg header-nav p-0">
@@ -26,6 +27,7 @@
                     <li class="active">
                         <a href="/projects/quotations/">Home </a>
                     </li>
+                    <?php if ($_SESSION['type'] === 'buyer'): ?>
                     <li class="has-submenu">
                         <a href="javascript:void(0);">For Buyers <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
@@ -35,6 +37,7 @@
                             <li><a href="/projects/quotations/buyer/profile-settings">Profile Settings</a></li>                                
                         </ul>
                     </li>
+                    <?php elseif ($_SESSION['type'] === 'seller'): ?>
                     <li class="has-submenu">
                         <a href="javascript:void(0);">For Sellers <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
@@ -47,6 +50,7 @@
                             <li><a href="/projects/quotations/seller/profile-settings">Profile Settings</a></li>                
                         </ul>
                     </li>
+                    <?php endif; ?>
                     <li class="has-submenu">
                         <a href="javascript:void(0);">Pages <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
@@ -80,7 +84,7 @@
 						<li><a href="/projects/quotations/seller/dashboard" class="login-btn">Seller Dashboard</a></li>
 					<?php endif; ?>
                 <?php else: ?>
-                    <li><a href="/projects/quotations/pages/signup" class="reg-btn">Become a Seller</a></li>
+                    <li><a href="/projects/quotations/pages/signup" class="reg-btn">Become a Seller/Buyer</a></li>
                     <li><a href="/projects/quotations/pages/signup" class="reg-btn"><img src="/projects/quotations/assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
                     <li><a href="/projects/quotations/pages/login" class="log-btn"><img src="/projects/quotations/assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
                 <?php endif; ?>

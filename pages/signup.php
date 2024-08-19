@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="align-items-center justify-content-center">
                         <div class="login-right">
                             <div class="login-header text-center">
-                                <a href="index.html"><img src="../assets/img/logo.svg" alt="logo" class="img-fluid"></a>
+                                <a href="index"><img src="../assets/img/logo.svg" alt="logo" class="img-fluid"></a>
                                 <h3>We love to see you joining our community</h3>
                             </div>
                             <nav class="user-tabs mb-4">
@@ -170,6 +170,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit">Sign Up Now<i class="feather-arrow-right ms-2"></i></button> 
                                     </form>
                                 </div>
+                                <div class="row">
+                                <div class="col-sm-8 dont-have d-flex align-items-center">Already have an account? <a href="login" class="ms-2">Login</a></div>
+                                
+                            </div>
                             </div>      
                         </div>
                     </div>

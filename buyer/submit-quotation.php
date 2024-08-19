@@ -44,7 +44,7 @@ if (isset($_SESSION['quotation']) && isset($_SESSION['username'])) {
         unset($_SESSION['quotation']);
 
         // Redirect to a success page
-        header('Location: ../admin');
+        header('Location: ../index');
         exit();
     } else {
         // Handle insertion error

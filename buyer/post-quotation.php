@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirect to the next page
-    header('Location: project-confirmation2.php');
+    header('Location: project-confirmation.php');
     exit();
 }
 
