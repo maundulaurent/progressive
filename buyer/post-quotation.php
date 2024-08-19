@@ -10,6 +10,9 @@ $industryResult = $conn->query($industryQuery);
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Decode the JSON items data
+    $items = isset($_POST['items']) ? json_decode($_POST['items'], true) : [];
+
     // Store form details in session
     $_SESSION['quotation'] = [
         'title' => $_POST['title'],
@@ -17,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'category_id' => $_POST['category_id'],
         'deadline' => $_POST['deadline'],
         'tags' => $_POST['tags'],
-        'items' => json_decode($_POST['items'], true), // JSON-encoded items array
+        'items' => $items, // Store decoded items array
         'county' => $_POST['county'],
         'town' => $_POST['town'],
         'delivery_location' => $_POST['delivery_location'],
@@ -35,9 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirect to the next page
-    header('Location: project-confirmation.php');
+    header('Location: project-confirmation2.php');
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <form action="post-quotation.php" method="POST" enctype="multipart/form-data">    
                                 <div class="title-box widget-box">
                                     <div class="row">
+										<input type="hidden" name="items" id="items" value="">
                                         <div class="col-lg-12">
                                             <h4>Basic Details</h4>
                                         </div>
@@ -265,9 +270,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="../assets/js/script.js"></script>   
 
     <script>
-        $(document).ready(function() {
-            // Load categories based on the selected industry
-            $('#industry_id').change(function() {
+       $(document).ready(function() {
+    	let items = [];
+
+	  // Load categories based on the selected industry
+	  $('#industry_id').change(function() {
                 var industry_id = $(this).val();
                 if (industry_id) {
                     $.ajax({
@@ -283,25 +290,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
 
-            // Handle adding items to the table
-            $('.add-item').click(function(e) {
-                e.preventDefault();
-                var item_name = $('input[name="item_name[]"]').val();
-                var item_quantity = $('input[name="item_quantity[]"]').val();
-                var item_budget = $('input[name="item_budget[]"]').val();
+    $('.add-item').click(function(e) {
+        e.preventDefault();
 
-                if (item_name && item_quantity && item_budget) {
-                    var row = '<tr>' +
-                                '<td></td>' +
-                                '<td>' + item_name + '</td>' +
-                                '<td>' + item_quantity + '</td>' +
-                                '<td>' + item_budget + '</td>' +
-                              '</tr>';
-                    $('#items_body').append(row);
-                    $('input[name="item_name[]"], input[name="item_quantity[]"], input[name="item_budget[]"]').val('');
-                }
-            });
-        });
+        let item_name = $('input[name="item_name[]"]').val();
+        let item_quantity = $('input[name="item_quantity[]"]').val();
+        let item_budget = $('input[name="item_budget[]"]').val();
+
+        if (item_name && item_quantity && item_budget) {
+            let item = {
+                name: item_name,
+                quantity: item_quantity,
+                budget: item_budget
+            };
+
+            items.push(item);
+
+            let row = `<tr>
+                          <td>${items.length}</td>
+                          <td>${item_name}</td>
+                          <td>${item_quantity}</td>
+                          <td>${item_budget}</td>
+                       </tr>`;
+
+            $('#items_body').append(row);
+
+            // Clear inputs
+            $('input[name="item_name[]"]').val('');
+            $('input[name="item_quantity[]"]').val('');
+            $('input[name="item_budget[]"]').val('');
+
+            // Update hidden input to hold JSON data
+            $('input[name="items"]').val(JSON.stringify(items));
+        }
+    });
+});
+
     </script>
 </body>
 </html>
+

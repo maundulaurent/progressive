@@ -32,13 +32,21 @@ if (isset($_SESSION['quotation'])) {
 
         <h2>Items</h2>
         <ul>
-            <?php foreach ($quotation['items'] as $item): ?>
-                <li><?php echo htmlspecialchars($item['name']) . ' - ' . htmlspecialchars($item['quantity']) . ' - Kes ' . htmlspecialchars($item['budget']); ?></li>
-            <?php endforeach; ?>
+            <?php if (isset($quotation['items']) && is_array($quotation['items'])): ?>
+                <?php foreach ($quotation['items'] as $item): ?>
+                    <li><?php echo htmlspecialchars($item['name']) . ' - ' . htmlspecialchars($item['quantity']) . ' pcs - Kes ' . htmlspecialchars($item['budget']); ?></li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <li>No items added.</li>
+            <?php endif; ?>
         </ul>
 
         <h2>Attached Quote</h2>
         <p><a href="<?php echo htmlspecialchars($quotation['written_quote']); ?>" target="_blank">Download Quote</a></p>
+
+        <form action="submit-quotation.php" method="POST">
+            <button type="submit" class="btn btn-primary">Post Quotation</button>
+        </form>
     </div>
 </body>
 </html>

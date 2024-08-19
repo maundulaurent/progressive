@@ -1,0 +1,538 @@
+This is the all-projects.php
+<?php
+session_start();
+require_once '../admin/includes/db.php'; // Include the database connection
+
+// Fetch the project requests from the database
+$query = "SELECT r.title, r.description, r.date, r.delivery_location, r.written_quote, r.items, r.budget, i.name AS industry_name, c.name AS category_name, r.date
+          FROM requests r
+          JOIN industry i ON r.industry_id = i.id
+          JOIN category c ON r.category_id = c.id
+          ORDER BY r.date DESC, r.time DESC";
+
+$result = $conn->query($query);
+
+// Check if the query was successful
+if ($result === false) {
+    die('Database query failed: ' . $conn->error);
+}
+
+if ($result->num_rows > 0) {
+    $projects = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $projects = [];
+}
+?>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+		<title>Jungle Quote</title>
+		
+		<?php include_once '../includes/icon.php' ?>;
+		<?php include_once '../includes/links.php' ?>;
+	</head>		
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+		
+			<!-- Start Navigation -->
+			<!-- Header -->
+			<?php include_once '../includes/header.php' ?>;
+			<!-- /Header -->
+											<ul class="list-grid d-flex align-items-center">
+											<li><a href="all-projects-grid"><i class="fas fa-th-large"></i></a></li>
+											<li><a href="all-projects" class="favour-active"><i class="fas fa-list"></i></a></li>
+										</ul>
+										
+									</div>
+								</div>
+							</div>
+							
+							<div class="list-book-mark book-mark favour-book">
+							<div class="row">
+								<div class="col-lg-12">
+									<?php if (!empty($projects)): ?>
+										<?php foreach ($projects as $project): ?>
+											<div class="project-list-card">
+												<a href="javascript:void(0);" class="add-fav-list"><i class="fa-regular fa-heart"></i></a>
+												<div class="company-detail-image">
+													<img src="../assets/img/default-logo.svg" class="img-fluid" alt="logo">
+												</div>
+												<div>
+													<div class="company-title">
+														<p><?= htmlspecialchars($project['industry_name']); ?></p>
+														<h4><?= htmlspecialchars($project['title']); ?></h4>
+													</div>
+													<div class="company-splits">
+														<div>
+															<div class="company-address">
+																<ul>
+																	<li>
+																		<i class="feather-map-pin"></i><?= htmlspecialchars($project['delivery_location']); ?>
+																	</li>
+																	<li>
+																		<i class="feather-calendar"></i><?= htmlspecialchars(date('d/m/Y', strtotime($project['date']))); ?>
+																	</li>
+																	<li>
+																		<i class="feather-file-2"></i><?= htmlspecialchars($project['category_name']); ?>
+																	</li>
+																</ul>
+															</div>
+															<div class="company-description">
+																<p><?= nl2br(htmlspecialchars($project['description'])); ?></p>
+															</div>
+															<div class="company-description">
+																<div class="tags">
+																	<a href="javascript:void(0);"><span class="badge badge-pill badge-design">tag1</span></a>
+																</div>
+															</div>
+														</div>
+														<div class="company-split-price">
+															<h5>Kes <?= htmlspecialchars(number_format($project['budget'], 2)); ?></h5>
+															<a href="projects-details.php" class="btn btn-submits">Submit Proposal</a>
+														</div>
+													</div>
+												</div>    
+											</div>
+										<?php endforeach; ?>
+									<?php else: ?>
+										<p>No projects found.</p>
+									<?php endif; ?>
+								</div>
+							</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<ul class="paginations list-pagination">
+											<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-left"></i></a>
+											</li>
+											<li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
+											<li class="page-item"><a href="javascript:void(0);">2</a></li>
+											<li class="page-item"><a href="javascript:void(0);">3</a></li>
+											<li class="page-item"><a href="javascript:void(0);">...</a></li>
+											<li class="page-item"><a href="javascript:void(0);">10</a></li>
+											<li class="page-item"><a href="javascript:void(0);"><i class="feather-chevron-right"></i></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>		
+				</div>
+			</div>
+			<!-- /Page Content -->
+   
+			<!-- Footer -->	
+            <?php include_once '../includes/footer.php' ?>;
+			<!-- /Footer -->
+		
+		   
+		</div>
+		<!-- /Main Wrapper -->
+		
+		<!-- The Modal -->
+		<div class="modal fade" id="rating">
+			<div class="modal-dialog modal-dialog-centered modal-md">
+				<div class="modal-content">
+					<div class="modal-header d-block b-0 pb-0">
+						<span class="modal-close float-end"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times orange-text"></i></a></span>
+					</div>
+					<div class="modal-body">		
+						<form action="all-projects-grid">
+							<div class="modal-info">
+								<div class="text-center pt-0 mb-5">
+									<h3>Please login to Favourite Freelancer</h3>
+								</div>
+								<div class="submit-section text-center">
+									<button  data-bs-dismiss="modal" class="btn btn-primary black-btn click-btn">Cancel</button>
+									<button type="submit" class="btn btn-primary click-btn">Submit</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /The Modal -->
+	  
+        <?php include_once '../includes/scripts.php' ?>;
+		
+	</body>
+</html>
+
+I want you to give me the code, so that when one of the items is selected, its details can be displayed in the page next, with all the details.
+Here is the next page, project-details.php
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+		<title>KofeJob</title>
+		
+		<?php include_once '../includes/links.php' ?>;
+
+	</head>		
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+					
+			<!-- Start Navigation -->
+			<!-- Header -->
+            <?php include_once '../includes/header.php' ?>;
+			<!-- /Header -->	
+			
+			<!-- Breadcrumb -->
+			<div class="bread-crumb-bar">
+				<div class="container">
+					<div class="row align-items-center inner-banner">
+						<div class="col-md-12 col-12 text-center">
+							<div class="breadcrumb-list">
+								<h2>Project Details</h2>
+								<nav aria-label="breadcrumb" class="page-breadcrumb">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+										<li class="breadcrumb-item" aria-current="page">Project Details</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container">	
+					<div class="row">
+						<div class="col-lg-8 col-md-12">
+							<div class="company-detail-block pt-0">
+								<div class="company-detail">
+									<div class="company-detail-image">
+										<img src="../assets/img/default-logo.svg" class="img-fluid" alt="logo">
+									</div>
+									<div class="company-title">
+										<p>Soft Technologies</p>
+										<h4>Build a Coaching Website Product Store images</h4>
+									</div>
+								</div>
+								<div class="company-address">
+									<ul>
+										<li>
+											<i class="feather-map-pin"></i>Los Angels
+										</li>
+										<li>
+											<i class="feather-calendar"></i>22 September 2023
+										</li>
+										<li>
+											<i class="feather-eye"></i>902 Views
+										</li>
+										<li>
+											<i class="feather-edit-2"></i>15 Proposal
+										</li>
+									</ul>
+								</div>
+								<div class="project-proposal-detail">
+									<ul>
+										<li>
+											<div class="proposal-detail-img">
+												<img src="../assets/img/icon/computer-line.svg" alt="icons">
+											</div>
+											<div class="proposal-detail text-capitalize">
+												<span class=" d-block">Freelancer Type</span>
+												<p class="mb-0">Full Time</p>
+											</div>
+										</li>
+										<li>
+											<div class="proposal-detail-img">
+												<img src="../assets/img/icon/time-line.svg" alt="icons">
+											</div>
+											<div class="proposal-detail text-capitalize">
+												<span class=" d-block">Project Type</span>
+												<p class="mb-0">Hourly</p>
+											</div>
+										</li>
+										<li>
+											<div class="proposal-detail-img">
+												<img src="../assets/img/icon/time-line.svg" alt="icons">
+											</div>
+											<div class="proposal-detail text-capitalize">
+												<span class=" d-block">Project Duration</span>
+												<p class="mb-0">10-15 Hours</p>
+											</div>
+										</li>
+										<li>
+											<div class="proposal-detail-img">
+												<img src="../assets/img/icon/user-heart-line.svg" alt="icons">
+											</div>
+											<div class="proposal-detail text-capitalize">
+												<span class=" d-block">Experience</span>
+												<p class="mb-0">Basic</p>
+											</div>
+										</li>
+										<li>
+											<div class="proposal-detail-img">
+												<img src="../assets/img/icon/translate-2.svg" alt="icons">
+											</div>
+											<div class="proposal-detail text-capitalize">
+												<span class=" d-block">Languages</span>
+												<p class="mb-0">English, Arabic</p>
+											</div>
+										</li>
+										<li>
+											<div class="proposal-detail-img">
+												<img src="../assets/img/icon/translate.svg" alt="icons">
+											</div>
+											<div class="proposal-detail text-capitalize">
+												<span class=" d-block">Language Fluency</span>
+												<p class="mb-0">Conversational</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="company-detail-block company-description">
+								<h4 class="company-detail-title">Description</h4>
+								<p>Lorem ipsum dolor sit amet,mollit anim id est laborum.</p>
+								<p class="mb-0">s qui ratione voluptatem sequi nesciunt.</p>
+							</div>
+							<div class="company-detail-block company-description">
+								<h4 class="company-detail-title">Skills Required</h4>
+								<div class="tags">
+									<a href="javascript:void(0);"><span class="badge badge-pill badge-design">After Effects</span></a>
+									<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Illustrator</span></a>
+									<a href="javascript:void(0);"><span class="badge badge-pill badge-design">HTML</span></a>
+									<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Whiteboard</span></a>
+								</div>
+							</div>
+							<div class="company-detail-block">
+								<h4 class="company-detail-title">Attachments</h4>
+								<div class="row row-gap">
+									<div class="col-lg-4 col-md-4 col-sm-12">
+										<div class="attachment-file">
+											<div class="attachment-files-details">
+												<h6>sample.pdf</h6>
+												<span>file size 139 KB</span>
+											</div>
+											<a href="javascript:void(0);" class="file-download-btn">
+												<i class="feather-download"></i>
+											</a>
+										</div>
+									</div>
+																	
+									
+								
+									<div class="col-lg-4 col-md-4 col-sm-12">
+										<div class="attachment-file">
+											<div class="attachment-files-details">
+												<h6>Website Content.dcs</h6>
+												<span>file size 139 KB</span>
+											</div>
+											<a href="javascript:void(0);" class="file-download-btn">
+												<i class="feather-download"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="company-detail-block company-description">
+								<h4 class="company-detail-title">Tags</h4>
+								<div class="tags">
+									<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Machine Learning</span></a>
+									<a href="javascript:void(0);"><span class="badge badge-pill badge-design">AI Chatbot</span></a>
+									<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Virtual Assistant</span></a>
+								</div>
+							</div>
+							<div class="company-detail-block pb-0">
+								<h4 class="company-detail-title">Project Proposals (5)</h4>
+								<div class="project-proposals-block ">
+									<div class="project-proposals-img">
+										<img src="../assets/img/user/avatar-1.jpg" class="img-fluid" alt="user">
+									</div>
+									<div class="project-proposals-description">
+										<div class="proposals-user-detail">
+											<div>
+												<h5>Theresa Phillips</h5>
+												<ul class="d-flex">
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
+														</div>
+													</li>
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="feather-calendar"></i>1 min ago</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div>
+												<div class="proposals-pricing">
+													<h4>$40-$500</h4>
+													<span>Price : Fixed </span>
+												</div>
+											</div>
+										</div>
+										<p class="mb-0" >Proposal one.</p>
+									</div>
+								</div>
+								<div class="project-proposals-block ">
+									<div class="project-proposals-img">
+										<img src="../assets/img/user/avatar-2.jpg" class="img-fluid" alt="user">
+									</div>
+									<div class="project-proposals-description">
+										<div class="proposals-user-detail">
+											<div>
+												<h5>Aaron Storey</h5>
+												<ul class="d-flex">
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
+														</div>
+													</li>
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="feather-calendar"></i>1 min ago</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div>
+												<div class="proposals-pricing">
+													<h4>$20-$350</h4>
+													<span>Price : Fixed </span>
+												</div>
+											</div>
+										</div>
+										<p class="mb-0" >Proposal two</p>
+									</div>
+								</div>
+								<div class="project-proposals-block ">
+									<div class="project-proposals-img">
+										<img src="../assets/img/user/avatar-3.jpg" class="img-fluid" alt="user">
+									</div>
+									<div class="project-proposals-description">
+										<div class="proposals-user-detail">
+											<div>
+												<h5>Aaron Storey</h5>
+												<ul class="d-flex">
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
+														</div>
+													</li>
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="feather-calendar"></i>1 min ago</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div>
+												<div class="proposals-pricing">
+													<h4>$50-$200</h4>
+													<span>Price : Fixed </span>
+												</div>
+											</div>
+										</div>
+										<p class="mb-0" >Proposal 4</p>
+									</div>
+								</div>
+								<div class="project-proposals-block ">
+									<div class="project-proposals-img">
+										<img src="../assets/img/user/avatar-4.jpg" class="img-fluid" alt="user">
+									</div>
+									<div class="project-proposals-description">
+										<div class="proposals-user-detail">
+											<div>
+												<h5>Archer Crossley</h5>
+												<ul class="d-flex">
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
+														</div>
+													</li>
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="feather-calendar"></i>1 min ago</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div>
+												<div class="proposals-pricing">
+													<h4>$10-$450</h4>
+													<span>Price : Fixed </span>
+												</div>
+											</div>
+										</div>
+										<p class="mb-0" >Propposal 4</p>
+									</div>
+								</div>
+								<div class="project-proposals-block ">
+									<div class="project-proposals-img">
+										<img src="../assets/img/user/avatar-5.jpg" class="img-fluid" alt="user">
+									</div>
+									<div class="project-proposals-description">
+										<div class="proposals-user-detail">
+											<div>
+												<h5>Amy Stockdill</h5>
+												<ul class="d-flex">
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
+														</div>
+													</li>
+													<li>
+														<div class="proposals-user-review">
+															<span><i class="feather-calendar"></i>5 min ago</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div>
+												<div class="proposals-pricing">
+													<h4>$300-$350</h4>
+													<span>Price : Fixed </span>
+												</div>
+											</div>
+										</div>
+										<p class="mb-0" >Proposal 5.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						
+					</div>
+				</div>
+			</div>		
+			<!-- /Page Content -->
+   
+			<!-- Footer -->	
+			<?php include_once '../includes/footer.php' ?>;
+			<!-- /Footer -->
+		   
+		</div>
+		<!-- /Main Wrapper -->
+		
+	  
+	
+		<?php include_once '../includes/scripts.php' ?>;
+		
+	</body>
+</html>
+
+Just fill the dynamic data where possible, and leave the other static data as it is, don't remove the static data. And then don't generate it too, just show me I will fill it self, generate what should change
