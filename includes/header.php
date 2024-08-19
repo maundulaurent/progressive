@@ -30,7 +30,8 @@
                         <a href="javascript:void(0);">For Buyers <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
                             <li><a href="/projects/quotations/buyer/post-quotation">Post a Quotation</a></li>                                         
-                            <li><a href="/projects/quotations/buyer/ongoing">Quotations and Proposals</a></li>                        
+                            <li><a href="/projects/quotations/buyer/ongoing">Quotations and Proposals</a></li>              
+                            <li><a href="/projects/quotations/buyer/confirm-delivery.php">Confirm Delivery</a></li>                        
                             <li><a href="/projects/quotations/buyer/profile-settings">Profile Settings</a></li>                                
                         </ul>
                     </li>
@@ -70,10 +71,12 @@
                     </div>
                 </li>
                 <?php if (isset($_SESSION['username'])): ?>
+                    <li class="text-dark"><?php echo htmlspecialchars($_SESSION['username']); ?></li>
                     <li><a href="/projects/quotations/pages/logout" class="log-btn"><img src="/projects/quotations/assets/img/icon/lock.svg" class="me-1" alt="img"> Logout</a></li>
 					<?php if ($_SESSION['type'] === 'buyer'): ?>
 					<li><a href="/projects/quotations/buyer/post-quotation" class="login-btn"><i class="feather-plus me-1"></i>Post a Quotation</a></li>
 					<?php elseif ($_SESSION['type'] === 'seller'): ?>
+						
 						<li><a href="/projects/quotations/seller/dashboard" class="login-btn">Seller Dashboard</a></li>
 					<?php endif; ?>
                 <?php else: ?>

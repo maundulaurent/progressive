@@ -13,7 +13,7 @@
 								<a href="/projects/quotations/admin/categories/categories"><i data-feather="copy"></i> <span>Categories</span></a>
 							</li>
 							<li>
-								<a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
+								<a href="/projects/quotations/admin/complete-request"><i data-feather="database"></i> <span>Complete Projects</span></a>
 							</li>
 							<li>
 								<a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
