@@ -30,7 +30,7 @@
                         <a href="javascript:void(0);">For Buyers <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
                             <li><a href="/projects/quotations/buyer/post-quotation">Post a Quotation</a></li>                                         
-                            <li><a href="/projects/quotations/buyer/ongoing">Posted Quotations</a></li>                        
+                            <li><a href="/projects/quotations/buyer/ongoing">Quotations and Proposals</a></li>                        
                             <li><a href="/projects/quotations/buyer/profile-settings">Profile Settings</a></li>                                
                         </ul>
                     </li>
@@ -39,6 +39,7 @@
                         <ul class="submenu">
                             <li><a href="/projects/quotations/seller/all-projects">All Projects</a></li>
                             <li><a href="/projects/quotations/seller/dashboard">Dashboard</a></li>
+                            <li><a href="/projects/quotations/seller/approved-quotes">Approved Quotes</a></li>
                             <li><a href="/projects/quotations/seller/profile">My Profile</a></li>
                             <li><a href="/projects/quotations/seller/change-password">Change Password</a></li>
                             <li><a href="/projects/quotations/seller/payments">Payments</a></li>                

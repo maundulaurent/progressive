@@ -33,9 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-		<title>KofeJob</title>
+		<title>Jungle Quote</title>
 		
-		<?php include_once '../includes/links.php' ?>;
+		<?php include_once '../includes/icon.php' ?>
+		<?php include_once '../includes/links.php' ?>
 
 	</head>		
 	<body>
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 					
 			<!-- Start Navigation -->
 			<!-- Header -->
-            <?php include_once '../includes/header.php' ?>;
+            <?php include_once '../includes/header.php' ?>
 			<!-- /Header -->	
 			
 			<!-- Breadcrumb -->
@@ -103,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 										<!-- Include project ID in the form -->
 										<input type="hidden" name="project_id" value="<?= htmlspecialchars($project['id']); ?>">
 										<!-- Form fields go here -->
-										<textarea name="proposal" placeholder="Write your proposal here" required></textarea>
+										<textarea name="proposal" placeholder="Write your proposal here" ></textarea>
 										<button type="submit" class="btn btn-primary">Submit Proposal</button>
 									</form>
 								</div>
@@ -295,7 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 			</div>
 		</div>
 		<!-- /The Modal -->
-		<?php include_once '../includes/scripts.php' ?>;
+		<?php include_once '../includes/scripts.php' ?>
 		
 	</body>
 </html>
